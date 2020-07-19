@@ -13,7 +13,7 @@ const path = require('path');
 |
 */
 const providers = [
-  path.join(__dirname, 'app', 'Providers', 'Venom/Provider'),
+  path.join(__dirname, '..', 'app', 'Providers', 'Venom/Provider'),
   '@adonisjs/framework/providers/AppProvider',
   '@adonisjs/auth/providers/AuthProvider',
   '@adonisjs/bodyparser/providers/BodyParserProvider',
