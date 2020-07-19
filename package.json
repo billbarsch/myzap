@@ -1,33 +1,15 @@
 {
-  "name": "adonis-api-app",
-  "version": "4.1.0",
-  "adonis-version": "4.1.0",
-  "description": "Adonisjs boilerplate for API server with pre-configured JWT",
+  "name": "myzap2",
+  "version": "1.0.0",
+  "description": "Free OpenSource Whatsapp Api",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "node ace test"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "adonisjs",
-    "adonis-app"
-  ],
-  "author": "",
-  "license": "UNLICENSED",
-  "private": true,
+  "author": "Bill Barsch",
+  "license": "ISC",
   "dependencies": {
-    "@adonisjs/ace": "^5.0.8",
-    "@adonisjs/auth": "^3.0.7",
-    "@adonisjs/bodyparser": "^2.0.5",
-    "@adonisjs/cors": "^1.0.7",
-    "@adonisjs/fold": "^4.0.9",
-    "@adonisjs/framework": "^5.0.9",
-    "@adonisjs/ignitor": "^2.0.8",
-    "@adonisjs/lucid": "^6.1.3",
+    "express": "^4.17.1",
     "venom-bot": "^1.0.9"
-  },
-  "devDependencies": {},
-  "autoload": {
-    "App": "./app"
   }
 }
