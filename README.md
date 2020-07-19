@@ -14,7 +14,6 @@
 
 `npm install`
 
-
 ### Start server
 
-`node indeex.js`
+`node index.js`
