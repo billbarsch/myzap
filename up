@@ -1,0 +1,5 @@
+#!/bin/bash
+cd public
+git add .
+git commit -m "fix.php"
+git push

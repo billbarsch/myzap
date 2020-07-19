@@ -11,6 +11,7 @@
 |
 */
 const providers = [
+  path.join(__dirname, '..', 'providers', 'Venom/Provider'),
   '@adonisjs/framework/providers/AppProvider',
   '@adonisjs/auth/providers/AuthProvider',
   '@adonisjs/bodyparser/providers/BodyParserProvider',
