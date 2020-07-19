@@ -17,5 +17,6 @@ app.listen(3333, () => {
 });
 
 app.get("/message", (req, res, next) => {
-    res.json(req.query);
+    var result = client.sendText(req.query.number, req.query.message);
+    res.json(result);
 });
