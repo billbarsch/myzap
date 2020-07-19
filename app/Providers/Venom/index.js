@@ -21,6 +21,10 @@ class Venom {
     }
     */
 
+    boot() {
+        console.log('booooott');
+    }
+
     get(name) {
         /**
          * If there is an instance of queue already, then return it
