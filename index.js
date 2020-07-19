@@ -12,7 +12,7 @@ function start(client) {
     });
 
     app.get("/message", async (req, res, next) => {
-        client.sendMessageToId(req.query.number + '@c.us', req.query.message);
+        await client.sendMessageToId(req.query.number + '@c.us', req.query.message);
         //let chats = await client.getAllGroups();
         res.json(req.query);
     });
