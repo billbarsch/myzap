@@ -2,7 +2,7 @@ const { ServiceProvider } = require('@adonisjs/fold')
 
 class VenomProvider extends ServiceProvider {
     register() {
-        this.app.singleton('Vemon', () => {
+        this.app.singleton('Venom', () => {
             const Config = this.app.use('Adonis/Src/Config')
             return new (require('.'))(Config)
         })
