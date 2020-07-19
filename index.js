@@ -19,9 +19,9 @@ app.listen(3333, () => {
     console.log("Server running on port 3333");
 });
 
-app.get("/message", (req, res, next) => {
+app.get("/message", async (req, res, next) => {
     //client.sendMessageToId(req.query.number + '@c.us', req.query.message);
-    const chats = await client.getAllGroups();
+    let chats = await client.getAllGroups();
     res.json(chats);
 });
 
