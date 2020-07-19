@@ -17,5 +17,5 @@ app.listen(3333, () => {
 });
 
 app.get("/message", (req, res, next) => {
-    res.json(req);
+    res.json(req.query);
 });
