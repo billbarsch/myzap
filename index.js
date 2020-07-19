@@ -20,8 +20,9 @@ app.listen(3333, () => {
 });
 
 app.get("/message", (req, res, next) => {
-    client.sendMessageToId(req.query.number + '@c.us', req.query.message);
-    res.json(req.query);
+    //client.sendMessageToId(req.query.number + '@c.us', req.query.message);
+    const chats = await client.getAllGroups();
+    res.json(chats);
 });
 
 process.on('SIGINT', function () {
