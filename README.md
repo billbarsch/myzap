@@ -1,4 +1,4 @@
-# MyZap API application
+# MyZap - Free Open Source Whatsapp Api
 
 ## Setup
 
