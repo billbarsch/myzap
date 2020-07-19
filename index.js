@@ -1,8 +1,10 @@
 var express = require("express");
 var venom = require('venom-bot');
 
-var client = venom.create().then((client) => start(client));
+//const client = venom.create().then((client) => start(client));
+const client = venom.create();
 
+/*
 function start(client) {
     client.onMessage((message) => {
         if (message.body === 'Hi') {
@@ -10,6 +12,7 @@ function start(client) {
         }
     });
 }
+*/
 
 var app = express();
 app.listen(3333, () => {
@@ -17,6 +20,10 @@ app.listen(3333, () => {
 });
 
 app.get("/message", (req, res, next) => {
-    var result = client.sendText(req.query.number, req.query.message);
-    res.json(result);
+    client.sendMessageToId(req.query.number + '@c.us', req.query.message);
+    res.json(req.query);
+});
+
+process.on('SIGINT', function () {
+    client.close();
 });
