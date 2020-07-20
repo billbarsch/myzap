@@ -2,7 +2,7 @@ var express = require("express");
 var venom = require('venom-bot');
 
 //const client = venom.create().then((client) => start(client));
-venom.create().then((client) => start(client));
+venom.create(null, null, null, { browserArgs: ['--no-sandbox'] }).then((client) => start(client));
 
 function start(client) {
 
