@@ -30,7 +30,17 @@ app.get("/message", async (req, res, next) => {
 app.get("/qrcode", async (req, res, next) => {
     var qrcode = Sessions.getQrcode(req.query.sessionName);
     if (qrcode) { //notLogged
-        res.status(200).json({ result: 'success', qrcode: qrcode });
+        if (req.query.image) {
+            qrcode = qrcode.replace('data:image/png;base64,', '');
+            const imageBuffer = Buffer.from(qrcode, 'base64');
+            res.writeHead(200, {
+                'Content-Type': 'image/png',
+                'Content-Length': img.length
+            });
+            res.end(img);
+        } else {
+            res.status(200).json({ result: 'success', qrcode: qrcode });
+        }
     } else { //isLogged 
         res.status(401).json({ result: 'error', message: 'isLogged' });
     }
