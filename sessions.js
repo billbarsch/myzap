@@ -17,11 +17,13 @@ module.exports = class Sessions {
         });
 
         if (!jaExiste) { //só adiciona se não existir
-            var newSession = Sessions.sessions.push({
+            var newSession = {
                 name: sessionName,
                 qrcode: '',
+                client: false,
                 status: 'notLogged'
-            });
+            }
+            Sessions.sessions.push(newSession);
             newSession.client = Sessions.init(sessionName);
         } else {
             console.log(sessionName + " already exists");
