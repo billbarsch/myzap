@@ -1,7 +1,54 @@
 const express = require("express");
-const venom = require('venom-bot');
-const fs = require('fs');
+const Sessions = require("./sessions");
+//const venom = require('venom-bot');
+//const fs = require('fs');
 
+var app = express();
+
+app.listen(3333, () => {
+    console.log("Server running on port 3333");
+});
+
+app.get("/start", async (req, res, next) => {
+    await Sessions.start(req.query.sessionName);
+    res.status(200).json({ result: 'success' });
+    //res.json(Sessions.getSessions());
+});
+
+app.get("/message", async (req, res, next) => {
+    Sessions.message(
+        req.query.sessionName,
+        req.query.number,
+        req.query.text
+    );
+    res.json(req.query);
+    //await client.sendMessageToId(req.query.number + '@c.us', req.query.message);
+    //let chats = await client.getAllGroups();
+    //res.json(req.query);
+});
+
+app.get("/qrcode", async (req, res, next) => {
+    var qrcode = Sessions.getQrcode(req.query.sessionName);
+    if (qrcode) { //notLogged
+        res.status(200).json({ result: 'success', qrcode: qrcode });
+    } else { //isLogged 
+        res.status(401).json({ result: 'error', message: 'isLogged' });
+    }
+    //await client.sendMessageToId(req.query.number + '@c.us', req.query.message);
+    //let chats = await client.getAllGroups();
+    //res.json(req.query);
+});
+
+//close all sessions
+process.on('SIGINT', function () {
+    Sessions.sessions.forEach(session => {
+        session.then((client) => {
+            client.close();
+        });
+    });
+});
+
+/*
 //const client = venom.create().then((client) => start(client));
 venom.create(
     "session1",
@@ -11,13 +58,15 @@ venom.create(
         // To write it somewhere else in a file
         exportQR(base64Qr, 'marketing-qr.png');
     },
-    null,
+    (statusFind) => {
+        console.log(statusFind);
+    },
     {
         headless: true,
         devtools: false,
         useChrome: false,
         debug: false,
-        logQR: true,
+        logQR: false,
         browserArgs: [
             '--log-level=3',
             '--no-default-browser-check',
@@ -53,7 +102,6 @@ venom.create(
         disableSpins: true
     }).then((client) => start(client));
 
-
 // Writes QR in specified path
 function exportQR(qrCode, path) {
     qrCode = qrCode.replace('data:image/png;base64,', '');
@@ -81,4 +129,4 @@ function start(client) {
             client.sendText(message.from, 'Welcome Venom 🕷');
         }
     });
-}
+}*/
