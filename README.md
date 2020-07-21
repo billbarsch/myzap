@@ -21,3 +21,20 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 ### Start server
 
 `node index.js`
+
+## Usage
+
+### Start new whatsapp session
+
+`http://localhost:3333/start?sessionName=session1`
+
+### Get QRCode (quickly!!)
+
+`http://localhost:3333/qrcode?sessionName=session1&image=true`
+- png
+
+`http://localhost:3333/qrcode?sessionName=session1`
+- json (base64)
+
+### Send message
+`http://localhost:3333/message?sessionName=session1&number=556334140378&text=HelloWorld`
