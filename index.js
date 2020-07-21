@@ -35,9 +35,9 @@ app.get("/qrcode", async (req, res, next) => {
             const imageBuffer = Buffer.from(qrcode, 'base64');
             res.writeHead(200, {
                 'Content-Type': 'image/png',
-                'Content-Length': img.length
+                'Content-Length': imageBuffer.length
             });
-            res.end(img);
+            res.end(imageBuffer);
         } else {
             res.status(200).json({ result: 'success', qrcode: qrcode });
         }
