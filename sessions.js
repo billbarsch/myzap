@@ -53,6 +53,7 @@ module.exports = class Sessions {
             sessionName,
             (base64Qr) => {
                 console.log("new qrcode updated");
+                session.state = "QRCODE";
                 session.qrcode = base64Qr;
             },
             (statusFind) => {
