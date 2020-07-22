@@ -9,32 +9,50 @@ module.exports = class Sessions {
     static async start(sessionName) {
         Sessions.sessions = Sessions.sessions || []; //start array
 
-        var jaExiste = false;
-        Sessions.sessions.forEach(session => {
-            if (session.name == sessionName) {
-                jaExiste = true;
-            }
-        });
+        var session = Sessions.getSession(sessionName);
 
-        if (!jaExiste) { //só adiciona se não existir
-            var newSession = {
-                name: sessionName,
-                qrcode: '',
-                client: false,
-                status: 'notLogged'
-            }
-            Sessions.sessions.push(newSession);
-            newSession.client = Sessions.init(sessionName);
+        if (!session) { //só adiciona se não existir
+            Sessions.addSesssion(sessionName);
         } else {
             console.log(sessionName + " already exists");
         }
     }
 
-    static async init(sessionName) {
+    static addSesssion(sessionName) {
+        var newSession = {
+            name: sessionName,
+            qrcode: false,
+            client: false,
+            status: 'notLogged',
+            state: 'STARTING'
+        }
+        Sessions.sessions.push(newSession);
+
+        newSession.client = Sessions.initSession(sessionName);
+        Sessions.setup(newSession);
+
+    }//addSession
+
+    static setup(newSession) {
+        newSession.client.then(client => {
+            client.onStateChange(state => {
+                newSession.state = state;
+                console.log(state);
+            });//.then((client) => Sessions.startProcess(client));
+            client.onMessage((message) => {
+                if (message.body === 'hi') {
+                    client.sendText(message.from, 'Hello\nfriend!');
+                }
+            });
+        });
+    }//setup
+
+    static async initSession(sessionName) {
         var session = Sessions.getSession(sessionName);
         const client = await venom.create(
             sessionName,
             (base64Qr) => {
+                console.log("new qrcode updated");
                 session.qrcode = base64Qr;
             },
             (statusFind) => {
@@ -76,13 +94,13 @@ module.exports = class Sessions {
                     '--disable-app-list-dismiss-on-blur',
                     '--disable-accelerated-video-decode',
                 ],
-                refreshQR: 30000,
+                refreshQR: 1000,
                 autoClose: false,
                 disableSpins: true
             }
-        );//.then((client) => Sessions.startProcess(client));
+        );
         return client;
-    }
+    }//initSession
 
     /*
     static startProcess(client) {
@@ -111,10 +129,23 @@ module.exports = class Sessions {
     */
     static getQrcode(sessionName) {
         var session = Sessions.getSession(sessionName);
-        if (session.status != 'isLogged') {
-            return session.qrcode;
+        if (session) {
+            if (["UNPAIRED", "UNPAIRED_IDLE"].includes(session.state)) {
+                session.client.then(client => {
+                    client.close();
+                    session.client = Sessions.initSession(sessionName);
+                    Sessions.setup(session);
+                });
+                return { result: "error", message: session.state };
+            } else { //CONNECTED
+                if (session.status != 'isLogged') {
+                    return { result: "success", qrcode: session.qrcode };
+                } else {
+                    return { result: "error", message: session.state };
+                }
+            }
         } else {
-            return false;
+            return { result: "error", message: "session not started" };
         }
     } //getQrcode
 
@@ -130,15 +161,26 @@ module.exports = class Sessions {
     }//getSession
 
     static getSessions() {
-        return Sessions.sessions;
+        if (Sessions.sessions) {
+            return Sessions.sessions;
+        } else {
+            return [];
+        }
     }//getSessions
 
     static message(sessionName, number, text) {
         var session = Sessions.getSession(sessionName);
         if (session) {
-            session.client.then(async (client) => {
-                await client.sendMessageToId(number + '@c.us', text);
-            });
+            if (session.state == "CONNECTED") {
+                session.client.then(client => {
+                    client.sendMessageToId(number + '@c.us', text);
+                });
+                return { result: "success" }
+            } else {
+                return { result: "error", message: session.state };
+            }
+        } else {
+            return { result: "error", message: "session not started" };
         }
     }
 }
