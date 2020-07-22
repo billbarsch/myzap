@@ -31,24 +31,14 @@ app.get("/start", async (req, res, next) => {
     } else if (session.state == "QRCODE") {
         res.status(200).json({ result: 'success', message: session.state });
     } else {
-        res.status(200).json({ result: 'error', message: session.state });
+        res.status(400).json({ result: 'error', message: session.state });
     }
-});
-
-app.get("/message", async (req, res, next) => {
-    var result = Sessions.message(
-        req.query.sessionName,
-        req.query.number,
-        req.query.text
-    );
-    res.json(result);
-    //await client.sendMessageToId(req.query.number + '@c.us', req.query.message);
-    //let chats = await client.getAllGroups();
-    //res.json(req.query);
-});
+});//start
 
 app.get("/qrcode", async (req, res, next) => {
+
     var qrcodeResult = Sessions.getQrcode(req.query.sessionName);
+
     if (qrcodeResult.result == "success") { //notLogged
         if (req.query.image) {
             qrcodeResult.qrcode = qrcodeResult.qrcode.replace('data:image/png;base64,', '');
@@ -64,10 +54,24 @@ app.get("/qrcode", async (req, res, next) => {
     } else { //isLogged 
         res.status(401).json(qrcodeResult);
     }
+});//qrcode
+
+app.get("/message", async (req, res, next) => {
+    var result = Sessions.message(
+        req.query.sessionName,
+        req.query.number,
+        req.query.text
+    );
+    res.json(result);
     //await client.sendMessageToId(req.query.number + '@c.us', req.query.message);
     //let chats = await client.getAllGroups();
     //res.json(req.query);
-});
+});//message
+
+app.get("/close", async (req, res, next) => {
+    var result = Sessions.closeSession(req.query.sessionName);
+    res.json(result);
+});//close
 
 process.stdin.resume();//so the program will not close instantly
 
@@ -75,10 +79,7 @@ function exitHandler(options, exitCode) {
     if (options.cleanup) {
         console.log('clean');
         Sessions.getSessions().forEach(session => {
-            if (session.client)
-                session.client.then(client => {
-                    client.close();
-                });
+            Sessions.closeSession(session.sessionName);
         });
     }
     if (exitCode || exitCode === 0) {

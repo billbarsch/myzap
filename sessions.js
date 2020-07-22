@@ -11,10 +11,10 @@ module.exports = class Sessions {
 
         var session = Sessions.getSession(sessionName);
 
-        if (!session) { //só adiciona se não existir
+        if (!session || session.state == "CLOSED") { //só adiciona se não existir
             Sessions.addSesssion(sessionName);
         } else {
-            console.log(sessionName + " already exists");
+            console.log("session.state: " + session.state);
         }
     }
 
@@ -37,7 +37,7 @@ module.exports = class Sessions {
         newSession.client.then(client => {
             client.onStateChange(state => {
                 newSession.state = state;
-                console.log(state);
+                console.log("session.state: " + state);
             });//.then((client) => Sessions.startProcess(client));
             client.onMessage((message) => {
                 if (message.body === 'hi') {
@@ -53,10 +53,12 @@ module.exports = class Sessions {
             sessionName,
             (base64Qr) => {
                 console.log("new qrcode updated");
+                console.log("session.state: " + session.state);
                 session.state = "QRCODE";
                 session.qrcode = base64Qr;
             },
             (statusFind) => {
+                console.log("session.status: " + session.status);
                 session.status = statusFind;
             },
             {
@@ -103,52 +105,24 @@ module.exports = class Sessions {
         return client;
     }//initSession
 
-    /*
-    static startProcess(client) {
-
-        console.log("new session " + client.name);
-
-        /*
-        //check messages
-        setInterval((client, sessionName) => {
-            console.log('check messages');
-            var session = Sessions.getSession(sessionName);
-            if (session.messages) {
-                session.messages.forEach((message) => {
-                    client.sendMessageToId(message.number + '@c.us', message.text);
-                });//foreach messages
-            }//if messages
-        }, 1000);
-
-        client.onMessage((message) => {
-            if (message.body === 'Hi') {
-                client.sendText(message.from, 'Welcome Venom 🕷');
-            }
-        });
-
-    }
-    */
-    static getQrcode(sessionName) {
+    static closeSession(sessionName) {
         var session = Sessions.getSession(sessionName);
-        if (session) {
-            if (["UNPAIRED", "UNPAIRED_IDLE"].includes(session.state)) {
-                session.client.then(client => {
-                    client.close();
-                    session.client = Sessions.initSession(sessionName);
-                    Sessions.setup(session);
-                });
+        if (session) { //só adiciona se não existir
+            if (session.state != "CLOSED") {
+                if (session.client)
+                    session.client.then(client => {
+                        client.close();
+                        session.state = "CLOSED";
+                        console.log("session.state: " + session.state);
+                    });
+                return { result: "success", message: "CLOSED" };
+            } else {//close
                 return { result: "error", message: session.state };
-            } else { //CONNECTED
-                if (session.status != 'isLogged') {
-                    return { result: "success", qrcode: session.qrcode };
-                } else {
-                    return { result: "error", message: session.state };
-                }
             }
         } else {
-            return { result: "error", message: "session not started" };
+            return { result: "error", message: "NOTFOUND" };
         }
-    } //getQrcode
+    }//close
 
     static getSession(sessionName) {
         var foundSession = false;
@@ -169,6 +143,29 @@ module.exports = class Sessions {
         }
     }//getSessions
 
+
+    static getQrcode(sessionName) {
+        var session = Sessions.getSession(sessionName);
+        if (session) {
+            if (["UNPAIRED", "UNPAIRED_IDLE"].includes(session.state)) {
+                session.client.then(client => {
+                    client.close();
+                    session.client = Sessions.initSession(sessionName);
+                    Sessions.setup(session);
+                });
+                return { result: "error", message: session.state };
+            } else { //CONNECTED
+                if (session.status != 'isLogged') {
+                    return { result: "success", qrcode: session.qrcode };
+                } else {
+                    return { result: "error", message: session.state };
+                }
+            }
+        } else {
+            return { result: "error", message: "NOTFOUND" };
+        }
+    } //getQrcode
+
     static message(sessionName, number, text) {
         var session = Sessions.getSession(sessionName);
         if (session) {
@@ -181,7 +178,7 @@ module.exports = class Sessions {
                 return { result: "error", message: session.state };
             }
         } else {
-            return { result: "error", message: "session not started" };
+            return { result: "error", message: "NOTFOUND" };
         }
-    }
+    }//message
 }
