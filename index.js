@@ -65,7 +65,7 @@ app.get("/sendText", async (req, res, next) => {
     res.json(result);
 });//sendText
 
-app.get("/sendFile", async (req, res, next) => {
+async function sendFile(req, res, next) {
     var result = await Sessions.sendFile(
         req.query.sessionName,
         req.query.number,
@@ -74,7 +74,9 @@ app.get("/sendFile", async (req, res, next) => {
         req.query.caption
     );
     res.json(result);
-});//sendFile
+}//sendFile
+app.get("/sendFile", sendFile);//sendFile
+app.post("/sendFile", sendFile);//sendFile
 
 app.get("/close", async (req, res, next) => {
     var result = Sessions.closeSession(req.query.sessionName);
