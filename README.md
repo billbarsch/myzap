@@ -38,10 +38,10 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 `http://localhost:3333/qrcode?sessionName=session1`
 - json (base64)
 
-### Send message
+### Send message (only POST method)
 `http://localhost:3333/sendText?sessionName=session1&number=556334140378&text=HelloWorld`
 
-### Send File
+### Send File (only POST method)
 `http://localhost:3333/sendFile?sessionName=session1&number=556334140378&base64Data=b2xhYWFhYWE=&fileName=teste.txt`
 
 ### Close whatsapp session

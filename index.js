@@ -5,6 +5,8 @@ const Sessions = require("./sessions");
 
 var app = express();
 
+app.use(express.json());
+
 app.listen(3333, () => {
     console.log("Server running on port 3333");
 });
@@ -56,29 +58,26 @@ app.get("/qrcode", async (req, res, next) => {
     }
 });//qrcode
 
-async function sendText(req, res, next) {
+app.post("/sendText", async function sendText(req, res, next) {
     var result = Sessions.sendText(
-        req.params.sessionName,
-        req.params.number,
-        req.params.text
+        req.body.sessionName,
+        req.body.number,
+        req.body.text
     );
+    //console.log(req.body);
     res.json(result);
-}//sendText
-app.get("/sendText", sendText);//sendText
-app.post("/sendText", sendText);//sendText
+});//sendText
 
-async function sendFile(req, res, next) {
+app.post("/sendFile", async (req, res, next) => {
     var result = await Sessions.sendFile(
-        req.params.sessionName,
-        req.params.number,
-        req.params.base64Data,
-        req.params.fileName,
-        req.params.caption
+        req.body.sessionName,
+        req.body.number,
+        req.body.base64Data,
+        req.body.fileName,
+        req.body.caption
     );
     res.json(result);
-}//sendFile
-app.get("/sendFile", sendFile);//sendFile
-app.post("/sendFile", sendFile);//sendFile
+});//sendFile
 
 app.get("/close", async (req, res, next) => {
     var result = Sessions.closeSession(req.query.sessionName);
