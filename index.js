@@ -56,14 +56,16 @@ app.get("/qrcode", async (req, res, next) => {
     }
 });//qrcode
 
-app.get("/sendText", async (req, res, next) => {
+async function sendText(req, res, next) {
     var result = Sessions.sendText(
         req.query.sessionName,
         req.query.number,
         req.query.text
     );
     res.json(result);
-});//sendText
+}//sendText
+app.get("/sendText", sendText);//sendText
+app.post("/sendText", sendText);//sendText
 
 async function sendFile(req, res, next) {
     var result = await Sessions.sendFile(
