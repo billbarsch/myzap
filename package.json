@@ -11,6 +11,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "mime": "^2.4.6",
-    "venom-bot": "^1.0.9"
+    "venom-bot": "^1.0.9",
+    "venom": "git://github.com/orkestral/venom.git"
   }
 }
