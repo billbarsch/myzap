@@ -58,9 +58,9 @@ app.get("/qrcode", async (req, res, next) => {
 
 async function sendText(req, res, next) {
     var result = Sessions.sendText(
-        req.query.sessionName,
-        req.query.number,
-        req.query.text
+        req.body.sessionName,
+        req.body.number,
+        req.body.text
     );
     res.json(result);
 }//sendText
@@ -69,11 +69,11 @@ app.post("/sendText", sendText);//sendText
 
 async function sendFile(req, res, next) {
     var result = await Sessions.sendFile(
-        req.query.sessionName,
-        req.query.number,
-        req.query.base64Data,
-        req.query.fileName,
-        req.query.caption
+        req.body.sessionName,
+        req.body.number,
+        req.body.base64Data,
+        req.body.fileName,
+        req.body.caption
     );
     res.json(result);
 }//sendFile
