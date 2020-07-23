@@ -1,6 +1,9 @@
 // person.js
 'use strict';
 
+const os = require('os');
+const fs = require('fs');
+const path = require('path');
 const venom = require('venom-bot');
 const { json } = require('express');
 
@@ -166,7 +169,7 @@ module.exports = class Sessions {
         }
     } //getQrcode
 
-    static message(sessionName, number, text) {
+    static sendText(sessionName, number, text) {
         var session = Sessions.getSession(sessionName);
         if (session) {
             if (session.state == "CONNECTED") {
@@ -174,6 +177,36 @@ module.exports = class Sessions {
                     client.sendMessageToId(number + '@c.us', text);
                 });
                 return { result: "success" }
+            } else {
+                return { result: "error", message: session.state };
+            }
+        } else {
+            return { result: "error", message: "NOTFOUND" };
+        }
+    }//message
+
+    static async sendFile(sessionName, number, base64Data, fileName, caption) {
+        var session = Sessions.getSession(sessionName);
+        if (session) {
+            if (session.state == "CONNECTED") {
+                await session.client.then(async (client) => {
+                    fs.mkdtemp(path.join(os.tmpdir(), session.name + '-'), (err, folder) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            var filePath = path.join(folder, fileName);
+                            console.log(filePath);
+                            fs.writeFile(filePath, base64Data, 'base64', function (err) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    client.sendFile(number + '@c.us', filePath, fileName, caption);
+                                }//!error
+                            });//writeFile
+                        }//!error
+                    });//mkdtemp
+                });//client.then(
+                return { result: "success" };
             } else {
                 return { result: "error", message: session.state };
             }

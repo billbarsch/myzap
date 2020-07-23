@@ -56,17 +56,25 @@ app.get("/qrcode", async (req, res, next) => {
     }
 });//qrcode
 
-app.get("/message", async (req, res, next) => {
-    var result = Sessions.message(
+app.get("/sendText", async (req, res, next) => {
+    var result = Sessions.sendText(
         req.query.sessionName,
         req.query.number,
         req.query.text
     );
     res.json(result);
-    //await client.sendMessageToId(req.query.number + '@c.us', req.query.message);
-    //let chats = await client.getAllGroups();
-    //res.json(req.query);
-});//message
+});//sendText
+
+app.get("/sendFile", async (req, res, next) => {
+    var result = await Sessions.sendFile(
+        req.query.sessionName,
+        req.query.number,
+        req.query.base64Data,
+        req.query.fileName,
+        req.query.caption
+    );
+    res.json(result);
+});//sendFile
 
 app.get("/close", async (req, res, next) => {
     var result = Sessions.closeSession(req.query.sessionName);

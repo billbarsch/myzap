@@ -41,6 +41,9 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 ### Send message
 `http://localhost:3333/message?sessionName=session1&number=556334140378&text=HelloWorld`
 
+### Send File
+`http://localhost:3333/sendFile?sessionName=session1&number=556334140378&base64Data=b2xhYWFhYWE=&fileName=teste.txt`
+
 ### Close whatsapp session
 
 `http://localhost:3333/close?sessionName=session1`
