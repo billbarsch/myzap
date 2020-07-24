@@ -91,3 +91,14 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 ### Close whatsapp session
 
 `http://localhost:3333/close?sessionName=session1`
+
+
+## To install certbot and create ssl certificate to https domains:
+
+`sudo apt-get update && sudo apt-get install -y software-properties-common`
+
+`sudo add-apt-repository universe && sudo add-apt-repository ppa:certbot/certbot`
+
+`sudo apt-get update && sudo apt-get install -y certbot`
+
+`sudo certbot certonly --manual --force-renewal -d *.yourdomain.net -d yourdomain.net --agree-tos --no-bootstrap --manual-public-ip-logging-ok --preferred-challenges dns-01 --server https://acme-v02.api.letsencrypt.org/directory`

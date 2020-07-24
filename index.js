@@ -1,6 +1,8 @@
+const https = require('https');
 const express = require("express");
 const cors = require('cors');
 const Sessions = require("./sessions");
+require('dotenv').config();
 //const venom = require('venom-bot');
 //const fs = require('fs');
 
@@ -9,9 +11,18 @@ var app = express();
 app.use(cors());
 app.use(express.json());
 
-app.listen(3333, () => {
-    console.log("Server running on port 3333");
-});
+if (process.env.HTTPS == 1) { //with ssl
+    https.createServer(
+        {
+            key: fs.readFileSync(process.env.SSL_KEY_PATH),
+            cert: fs.readFileSync(process.env.SSL_CERT_PATH)
+        },
+        app).listen(process.env.HOST_PORT);
+} else { //http
+    app.listen(process.env.HOST_PORT, () => {
+        console.log("Server running on port " + process.env.HOST_PORT);
+    });
+}//http
 
 app.get("/start", async (req, res, next) => {
     await Sessions.start(req.query.sessionName);
