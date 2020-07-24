@@ -26,6 +26,14 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 
 `node index.js`
 
+### keep processes alive at every server restart
+
+`npm install pm2 -g`
+
+`pm2 start index.js`
+
+`pm2 startup`
+
 ## Usage
 
 ### Start new whatsapp session
