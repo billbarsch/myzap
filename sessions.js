@@ -159,7 +159,7 @@ module.exports = class Sessions {
                 return { result: "error", message: session.state };
             } else { //CONNECTED
                 if (session.status != 'isLogged') {
-                    return { result: "success", qrcode: session.qrcode };
+                    return { result: "success", message: session.state, qrcode: session.qrcode };
                 } else {
                     return { result: "error", message: session.state };
                 }

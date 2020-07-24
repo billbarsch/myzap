@@ -1,10 +1,12 @@
 const express = require("express");
+const cors = require('cors');
 const Sessions = require("./sessions");
 //const venom = require('venom-bot');
 //const fs = require('fs');
 
 var app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.listen(3333, () => {
@@ -16,10 +18,13 @@ app.get("/start", async (req, res, next) => {
     var session = Sessions.getSession(req.query.sessionName);
     var count = 0;
     while (["STARTING", "TIMEOUT"].includes(session.state)) {
-        console.log("starting...")
-        await new Promise(r => setTimeout(r, 1000)); //wait 1 second
+        console.log("starting..." + count);
+        await new Promise(r => setTimeout(r, 2000)); //wait 1 second
 
         if (session.state == "QRCODE") {
+            break;
+        }
+        if (session.state == "CLOSED") {
             break;
         }
 
@@ -27,13 +32,15 @@ app.get("/start", async (req, res, next) => {
         if (count > 60) { //60 seconds
             break; //exit loop
         }
-    }
+    }//while
+
     if (session.state == "CONNECTED") {
         res.status(200).json({ result: 'success', message: session.state });
     } else if (session.state == "QRCODE") {
         res.status(200).json({ result: 'success', message: session.state });
     } else {
-        res.status(400).json({ result: 'error', message: session.state });
+        Sessions.closeSession(req.query.sessionName);
+        res.status(200).json({ result: 'error', message: session.state });
     }
 });//start
 
@@ -51,10 +58,10 @@ app.get("/qrcode", async (req, res, next) => {
             });
             res.end(imageBuffer);
         } else {
-            res.status(200).json({ result: 'success', qrcode: qrcodeResult.qrcode });
+            res.status(200).json(qrcodeResult);
         }
     } else { //isLogged 
-        res.status(401).json(qrcodeResult);
+        res.status(200).json(qrcodeResult);
     }
 });//qrcode
 

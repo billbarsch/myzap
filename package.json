@@ -9,6 +9,7 @@
   "author": "Bill Barsch",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mime": "^2.4.6",
     "venom-bot": "^1.0.9"
