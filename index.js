@@ -1,10 +1,9 @@
+const fs = require('fs');
 const https = require('https');
 const express = require("express");
 const cors = require('cors');
 const Sessions = require("./sessions");
 require('dotenv').config();
-//const venom = require('venom-bot');
-//const fs = require('fs');
 
 var app = express();
 

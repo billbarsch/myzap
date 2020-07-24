@@ -20,6 +20,8 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 
 `npm install`
 
+`cp .env-example .env`
+
 ### Start server
 
 `node index.js`
