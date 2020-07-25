@@ -89,7 +89,7 @@ app.post("/sendFile", async (req, res, next) => {
     var result = await Sessions.sendFile(
         req.body.sessionName,
         req.body.number,
-        req.body.base64Data,
+        req.body.hexData,
         req.body.fileName,
         req.body.caption
     );

@@ -1,6 +1,7 @@
 // person.js
 'use strict';
 
+const hex2bin = require("./hex2bin");
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
@@ -185,7 +186,9 @@ module.exports = class Sessions {
         }
     }//message
 
-    static async sendFile(sessionName, number, base64Data, fileName, caption) {
+    static async sendFile(sessionName, number, hexData, fileName, caption) {
+        //const base64Data = hex2bin(hexData).toString("base64");
+        const base64Data = Buffer.from(hexData, 'hex').toString('base64');
         var session = Sessions.getSession(sessionName);
         if (session) {
             if (session.state == "CONNECTED") {
