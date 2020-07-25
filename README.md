@@ -86,7 +86,7 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
         {
             sessionName: "session1", 
             number: '556334140378',
-            hexData:"44696d61", //hexadecimal
+            base64Data:"44696d61", //hexadecimal
             fileName:"test.txt",
             caption: "Document" //optional
         }
