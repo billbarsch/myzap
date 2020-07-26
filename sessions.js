@@ -151,7 +151,7 @@ module.exports = class Sessions {
         var session = Sessions.getSession(sessionName);
         if (session) {
             if (["UNPAIRED", "UNPAIRED_IDLE"].includes(session.state)) {
-                session.client.then(client => {
+                session.client.then(async client => {
                     await client.close();
                     Sessions.start(sessionName);
                 });
