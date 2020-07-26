@@ -15,13 +15,13 @@ module.exports = class Sessions {
         var session = Sessions.getSession(sessionName);
 
         if (!session || session.state == "CLOSED") { //só adiciona se não existir
-            Sessions.addSesssion(sessionName);
+            await Sessions.addSesssion(sessionName);
         } else {
             console.log("session.state: " + session.state);
         }
     }
 
-    static addSesssion(sessionName) {
+    static async addSesssion(sessionName) {
         var newSession = {
             name: sessionName,
             qrcode: false,
@@ -30,39 +30,25 @@ module.exports = class Sessions {
             state: 'STARTING'
         }
         Sessions.sessions.push(newSession);
+        console.log("newSession.state: " + newSession.state);
 
         newSession.client = Sessions.initSession(sessionName);
         Sessions.setup(newSession);
 
     }//addSession
 
-    static setup(newSession) {
-        newSession.client.then(client => {
-            client.onStateChange(state => {
-                newSession.state = state;
-                console.log("session.state: " + state);
-            });//.then((client) => Sessions.startProcess(client));
-            client.onMessage((message) => {
-                if (message.body === 'hi') {
-                    client.sendText(message.from, 'Hello\nfriend!');
-                }
-            });
-        });
-    }//setup
-
     static async initSession(sessionName) {
         var session = Sessions.getSession(sessionName);
         const client = await venom.create(
             sessionName,
             (base64Qr) => {
-                console.log("new qrcode updated");
-                console.log("session.state: " + session.state);
                 session.state = "QRCODE";
                 session.qrcode = base64Qr;
+                console.log("new qrcode updated - session.state: " + session.state);
             },
             (statusFind) => {
-                console.log("session.status: " + session.status);
                 session.status = statusFind;
+                console.log("session.status: " + session.status);
             },
             {
                 headless: true,
@@ -100,27 +86,41 @@ module.exports = class Sessions {
                     '--disable-app-list-dismiss-on-blur',
                     '--disable-accelerated-video-decode',
                 ],
-                refreshQR: 1000,
-                autoClose: false,
+                refreshQR: 5000,
+                autoClose: 60 * 60 * 24 * 365, //never
                 disableSpins: true
             }
         );
         return client;
     }//initSession
 
-    static closeSession(sessionName) {
+    static async setup(newSession) {
+        await newSession.client.then(client => {
+            client.onStateChange(state => {
+                newSession.state = state;
+                console.log("session.state: " + state);
+            });//.then((client) => Sessions.startProcess(client));
+            client.onMessage((message) => {
+                if (message.body === 'hi') {
+                    client.sendText(message.from, 'Hello\nfriend!');
+                }
+            });
+        });
+    }//setup
+
+    static async closeSession(sessionName) {
         var session = Sessions.getSession(sessionName);
         if (session) { //só adiciona se não existir
             if (session.state != "CLOSED") {
                 if (session.client)
-                    session.client.then(client => {
-                        client.close();
+                    await session.client.then(async client => {
+                        await client.close();
                         session.state = "CLOSED";
-                        console.log("session.state: " + session.state);
+                        console.log("client.close - session.state: " + session.state);
                     });
                 return { result: "success", message: "CLOSED" };
             } else {//close
-                return { result: "error", message: session.state };
+                return { result: "success", message: session.state };
             }
         } else {
             return { result: "error", message: "NOTFOUND" };
@@ -169,12 +169,12 @@ module.exports = class Sessions {
         }
     } //getQrcode
 
-    static sendText(sessionName, number, text) {
+    static async sendText(sessionName, number, text) {
         var session = Sessions.getSession(sessionName);
         if (session) {
             if (session.state == "CONNECTED") {
-                session.client.then(client => {
-                    client.sendMessageToId(number + '@c.us', text);
+                var resultSendText = await session.client.then(async client => {
+                    return await client.sendMessageToId(number + '@c.us', text);
                 });
                 return { result: "success" }
             } else {
@@ -189,22 +189,12 @@ module.exports = class Sessions {
         var session = Sessions.getSession(sessionName);
         if (session) {
             if (session.state == "CONNECTED") {
-                await session.client.then(async (client) => {
-                    fs.mkdtemp(path.join(os.tmpdir(), session.name + '-'), (err, folder) => {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            var filePath = path.join(folder, fileName);
-                            console.log(filePath);
-                            fs.writeFile(filePath, base64Data, 'base64', function (err) {
-                                if (err) {
-                                    console.log(err);
-                                } else {
-                                    client.sendFile(number + '@c.us', filePath, fileName, caption);
-                                }//!error
-                            });//writeFile
-                        }//!error
-                    });//mkdtemp
+                var resultSendFile = await session.client.then(async (client) => {
+                    var folderName = fs.mkdtempSync(path.join(os.tmpdir(), session.name + '-'));
+                    var filePath = path.join(folderName, fileName);
+                    fs.writeFileSync(filePath, base64Data, 'base64');
+                    console.log(filePath);
+                    return await client.sendFile(number + '@c.us', filePath, fileName, caption);
                 });//client.then(
                 return { result: "success" };
             } else {

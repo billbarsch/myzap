@@ -24,24 +24,16 @@ if (process.env.HTTPS == 1) { //with ssl
 }//http
 
 app.get("/start", async (req, res, next) => {
-    await Sessions.start(req.query.sessionName);
+    Sessions.start(req.query.sessionName);
     var session = Sessions.getSession(req.query.sessionName);
     var count = 0;
     while (["STARTING", "TIMEOUT"].includes(session.state)) {
         console.log("starting..." + count);
-        await new Promise(r => setTimeout(r, 2000)); //wait 1 second
-
-        if (session.state == "QRCODE") {
-            break;
-        }
-        if (session.state == "CLOSED") {
-            break;
-        }
-
         count++;
         if (count > 60) { //60 seconds
             break; //exit loop
         }
+        await new Promise(r => setTimeout(r, 1000)); //wait 1 second
     }//while
 
     if (session.state == "CONNECTED") {
@@ -49,7 +41,7 @@ app.get("/start", async (req, res, next) => {
     } else if (session.state == "QRCODE") {
         res.status(200).json({ result: 'success', message: session.state });
     } else {
-        Sessions.closeSession(req.query.sessionName);
+        await Sessions.closeSession(req.query.sessionName);
         res.status(200).json({ result: 'error', message: session.state });
     }
 });//start
@@ -76,7 +68,7 @@ app.get("/qrcode", async (req, res, next) => {
 });//qrcode
 
 app.post("/sendText", async function sendText(req, res, next) {
-    var result = Sessions.sendText(
+    var result = await Sessions.sendText(
         req.body.sessionName,
         req.body.number,
         req.body.text
@@ -97,17 +89,17 @@ app.post("/sendFile", async (req, res, next) => {
 });//sendFile
 
 app.get("/close", async (req, res, next) => {
-    var result = Sessions.closeSession(req.query.sessionName);
+    var result = await Sessions.closeSession(req.query.sessionName);
     res.json(result);
 });//close
 
 process.stdin.resume();//so the program will not close instantly
 
-function exitHandler(options, exitCode) {
+async function exitHandler(options, exitCode) {
     if (options.cleanup) {
-        console.log('clean');
-        Sessions.getSessions().forEach(session => {
-            Sessions.closeSession(session.sessionName);
+        console.log('cleanup');
+        await Sessions.getSessions().forEach(async session => {
+            await Sessions.closeSession(session.sessionName);
         });
     }
     if (exitCode || exitCode === 0) {
