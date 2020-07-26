@@ -48,7 +48,7 @@ app.get("/start", async (req, res, next) => {
 
 app.get("/qrcode", async (req, res, next) => {
 
-    var qrcodeResult = Sessions.getQrcode(req.query.sessionName);
+    var qrcodeResult = await Sessions.getQrcode(req.query.sessionName);
 
     if (qrcodeResult.result == "success") { //notLogged
         if (req.query.image) {
