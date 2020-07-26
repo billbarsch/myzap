@@ -151,12 +151,12 @@ module.exports = class Sessions {
         var session = Sessions.getSession(sessionName);
         if (session) {
             if (["UNPAIRED", "UNPAIRED_IDLE"].includes(session.state)) {
-                await session.client.then(async client => {
-                    //restart session
-                    await client.close();
-                    Sessions.start(sessionName);
-                });
+                //restart session
+                await Sessions.closeSession(sessionName);
+                Sessions.start(sessionName);
                 return { result: "error", message: session.state };
+            } else if (["CLOSED"].includes(session.state)) {
+                Sessions.start(sessionName);
             } else { //CONNECTED
                 if (session.status != 'isLogged') {
                     return { result: "success", message: session.state, qrcode: session.qrcode };
