@@ -147,14 +147,13 @@ module.exports = class Sessions {
     }//getSessions
 
 
-    static getQrcode(sessionName) {
+    static async getQrcode(sessionName) {
         var session = Sessions.getSession(sessionName);
         if (session) {
             if (["UNPAIRED", "UNPAIRED_IDLE"].includes(session.state)) {
                 session.client.then(client => {
-                    client.close();
-                    session.client = Sessions.initSession(sessionName);
-                    Sessions.setup(session);
+                    await client.close();
+                    Sessions.start(sessionName);
                 });
                 return { result: "error", message: session.state };
             } else { //CONNECTED
