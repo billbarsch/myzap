@@ -152,6 +152,7 @@ module.exports = class Sessions {
         if (session) {
             if (["UNPAIRED", "UNPAIRED_IDLE"].includes(session.state)) {
                 await session.client.then(async client => {
+                    //restart session
                     await client.close();
                     Sessions.start(sessionName);
                 });
@@ -160,7 +161,7 @@ module.exports = class Sessions {
                 if (session.status != 'isLogged') {
                     return { result: "success", message: session.state, qrcode: session.qrcode };
                 } else {
-                    return { result: "error", message: session.state };
+                    return { result: "success", message: session.state };
                 }
             }
         } else {
