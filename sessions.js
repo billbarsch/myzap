@@ -33,7 +33,7 @@ module.exports = class Sessions {
             console.log("session.state: " + session.state);
         }
         return session;
-    }
+    }//start
 
     static async addSesssion(sessionName) {
         var newSession = {

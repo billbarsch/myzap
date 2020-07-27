@@ -27,17 +27,6 @@ if (process.env.HTTPS == 1) { //with ssl
 app.get("/start", async (req, res, next) => {
     console.log("starting..." + req.query.sessionName);
     var session = await Sessions.start(req.query.sessionName);
-    //var session = Sessions.getSession(req.query.sessionName);
-    /*
-    var count = 0;
-    while (["STARTING", "TIMEOUT"].includes(session.state)) {
-        count++;
-        if (count > 60) { //60 seconds
-            break; //exit loop
-        }
-        await new Promise(r => setTimeout(r, 1000)); //wait 1 second
-    }//while
-    */
 
     if (["CONNECTED", "QRCODE", "STARTING"].includes(session.state)) {
         res.status(200).json({ result: 'success', message: session.state });
