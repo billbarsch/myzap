@@ -100,7 +100,7 @@ module.exports = class Sessions {
                     '--disable-app-list-dismiss-on-blur',
                     '--disable-accelerated-video-decode',
                 ],
-                refreshQR: 5000,
+                refreshQR: 15000,
                 autoClose: 60 * 60 * 24 * 365, //never
                 disableSpins: true
             }
