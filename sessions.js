@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const venom = require('venom-bot');
 const { json } = require('express');
+const { Session } = require('inspector');
 
 module.exports = class Sessions {
 
@@ -14,11 +15,22 @@ module.exports = class Sessions {
 
         var session = Sessions.getSession(sessionName);
 
-        if (!session || session.state == "CLOSED") { //só adiciona se não existir
-            await Sessions.addSesssion(sessionName);
+        if (session == false) { //create new session
+            console.log("session == false");
+            session = await Sessions.addSesssion(sessionName);
+        } else if (["CLOSED"].includes(session.state)) { //restart session
+            console.log("session.state == CLOSED");
+            session.state = "STARTING";
+            session.status = 'notLogged';
+            session.client = Sessions.initSession(sessionName);
+            Sessions.setup(sessionName);
+        } else if (["CONFLICT", "UNPAIRED", "UNLAUNCHED"].includes(session.state)) {
+            console.log("session.client.useHere()");
+            session.client.useHere();
         } else {
             console.log("session.state: " + session.state);
         }
+        return session;
     }
 
     static async addSesssion(sessionName) {
@@ -32,9 +44,11 @@ module.exports = class Sessions {
         Sessions.sessions.push(newSession);
         console.log("newSession.state: " + newSession.state);
 
+        //setup session
         newSession.client = Sessions.initSession(sessionName);
-        Sessions.setup(newSession);
+        Sessions.setup(sessionName);
 
+        return newSession;
     }//addSession
 
     static async initSession(sessionName) {
@@ -94,19 +108,11 @@ module.exports = class Sessions {
         return client;
     }//initSession
 
-    static async setup(newSession) {
-        await newSession.client.then(client => {
+    static async setup(sessionName) {
+        var session = Sessions.getSession(sessionName);
+        await session.client.then(client => {
             client.onStateChange(state => {
-                const conflits = [
-                    venom.SocketState.CONFLICT,
-                    venom.SocketState.UNPAIRED,
-                    venom.SocketState.UNLAUNCHED,
-                ];
-                if (conflits.includes(state)) {
-                    client.useHere();
-                }
-
-                newSession.state = state;
+                session.state = state;
                 console.log("session.state: " + state);
             });//.then((client) => Sessions.startProcess(client));
             client.onMessage((message) => {
@@ -125,6 +131,7 @@ module.exports = class Sessions {
                     await session.client.then(async client => {
                         await client.close();
                         session.state = "CLOSED";
+                        session.client = false;
                         console.log("client.close - session.state: " + session.state);
                     });
                 return { result: "success", message: "CLOSED" };
@@ -154,7 +161,6 @@ module.exports = class Sessions {
             return [];
         }
     }//getSessions
-
 
     static async getQrcode(sessionName) {
         var session = Sessions.getSession(sessionName);

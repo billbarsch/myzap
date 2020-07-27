@@ -25,46 +25,49 @@ if (process.env.HTTPS == 1) { //with ssl
 }//http
 
 app.get("/start", async (req, res, next) => {
-    Sessions.start(req.query.sessionName);
-    var session = Sessions.getSession(req.query.sessionName);
+    console.log("starting..." + req.query.sessionName);
+    var session = await Sessions.start(req.query.sessionName);
+    //var session = Sessions.getSession(req.query.sessionName);
+    /*
     var count = 0;
     while (["STARTING", "TIMEOUT"].includes(session.state)) {
-        console.log("starting..." + count);
         count++;
         if (count > 60) { //60 seconds
             break; //exit loop
         }
         await new Promise(r => setTimeout(r, 1000)); //wait 1 second
     }//while
+    */
 
-    if (session.state == "CONNECTED") {
-        res.status(200).json({ result: 'success', message: session.state });
-    } else if (session.state == "QRCODE") {
+    if (["CONNECTED", "QRCODE", "STARTING"].includes(session.state)) {
         res.status(200).json({ result: 'success', message: session.state });
     } else {
-        await Sessions.closeSession(req.query.sessionName);
         res.status(200).json({ result: 'error', message: session.state });
     }
 });//start
 
 app.get("/qrcode", async (req, res, next) => {
+    console.log("qrcode..." + req.query.sessionName);
+    var session = Sessions.getSession(req.query.sessionName);
 
-    var qrcodeResult = await Sessions.getQrcode(req.query.sessionName);
-
-    if (qrcodeResult.result == "success") { //notLogged
-        if (req.query.image) {
-            qrcodeResult.qrcode = qrcodeResult.qrcode.replace('data:image/png;base64,', '');
-            const imageBuffer = Buffer.from(qrcodeResult.qrcode, 'base64');
-            res.writeHead(200, {
-                'Content-Type': 'image/png',
-                'Content-Length': imageBuffer.length
-            });
-            res.end(imageBuffer);
+    if (session != false) {
+        if (session.status != 'isLogged') {
+            if (req.query.image) {
+                qrcodeResult.qrcode = qrcodeResult.qrcode.replace('data:image/png;base64,', '');
+                const imageBuffer = Buffer.from(qrcodeResult.qrcode, 'base64');
+                res.writeHead(200, {
+                    'Content-Type': 'image/png',
+                    'Content-Length': imageBuffer.length
+                });
+                res.end(imageBuffer);
+            } else {
+                res.status(200).json({ result: "success", message: session.state, qrcode: session.qrcode });
+            }
         } else {
-            res.status(200).json(qrcodeResult);
+            res.status(200).json({ result: "error", message: session.state });
         }
-    } else { //isLogged 
-        res.status(200).json(qrcodeResult);
+    } else {
+        res.status(200).json({ result: "error", message: "NOTFOUND" });
     }
 });//qrcode
 
