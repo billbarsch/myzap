@@ -25,7 +25,7 @@ module.exports = class Sessions {
             session.client = Sessions.initSession(sessionName);
             Sessions.setup(sessionName);
         } else if (["CONFLICT", "UNPAIRED", "UNLAUNCHED"].includes(session.state)) {
-            console.log("session.client.useHere()");
+            console.log("client.useHere()");
             session.client.then(cliente => {
                 client.useHere();
             });
