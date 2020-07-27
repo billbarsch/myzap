@@ -97,6 +97,15 @@ module.exports = class Sessions {
     static async setup(newSession) {
         await newSession.client.then(client => {
             client.onStateChange(state => {
+                const conflits = [
+                    venom.SocketState.CONFLICT,
+                    venom.SocketState.UNPAIRED,
+                    venom.SocketState.UNLAUNCHED,
+                ];
+                if (conflits.includes(state)) {
+                    client.useHere();
+                }
+
                 newSession.state = state;
                 console.log("session.state: " + state);
             });//.then((client) => Sessions.startProcess(client));
@@ -150,7 +159,8 @@ module.exports = class Sessions {
     static async getQrcode(sessionName) {
         var session = Sessions.getSession(sessionName);
         if (session) {
-            if (["UNPAIRED", "UNPAIRED_IDLE"].includes(session.state)) {
+            //if (["UNPAIRED", "UNPAIRED_IDLE"].includes(session.state)) {
+            if (["UNPAIRED_IDLE"].includes(session.state)) {
                 //restart session
                 await Sessions.closeSession(sessionName);
                 Sessions.start(sessionName);
