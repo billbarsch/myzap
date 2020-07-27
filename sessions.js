@@ -129,7 +129,11 @@ module.exports = class Sessions {
             if (session.state != "CLOSED") {
                 if (session.client)
                     await session.client.then(async client => {
-                        await client.close();
+                        try {
+                            await client.close();
+                        } catch (error) {
+                            console.log("client.close(): " + error.message);
+                        }
                         session.state = "CLOSED";
                         session.client = false;
                         console.log("client.close - session.state: " + session.state);
