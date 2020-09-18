@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlanMartines/wabot.git"
+    "url": "git+https://github.com/AlanMartines/myzap.git"
   },
   "keywords": [
     "whatsapp",
@@ -25,9 +25,9 @@
   "author": "Alan Martines <alancpmartines@hotmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AlanMartines/wabot/issues"
+    "url": "https://github.com/AlanMartines/myzap/issues"
   },
-  "homepage": "https://github.com/AlanMartines/wabot#readme",
+  "homepage": "https://github.com/AlanMartines/myzap#readme",
   "dependencies": {
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
