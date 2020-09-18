@@ -5,7 +5,7 @@
 
 ```bash
 # Clone este repositório
-$ git clone git@github.com:AlanMartines/wabot.git
+$ git clone git@github.com:AlanMartines/myzap.git
 
 # Acesse a pasta do projeto no terminal/cmd
 $ cd wabot
