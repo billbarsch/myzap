@@ -1,0 +1,39 @@
+<!-- Inicio - Image and text -->
+<nav class="navbar navbar-dark navbar-expand-lg">
+  <a class="navbar-brand" href="../home/">
+    <img src="/images/whatsapp-bot.png" height="32" class="img-fliud d-inline-block align-top"/>
+    Eletroinfo
+    </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-text-height"></i>&#32;Enviar Texto
+        </a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbar">
+          <a class="dropdown-item" href="/pages/sendText"><i class="fas fa-user"></i>&#32;Enviar Texto - Simples Contato</a>
+          <a class="dropdown-item" href="/pages/sendTextMult"><i class="fas fa-users"></i>&#32;Enviar Texto - Multiplos Contatos</a>
+        </div>
+      </li>
+
+    </ul>
+
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user"></i>&#32;Venom Bot</a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbar">
+          <a class="dropdown-item" href="#"><i class="fas fa-address-card"></i>&#32;Meus dados</a>
+          <a class="dropdown-item" href="../usuarios/trocar_email.php"><i class="fas fa-envelope"></i>&#32; Alterar e-mail</a>
+          <a class="dropdown-item" href="../usuarios/trocar_senha.php"><i class="fas fa-key"></i>&#32; Alterar senha</a>
+          <a class="dropdown-item" href="../login/logout.php?tokenout=<?php print md5(session_id()); ?>"><i class="fas fa-sign-out-alt"></i>&#32;Sair</a>
+        </div>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
