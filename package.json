@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "Free OpenSource Whatsapp Api",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": { "start" : "node app.js" },
   "author": "Bill Barsch",
   "license": "ISC",
   "dependencies": {
