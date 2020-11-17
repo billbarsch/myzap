@@ -197,7 +197,7 @@ module.exports = class Sessions {
         if (session) {
             if (session.state == "CONNECTED") {
                 var resultSendText = await session.client.then(async client => {
-                    return await client.sendMessageToId(number + '@c.us', text);
+                    return await client.sendText(number + '@c.us', text);
                 });
                 return { result: "success" }
             } else {
