@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Free OpenSource Whatsapp Api",
   "main": "index.js",
-  "scripts": { "start" : "node app.js" },
+  "scripts": {
+    "start": "node app.js"
+  },
   "author": "Bill Barsch",
   "license": "ISC",
   "dependencies": {
