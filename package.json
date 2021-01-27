@@ -1,18 +1,18 @@
 {
-  "name": "myzap",
-  "version": "1.0.0",
-  "description": "Free OpenSource Whatsapp Api",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Bill Barsch",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mime": "^2.4.6",
-    "venom-bot": "^1.1.4"
-  }
+    "name": "myzap",
+    "version": "1.0.0",
+    "description": "Free OpenSource Whatsapp Api",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Bill Barsch",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "mime": "^2.4.6",
+        "venom-bot": "^2.2.3"
+    }
 }
