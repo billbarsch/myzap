@@ -6,13 +6,13 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 
 ## Setup
 
-`sudo apt install -y gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget build-essential apt-transport-https libgbm-dev`
+`sudo apt install -y curl nano gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget build-essential apt-transport-https libgbm-dev`
 - para instalar todas as dependencias necessárias no sistema
 
 `curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -`
 
-`sudo apt install git nodejs yarn`
-- para instalar git, nodejs e yarn
+`sudo apt install -y git nodejs`
+- para instalar git, nodejs
 
 `git clone https://github.com/billbarsch/myzap.git`
 
@@ -28,7 +28,7 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 
 ### keep processes alive at every server restart
 
-`npm install pm2 -g`
+`npm install -y pm2 -g`
 
 `pm2 start index.js`
 
@@ -103,7 +103,7 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 `http://localhost:3333/close?sessionName=session1`
 
 
-## Salvar token do venon na nuvem
+## Salvar token do venom na nuvem
  - Crie uma conta grátis no https://jsonbin.io/ 
  - Crie um novo "bin" (objeto json) com quaisquer dados e copie o id dele e coloque no arquivo .env
  - Copie também o seu token de acesso à api do jsonbin.io e coloque no arquivo .env
