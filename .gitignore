@@ -1,14 +1,7 @@
-#package-lock.json
-
-# Node modules
 node_modules
-
 tokens
-# Adonis directory for storing tmp files
 tmp
-
-# Environment variables, never commit this file
 .env
-
-# The development sqlite file
+.env.prod
+deploy.sh
 database/*.sqlite

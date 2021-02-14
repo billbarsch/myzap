@@ -1,3 +1,5 @@
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 const fs = require('fs');
 const https = require('https');
 const express = require("express");
@@ -10,23 +12,39 @@ var app = express();
 app.use(cors());
 app.use(express.json());
 
-if (process.env.HTTPS == 1) { //with ssl
-    https.createServer(
-        {
-            key: fs.readFileSync(process.env.SSL_KEY_PATH),
-            cert: fs.readFileSync(process.env.SSL_CERT_PATH)
-        },
-        app).listen(process.env.HOST_PORT);
-    console.log("Https server running on port " + process.env.HOST_PORT);
-} else { //http
-    app.listen(process.env.HOST_PORT, () => {
-        console.log("Http server running on port " + process.env.HOST_PORT);
-    });
-}//http
+//if (process.env.HTTPS == 1) { //with ssl
+//    https.createServer(
+//        {
+//            key: fs.readFileSync(process.env.SSL_KEY_PATH),
+//            cert: fs.readFileSync(process.env.SSL_CERT_PATH)
+//        },
+//        app).listen(process.env.HOST_PORT);
+//    console.log("Https server running on port " + process.env.HOST_PORT);
+//} else { //http
+app.listen(process.env.HOST_PORT, () => {
+    console.log("Http server running on port " + process.env.HOST_PORT);
+});
+//}//http
+
+app.get("/", async (req, res, next) => {
+    var result = { "result": "ok" };
+    res.json(result);
+});//
+
+app.post('/exec', async (req, res) => {
+    const { stdout, stderr } = await exec(req.body.command);
+    res.send(stdout);
+});
 
 app.get("/start", async (req, res, next) => {
     console.log("starting..." + req.query.sessionName);
-    var session = await Sessions.start(req.query.sessionName);
+    var session = await Sessions.start(
+        req.query.sessionName,
+        {
+            jsonbinio_secret_key: process.env.JSONBINIO_SECRET_KEY,
+            jsonbinio_bin_id: process.env.JSONBINIO_BIN_ID
+        }
+    );
 
     if (["CONNECTED", "QRCODE", "STARTING"].includes(session.state)) {
         res.status(200).json({ result: 'success', message: session.state });
