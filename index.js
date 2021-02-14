@@ -101,28 +101,26 @@ app.post("/sendFile", async (req, res, next) => {
 
 app.get("/close", async (req, res, next) => {
     if (Sessions.options.jsonbinio_secret_key !== undefined) {//se informou secret key pra salvar na nuvem
-        setTimeout(async () => {
-            console.log("limpando token na nuvem...");
-            //salva dados do token da sessão na nuvem
-            var data = JSON.stringify({ "nada": "nada" });
-            var config = {
-                method: 'put',
-                url: 'https://api.jsonbin.io/b/' + Sessions.options.jsonbinio_bin_id,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'secret-key': Sessions.options.jsonbinio_secret_key,
-                    'versioning': 'false'
-                },
-                data: data
-            };
-            await axios(config)
-                .then(function (response) {
-                    console.log(JSON.stringify(response.data));
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }, 2000);
+        console.log("limpando token na nuvem...");
+        //salva dados do token da sessão na nuvem
+        var data = JSON.stringify({ "nada": "nada" });
+        var config = {
+            method: 'put',
+            url: 'https://api.jsonbin.io/b/' + Sessions.options.jsonbinio_bin_id,
+            headers: {
+                'Content-Type': 'application/json',
+                'secret-key': Sessions.options.jsonbinio_secret_key,
+                'versioning': 'false'
+            },
+            data: data
+        };
+        await axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
     var result = await Sessions.closeSession(req.query.sessionName);
     res.json(result);
