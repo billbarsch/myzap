@@ -12,17 +12,19 @@ var app = express();
 app.use(cors());
 app.use(express.json());
 
+var appPort = process.env.PORT ? process.env.PORT : 3000;
+
 if (process.env.HTTPS == 1) { //with ssl
     https.createServer(
         {
             key: fs.readFileSync(process.env.SSL_KEY_PATH),
             cert: fs.readFileSync(process.env.SSL_CERT_PATH)
         },
-        app).listen(process.env.HOST_PORT);
-    console.log("Https server running on port " + process.env.HOST_PORT);
+        app).listen(appPort);
+    console.log("Https server running on port " + appPort);
 } else { //http
-    app.listen(process.env.HOST_PORT, () => {
-        console.log("Http server running on port " + process.env.HOST_PORT);
+    app.listen(appPort, () => {
+        console.log("Http server running on port " + appPort);
     });
 }//http
 
@@ -38,14 +40,9 @@ app.post('/exec', async (req, res) => {
 
 app.get("/start", async (req, res, next) => {
     console.log("starting..." + req.query.sessionName);
-    var session = await Sessions.start(
-        req.query.sessionName,
-        {
-            jsonbinio_secret_key: process.env.JSONBINIO_SECRET_KEY,
-            jsonbinio_bin_id: process.env.JSONBINIO_BIN_ID
-        }
-    );
-
+    var session = process.env.JSONBINIO_SECRET_KEY ?
+        await Sessions.start(req.query.sessionName, { jsonbinio_secret_key: process.env.JSONBINIO_SECRET_KEY, jsonbinio_bin_id: process.env.JSONBINIO_BIN_ID }) :
+        await Sessions.start(req.query.sessionName);
     if (["CONNECTED", "QRCODE", "STARTING"].includes(session.state)) {
         res.status(200).json({ result: 'success', message: session.state });
     } else {
@@ -79,12 +76,7 @@ app.get("/qrcode", async (req, res, next) => {
 });//qrcode
 
 app.post("/sendText", async function sendText(req, res, next) {
-    var result = await Sessions.sendText(
-        req.body.sessionName,
-        req.body.number,
-        req.body.text
-    );
-    //console.log(req.body);
+    var result = await Sessions.sendText(req);
     res.json(result);
 });//sendText
 

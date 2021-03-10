@@ -76,14 +76,16 @@ module.exports = class Sessions {
 
         const client = await venom.create(
             sessionName,
-            (base64Qr) => {
-                session.state = "QRCODE";
+            (base64Qr, asciiQR, attempts) => {
+                // session.state = "QRCODE";
                 session.qrcode = base64Qr;
-                console.log("new qrcode updated - session.state: " + session.state);
+                console.log('Number attempts read qrcode: ', attempts);
+                console.log('Terminal qrcode: ', asciiQR);
+                // console.log('base64 qrcode: ', base64Qr);
             },
-            (statusFind) => {
-                session.status = statusFind;
-                console.log("session.status: " + session.status);
+            // statusFind
+            (statusSession, session) => {
+                console.log('#### status=' + statusSession + ' sessionName=' + session);
             }, {
             headless: true,
             devtools: false,
@@ -136,8 +138,8 @@ module.exports = class Sessions {
             client.onStateChange(state => {
                 session.state = state;
                 if (state == "CONNECTED") {
-                    console.log("tem jsonbinio_secret_key");
                     if (Sessions.options.jsonbinio_secret_key !== undefined && session.browserSessionToken == undefined) {//se informou secret key pra salvar na nuvem
+                        console.log("tem jsonbinio_secret_key");
                         setTimeout(async () => {
                             console.log("gravando token na nuvem...");
                             //salva dados do token da sessão na nuvem
@@ -240,12 +242,18 @@ module.exports = class Sessions {
         }
     } //getQrcode
 
-    static async sendText(sessionName, number, text) {
-        var session = Sessions.getSession(sessionName);
+    static async sendText(req) {
+        var params = {
+            sessionName: req.body.sessionName,
+            number: req.body.number,
+            text: req.body.text
+        }
+        var session = Sessions.getSession(params.sessionName);
         if (session) {
             if (session.state == "CONNECTED") {
-                var resultSendText = await session.client.then(async client => {
-                    return await client.sendText(number + '@c.us', text);
+                await session.client.then(async client => {
+                    console.log('#### send msg =', params);
+                    return await client.sendText(params.number + '@c.us', params.text);
                 });
                 return { result: "success" }
             } else {
