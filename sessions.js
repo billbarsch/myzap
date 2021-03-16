@@ -38,6 +38,7 @@ module.exports = class Sessions {
     static async addSesssion(sessionName) {
         var newSession = {
             name: sessionName,
+            hook:null,
             qrcode: false,
             client: false,
             status: 'notLogged',
@@ -87,59 +88,60 @@ module.exports = class Sessions {
             (statusSession, session) => {
                 console.log('#### status=' + statusSession + ' sessionName=' + session);
             }, {
-            headless: true,
-            devtools: false,
-            useChrome: false,
-            debug: false,
-            logQR: false,
-            browserArgs: [
-                '--log-level=3',
-                '--no-default-browser-check',
-                '--disable-site-isolation-trials',
-                '--no-experiments',
-                '--ignore-gpu-blacklist',
-                '--ignore-certificate-errors',
-                '--ignore-certificate-errors-spki-list',
-                '--disable-gpu',
-                '--disable-extensions',
-                '--disable-default-apps',
-                '--enable-features=NetworkService',
-                '--disable-setuid-sandbox',
-                '--no-sandbox',
-                // Extras
-                '--disable-webgl',
-                '--disable-threaded-animation',
-                '--disable-threaded-scrolling',
-                '--disable-in-process-stack-traces',
-                '--disable-histogram-customizer',
-                '--disable-gl-extensions',
-                '--disable-composited-antialiasing',
-                '--disable-canvas-aa',
-                '--disable-3d-apis',
-                '--disable-accelerated-2d-canvas',
-                '--disable-accelerated-jpeg-decoding',
-                '--disable-accelerated-mjpeg-decode',
-                '--disable-app-list-dismiss-on-blur',
-                '--disable-accelerated-video-decode',
-            ],
-            refreshQR: 15000,
-            autoClose: 60 * 60 * 24 * 365, //never
-            disableSpins: true
-        },
+                headless: true,
+                devtools: false,
+                useChrome: false,
+                debug: false,
+                logQR: false,
+                browserArgs: [
+                    '--log-level=3',
+                    '--no-default-browser-check',
+                    '--disable-site-isolation-trials',
+                    '--no-experiments',
+                    '--ignore-gpu-blacklist',
+                    '--ignore-certificate-errors',
+                    '--ignore-certificate-errors-spki-list',
+                    '--disable-gpu',
+                    '--disable-extensions',
+                    '--disable-default-apps',
+                    '--enable-features=NetworkService',
+                    '--disable-setuid-sandbox',
+                    '--no-sandbox',
+                    // Extras
+                    '--disable-webgl',
+                    '--disable-threaded-animation',
+                    '--disable-threaded-scrolling',
+                    '--disable-in-process-stack-traces',
+                    '--disable-histogram-customizer',
+                    '--disable-gl-extensions',
+                    '--disable-composited-antialiasing',
+                    '--disable-canvas-aa',
+                    '--disable-3d-apis',
+                    '--disable-accelerated-2d-canvas',
+                    '--disable-accelerated-jpeg-decoding',
+                    '--disable-accelerated-mjpeg-decode',
+                    '--disable-app-list-dismiss-on-blur',
+                    '--disable-accelerated-video-decode',
+                ],
+                refreshQR: 15000,
+                autoClose: 60 * 60 * 24 * 365, //never
+                disableSpins: true
+            },
             session.browserSessionToken
         );
-        console.log("usou isso no create: " + JSON.stringify(session.browserSessionToken));
+        var browserSessionToken = await client.getSessionTokenBrowser();
+        console.log("usou isso no create: " + JSON.stringify(browserSessionToken));
         return client;
     } //initSession
 
     static async setup(sessionName) {
         var session = Sessions.getSession(sessionName);
+
         await session.client.then(client => {
             client.onStateChange(state => {
                 session.state = state;
                 if (state == "CONNECTED") {
                     if (Sessions.options.jsonbinio_secret_key !== undefined && session.browserSessionToken == undefined) {//se informou secret key pra salvar na nuvem
-                        console.log("tem jsonbinio_secret_key");
                         setTimeout(async () => {
                             console.log("gravando token na nuvem...");
                             //salva dados do token da sessão na nuvem
@@ -167,8 +169,25 @@ module.exports = class Sessions {
                 }//if CONNECTED
                 console.log("session.state: " + state);
             }); //.then((client) => Sessions.startProcess(client));
-            client.onMessage((message) => {
-                if (message.body === 'hi') {
+            client.onMessage(async (message) => {
+                var session = Sessions.getSession(sessionName);
+                if(session.hook != null){
+                    var config = {
+                        method: 'post',
+                        url: session.hook,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data: message
+                    };
+                    await axios(config)
+                        .then(function (response) {
+                            console.log(JSON.stringify(response.data));
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }else if(message.body == "TESTEBOT"){
                     client.sendText(message.from, 'Hello\nfriend!');
                 }
             });
@@ -209,6 +228,7 @@ module.exports = class Sessions {
             });
         return foundSession;
     } //getSession
+    
 
     static getSessions() {
         if (Sessions.sessions) {
@@ -283,4 +303,31 @@ module.exports = class Sessions {
             return { result: "error", message: "NOTFOUND" };
         }
     } //message
+
+    static async saveHook(req){
+        var sessionName = req.body.sessionName;
+        /**
+         * Verifica se encontra sessão 
+         */
+        var foundSession = false;
+        var foundSessionId = null;
+        if (Sessions.sessions)
+            Sessions.sessions.forEach((session,id) => {
+                if (sessionName == session.name) {
+                    foundSession = session;
+                    foundSessionId = id;
+                }
+            });
+        // Se não encontrar retorna erro
+        if(!foundSession){
+            return { result: "error", message: 'Session not found' };
+        }else{
+            // Se encontrar cria variáveis
+            var hook = req.body.hook;
+            foundSession.hook = hook;
+            Sessions.sessions[foundSessionId] = foundSession;
+            return { result: "success", message: 'Hook Atualizado' };
+        }
+        
+    }
 }
