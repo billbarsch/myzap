@@ -75,6 +75,11 @@ app.get("/qrcode", async (req, res, next) => {
     }
 });//qrcode
 
+app.post("/sendHook", async function sendText(req, res, next) {
+    var result = await Sessions.saveHook(req);
+    res.json(result);
+});//sendText
+
 app.post("/sendText", async function sendText(req, res, next) {
     var result = await Sessions.sendText(req);
     res.json(result);
