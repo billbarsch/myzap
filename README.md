@@ -108,15 +108,15 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 `http://localhost:3333/close?sessionName=session1`
 
 
-## Salvar token do venom na nuvem
+## Salvar token do venom na nuvem (jsonbin.io) (opcional)
  - Crie uma conta grátis no https://jsonbin.io/ 
  - Crie um novo "bin" (objeto json) com quaisquer dados e copie o id dele e coloque no arquivo .env
  - Copie também o seu token de acesso à api do jsonbin.io e coloque no arquivo .env
 
 ```
 ...
-JSONBINIO_BIN_ID=23452345345 <- aqui
-JSONBINIO_SECRET_KEY=345234532452452345243 <- aqui
+JSONBINIO_BIN_ID=23452345345 <- deixar em branco caso não queira usar essa opção do jsonbin.io 
+JSONBINIO_SECRET_KEY=345234532452452345243 <- deixar em branco caso não queira usar essa opção do jsonbin.io
 ...
 ```
 
