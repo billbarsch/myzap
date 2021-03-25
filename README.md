@@ -7,7 +7,7 @@
 
 
 
-Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um navegador virtual sem interface gráfica que abre o whatsapp web e executa todos os comandos via código possibilitando assim a automação de todas as funções.
+Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom) ou o [WPPCONNECT](https://github.com/wppconnect-team/wppconnect), um navegador virtual sem interface gráfica que abre o whatsapp web e executa todos os comandos via código possibilitando assim a automação de todas as funções.
 
 ## Setup
 
@@ -26,6 +26,13 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom), um
 `npm install`
 
 `cp .env-example .env`
+```
+Dentro do arquivo .env:
+Para usar o venom como motor use a variavel:
+ENGINE=VENOM
+Para usar o WPPCONNECT como motor use a variavel:
+ENGINE=WPPCONNECT
+```
 
 ### Start server
 
