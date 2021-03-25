@@ -5,6 +5,7 @@ const os = require('os');
 const fs = require('fs');
 const path = require('path');
 const venom = require('venom-bot');
+const wppconnect = require('@wppconnect-team/wppconnect');
 const axios = require('axios');
 
 module.exports = class Sessions {
@@ -38,7 +39,7 @@ module.exports = class Sessions {
     static async addSesssion(sessionName) {
         var newSession = {
             name: sessionName,
-            hook:null,
+            hook: null,
             qrcode: false,
             client: false,
             status: 'notLogged',
@@ -74,25 +75,23 @@ module.exports = class Sessions {
                 console.log("nao tinha token na nuvem");
             }
         }//if jsonbinio_secret_key
-
-        const client = await venom.create(
-            sessionName,
-            (base64Qr, asciiQR, attempts) => {
-                // session.state = "QRCODE";
-                session.qrcode = base64Qr;
-                console.log('Number attempts read qrcode: ', attempts);
-                console.log('Terminal qrcode: ', asciiQR);
-                // console.log('base64 qrcode: ', base64Qr);
-            },
-            // statusFind
-            (statusSession, session) => {
-                console.log('#### status=' + statusSession + ' sessionName=' + session);
-            }, {
+        if (process.env.ENGINE === 'VENOM') {
+            const client = await venom.create(
+                sessionName,
+                (base64Qr, asciiQR, attempts) => {
+                    session.state = "QRCODE";
+                    session.qrcode = base64Qr;
+                },
+                // statusFind
+                (statusSession, session) => {
+                    console.log('#### status=' + statusSession + ' sessionName=' + session);
+                }, {
+                folderNameToken: 'tokens',
                 headless: true,
                 devtools: false,
                 useChrome: false,
                 debug: false,
-                logQR: false,
+                logQR: true,
                 browserArgs: [
                     '--log-level=3',
                     '--no-default-browser-check',
@@ -124,16 +123,80 @@ module.exports = class Sessions {
                     '--disable-accelerated-video-decode',
                 ],
                 refreshQR: 15000,
-                autoClose: 60 * 60 * 24 * 365, //never
-                disableSpins: true
+                autoClose: 60000,
+                disableSpins: true,
+                disableWelcome: false,
+                createPathFileToken: true,
+                waitForLogin: true
             },
-            session.browserSessionToken
-        );
-        var browserSessionToken = await client.getSessionTokenBrowser();
-        console.log("usou isso no create: " + JSON.stringify(browserSessionToken));
-        return client;
-    } //initSession
+                session.browserSessionToken
+            );
+            var browserSessionToken = await client.getSessionTokenBrowser();
+            console.log("usou isso no create: " + JSON.stringify(browserSessionToken));
+            return client;
+        } //initSession
+        if (process.env.ENGINE === 'WPPCONNECT') {
+            const client = await wppconnect.create({
+                session: session.name,
+                catchQR: (base64Qrimg, asciiQR, attempts, urlCode) => {
+                    session.state = "QRCODE";
+                    session.qrcode = base64Qrimg;
+                    session.CodeasciiQR = asciiQR;
+                    session.CodeurlCode = urlCode;
+                },
+                statusFind: (statusSession, session) => {
+                    console.log('- Status da sessão:', statusSession);
+                    console.log('- Session name: ', session);
 
+                },
+                folderNameToken: 'tokens',
+                headless: true,
+                devtools: false,
+                useChrome: true,
+                debug: false,
+                logQR: true,
+                browserArgs: [
+                    '--log-level=3',
+                    '--no-default-browser-check',
+                    '--disable-site-isolation-trials',
+                    '--no-experiments',
+                    '--ignore-gpu-blacklist',
+                    '--ignore-certificate-errors',
+                    '--ignore-certificate-errors-spki-list',
+                    '--disable-gpu',
+                    '--disable-extensions',
+                    '--disable-default-apps',
+                    '--enable-features=NetworkService',
+                    '--disable-setuid-sandbox',
+                    '--no-sandbox',
+                    // Extras
+                    '--disable-webgl',
+                    '--disable-threaded-animation',
+                    '--disable-threaded-scrolling',
+                    '--disable-in-process-stack-traces',
+                    '--disable-histogram-customizer',
+                    '--disable-gl-extensions',
+                    '--disable-composited-antialiasing',
+                    '--disable-canvas-aa',
+                    '--disable-3d-apis',
+                    '--disable-accelerated-2d-canvas',
+                    '--disable-accelerated-jpeg-decoding',
+                    '--disable-accelerated-mjpeg-decode',
+                    '--disable-app-list-dismiss-on-blur',
+                    '--disable-accelerated-video-decode',
+                ],
+                disableSpins: true,
+                disableWelcome: false,
+                updatesLog: true,
+                autoClose: 60000,
+                createPathFileToken: true,
+                waitForLogin: true,
+
+            });
+            wppconnect.defaultLogger.level = 'silly'
+            return client;
+        }
+    }
     static async setup(sessionName) {
         var session = Sessions.getSession(sessionName);
 
@@ -171,7 +234,7 @@ module.exports = class Sessions {
             }); //.then((client) => Sessions.startProcess(client));
             client.onMessage(async (message) => {
                 var session = Sessions.getSession(sessionName);
-                if(session.hook != null){
+                if (session.hook != null) {
                     var config = {
                         method: 'post',
                         url: session.hook,
@@ -187,7 +250,7 @@ module.exports = class Sessions {
                         .catch(function (error) {
                             console.log(error);
                         });
-                }else if(message.body == "TESTEBOT"){
+                } else if (message.body == "TESTEBOT") {
                     client.sendText(message.from, 'Hello\nfriend!');
                 }
             });
@@ -228,7 +291,7 @@ module.exports = class Sessions {
             });
         return foundSession;
     } //getSession
-    
+
 
     static getSessions() {
         if (Sessions.sessions) {
@@ -304,7 +367,7 @@ module.exports = class Sessions {
         }
     } //message
 
-    static async saveHook(req){
+    static async saveHook(req) {
         var sessionName = req.body.sessionName;
         /**
          * Verifica se encontra sessão 
@@ -312,22 +375,22 @@ module.exports = class Sessions {
         var foundSession = false;
         var foundSessionId = null;
         if (Sessions.sessions)
-            Sessions.sessions.forEach((session,id) => {
+            Sessions.sessions.forEach((session, id) => {
                 if (sessionName == session.name) {
                     foundSession = session;
                     foundSessionId = id;
                 }
             });
         // Se não encontrar retorna erro
-        if(!foundSession){
+        if (!foundSession) {
             return { result: "error", message: 'Session not found' };
-        }else{
+        } else {
             // Se encontrar cria variáveis
             var hook = req.body.hook;
             foundSession.hook = hook;
             Sessions.sessions[foundSessionId] = foundSession;
             return { result: "success", message: 'Hook Atualizado' };
         }
-        
+
     }
 }
