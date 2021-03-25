@@ -12,7 +12,7 @@ var app = express();
 app.use(cors());
 app.use(express.json());
 
-var appPort = process.env.PORT ? process.env.PORT : 3000;
+var appPort = process.env.PORT ? process.env.PORT : 3333;
 
 if (process.env.HTTPS == 1) { //with ssl
     https.createServer(
