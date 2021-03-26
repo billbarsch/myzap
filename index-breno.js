@@ -11,11 +11,11 @@ var app = express();
 
 app.use(cors());
 app.use(express.json({
-    limit: '100mb',
+    limit: '50mb',
     extended: true
 }));
 
-var appPort = process.env.PORT ? process.env.PORT : 3333;
+var appPort = process.env.PORT ? process.env.PORT : 3000;
 
 if (process.env.HTTPS == 1) { //with ssl
     https.createServer(
@@ -77,11 +77,6 @@ app.get("/qrcode", async (req, res, next) => {
         res.status(200).json({ result: "error", message: "NOTFOUND" });
     }
 });//qrcode
-
-app.post("/sendHook", async function sendText(req, res, next) {
-    var result = await Sessions.saveHook(req);
-    res.json(result);
-});//sendText
 
 app.post("/sendText", async function sendText(req, res, next) {
     var result = await Sessions.sendText(req);
