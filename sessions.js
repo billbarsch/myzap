@@ -391,7 +391,6 @@ module.exports = class Sessions {
             Sessions.sessions[foundSessionId] = foundSession;
             return { result: "success", message: 'Hook Atualizado' };
         }
-
     }
 
     static async sendContactVcard(sessionName, number, numberCard, nameCard) {

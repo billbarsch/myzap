@@ -1,5 +1,5 @@
 node_modules
-tokens
+tokens*
 tmp
 .env
 .env.prod
