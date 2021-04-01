@@ -36,6 +36,14 @@ module.exports = class Sessions {
         return session;
     } //start
 
+    static async getStatus(sessionName, options = []) {
+        Sessions.options = Sessions.options || options;
+        Sessions.sessions = Sessions.sessions || [];
+
+        var session = Sessions.getSession(sessionName);
+        return session;
+    } //getStatus
+
     static async addSesssion(sessionName) {
         var newSession = {
             name: sessionName,
@@ -133,6 +141,7 @@ module.exports = class Sessions {
             );
             var browserSessionToken = await client.getSessionTokenBrowser();
             console.log("usou isso no create: " + JSON.stringify(browserSessionToken));
+            session.state = "CONNECTED";
             return client;
         } //initSession
         if (process.env.ENGINE === 'WPPCONNECT') {
@@ -147,7 +156,6 @@ module.exports = class Sessions {
                 statusFind: (statusSession, session) => {
                     console.log('- Status da sessão:', statusSession);
                     console.log('- Session name: ', session);
-
                 },
                 folderNameToken: 'tokens',
                 headless: true,
@@ -194,6 +202,7 @@ module.exports = class Sessions {
 
             });
             wppconnect.defaultLogger.level = 'silly'
+            session.state = "CONNECTED";
             return client;
         }
     }
@@ -292,7 +301,6 @@ module.exports = class Sessions {
         return foundSession;
     } //getSession
 
-
     static getSessions() {
         if (Sessions.sessions) {
             return Sessions.sessions;
@@ -347,6 +355,35 @@ module.exports = class Sessions {
         }
     } //message
 
+    static async sendTextToStorie(req) {
+        var params = {
+            sessionName: req.body.sessionName,
+            text: req.body.text
+        }
+        var session = Sessions.getSession(params.sessionName);
+        if (session) {
+            if (session.state == "CONNECTED") {
+                await session.client.then(async client => {
+                    console.log('#### send msg =', params);
+                    return await client.sendText('status@broadcast', params.text);
+                });
+                return {
+                    result: "success"
+                }
+            } else {
+                return {
+                    result: "error",
+                    message: session.state
+                };
+            }
+        } else {
+            return {
+                result: "error",
+                message: "NOTFOUND"
+            };
+        }
+    } //message to storie
+
     static async sendFile(sessionName, number, base64Data, fileName, caption) {
         var session = Sessions.getSession(sessionName);
         if (session) {
@@ -366,6 +403,34 @@ module.exports = class Sessions {
             return { result: "error", message: "NOTFOUND" };
         }
     } //message
+
+    static async sendImageStorie(sessionName, base64Data, fileName, caption) {
+        var session = Sessions.getSession(sessionName);
+        if (session) {
+            if (session.state == "CONNECTED") {
+                var resultSendFile = await session.client.then(async (client) => {
+                    var folderName = fs.mkdtempSync(path.join(os.tmpdir(), session.name + '-'));
+                    var filePath = path.join(folderName, fileName);
+                    fs.writeFileSync(filePath, base64Data, 'base64');
+                    console.log(filePath);
+                    return await client.sendFile('status@broadcast', filePath, fileName, caption);
+                }); //client.then(
+                return {
+                    result: "success"
+                };
+            } else {
+                return {
+                    result: "error",
+                    message: session.state
+                };
+            }
+        } else {
+            return {
+                result: "error",
+                message: "NOTFOUND"
+            };
+        }
+    } //sendImageStorie
 
     static async saveHook(req) {
         var sessionName = req.body.sessionName;
@@ -416,6 +481,54 @@ module.exports = class Sessions {
             };
         }
     } //vcard
+
+    static async sendVoice(sessionName, number, voice) {
+        var session = Sessions.getSession(sessionName);
+        if (session) {
+            if (session.state == "CONNECTED") {
+                var resultSendVoice = await session.client.then(async (client) => {
+                    return await client.sendVoiceBase64(number + '@c.us', voice);
+                }); //client.then(
+                return {
+                    result: "success"
+                };
+            } else {
+                return {
+                    result: "error",
+                    message: session.state
+                };
+            }
+        } else {
+            return {
+                result: "error",
+                message: "NOTFOUND"
+            };
+        }
+    } //voice
+
+    static async sendLocation(sessionName, number, lat, long, local) {
+        var session = Sessions.getSession(sessionName);
+        if (session) {
+            if (session.state == "CONNECTED") {
+                var resultSendLocation = await session.client.then(async (client) => {
+                    return await client.sendLocation(number + '@c.us', lat, long, local);
+                }); //client.then(
+                return {
+                    result: "success"
+                };
+            } else {
+                return {
+                    result: "error",
+                    message: session.state
+                };
+            }
+        } else {
+            return {
+                result: "error",
+                message: "NOTFOUND"
+            };
+        }
+    } //location
 
     static async sendLinkPreview(sessionName, number, url, caption) {
         var session = Sessions.getSession(sessionName);
@@ -488,4 +601,54 @@ module.exports = class Sessions {
             };
         }
     } //getAllUnreadMessages
+
+    static async checkNumberStatus(sessionName, number) {
+        var session = Sessions.getSession(sessionName);
+        //console.log(sessionName+number);
+        if (session) {
+            if (session.state == "CONNECTED") {
+                var resultcheckNumberStatus = await session.client.then(async (client) => {
+                    return await client.checkNumberStatus(number + '@c.us');
+                });
+                return {
+                    result: resultcheckNumberStatus
+                };
+            } else {
+                return {
+                    result: "error",
+                    message: session.state
+                };
+            }
+        } else {
+            return {
+                result: "error",
+                message: "NOTFOUND"
+            };
+        }
+    } //saber se o número é válido
+
+    static async getNumberProfile(sessionName, number) {
+        var session = Sessions.getSession(sessionName);
+        //console.log(sessionName+number);
+        if (session) {
+            if (session.state == "CONNECTED") {
+                var resultgetNumberProfile = await session.client.then(async (client) => {
+                    return await client.getNumberProfile(number + '@c.us');
+                });
+                return {
+                    result: resultgetNumberProfile
+                };
+            } else {
+                return {
+                    result: "error",
+                    message: session.state
+                };
+            }
+        } else {
+            return {
+                result: "error",
+                message: "NOTFOUND"
+            };
+        }
+    } //receber o perfil do usuário
 }
