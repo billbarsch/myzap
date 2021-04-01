@@ -40,7 +40,7 @@ TOTALMEN=$(free -m|grep Mem|tr -s " " |cut -d " " -f2) #Total disponivel de memo
 PERC=$(expr $TOTALMEN / $USOMEN \* 10)
 #Melhor maneira ao meu ver de pegar
 
-if [ "$USUARIO" == "0" ] && [ "$UBUNTU" == "18.04" ] && [ "$KERNEL" == "4.15" ]
+if [ "$UBUNTU" == "18.04" ] && [ "$KERNEL" == "4.15" ]
 	then
 		echo -e "O usuário é Root, continuando com o script..."
 		echo -e "Distribuição é >=18.04.x, continuando com o script..."
