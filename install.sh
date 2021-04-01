@@ -17,7 +17,7 @@
 #==== MOD 1.2 DATA:01/04/2021
 #==== tempo de instalacao tempo de espera para cada comando
 #==== verificacao de versao do ubuntu com verificacao versao kernel
-#==== verificacao se usuario e root
+#==== verificacao se usuario e root /removido por hora/
 ###########################################################################
 # Variável da Data Inicial para calcular o tempo de execução do script (VARIÁVEL MELHORADA)
 # opção do comando date: +%T (Time)
@@ -40,18 +40,18 @@ TOTALMEN=$(free -m|grep Mem|tr -s " " |cut -d " " -f2) #Total disponivel de memo
 PERC=$(expr $TOTALMEN / $USOMEN \* 10)
 #Melhor maneira ao meu ver de pegar
 
-if [ "$UBUNTU" == "18.04" ] && [ "$KERNEL" == "4.15" ]
-	then
-		echo -e "O usuário é Root, continuando com o script..."
-		echo -e "Distribuição é >=18.04.x, continuando com o script..."
-		echo -e "Kernel é >= 4.15, continuando com o script..."
-		sleep 5
-	else
-		echo -e "Usuário não é Root ($USUARIO) ou Distribuição não é >=18.04.x ($UBUNTU) ou Kernel não é >=4.15 ($KERNEL)"
-		echo -e "Caso você não tenha executado o script com o comando: sudo -i"
-		echo -e "Execute novamente o script para verificar o ambiente."
-		exit 1
-fi
+# if [ "$UBUNTU" == "18.04" ] && [ "$KERNEL" >= "4.15" ]
+# 	then
+# 		echo -e "O usuário é Root, continuando com o script..."
+# 		echo -e "Distribuição é >=18.04.x, continuando com o script..."
+# 		echo -e "Kernel é >= 4.15, continuando com o script..."
+# 		sleep 5
+# 	else
+# 		echo -e "Usuário não é Root ($USUARIO) ou Distribuição não é >=18.04.x ($UBUNTU) ou Kernel não é >=4.15 ($KERNEL)"
+# 		echo -e "Caso você não tenha executado o script com o comando: sudo -i"
+# 		echo -e "Execute novamente o script para verificar o ambiente."
+# 		exit 1
+# fi
 #
 # Verificando se o usuário é Root, Distribuição é >=18.04 e o Kernel é >=4.15 <IF MELHORADO)
 # 
