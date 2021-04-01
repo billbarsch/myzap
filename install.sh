@@ -38,6 +38,9 @@ UPTIME=$(uptime -s)
 USOMEN=$(free -m|grep Mem|tr -s " " |cut -d " " -f3) #uso atual da memoria
 TOTALMEN=$(free -m|grep Mem|tr -s " " |cut -d " " -f2) #Total disponivel de memoria 
 PERC=$(expr $TOTALMEN / $USOMEN \* 10)
+#
+# Exportando o recurso de Noninteractive do Debconf para não solicitar telas de configuração
+export DEBIAN_FRONTEND="noninteractive"
 #Melhor maneira ao meu ver de pegar
 
 # if [ "$UBUNTU" == "18.04" ] && [ "$KERNEL" >= "4.15" ]
@@ -54,8 +57,7 @@ PERC=$(expr $TOTALMEN / $USOMEN \* 10)
 # fi
 #
 # Verificando se o usuário é Root, Distribuição é >=18.04 e o Kernel é >=4.15 <IF MELHORADO)
-# 
-
+# echo -e echo interpretar os caracteres de escape da barra invertida
 clear
 echo "==========================================================="
 echo "Relatorio da Maquina: $HOSTNAME"
@@ -81,12 +83,12 @@ echo
 lastlog -u $UID
 echo "==========================================================="
 echo "#####################################################################################"
+echo -e "Início do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
 echo "#########################-------UPDATE------------10%---#############################"
 sudo apt-get update >>$LOG
 sleep 5
 echo "#########################-------INSTALL-BROWSER---15%---#############################"
-sudo apt-get install chromium-chromedriver -y >>$LOG
-sleep 5
+sudo apt-get install chromium-chromedriver -y 
 echo "#########################-------UPGRADE-----------20%---#############################"
 sudo apt-get full-upgrade -y >>$LOG
 sleep 5
