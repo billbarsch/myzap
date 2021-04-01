@@ -9,18 +9,21 @@
 #Descricao: Script install Myzap Api open source
 #			
 #
-#====Versao 1.3
+#====Versao 1.4
 #==== MOD 1.1 DATA:30/03/2021
 #==== create .env install browser
 #==== MOD 1.2 DATA:01/04/2021
 #==== chromium-chromedriver
-#==== MOD 1.2 DATA:01/04/2021
+#==== MOD 1.3 DATA:01/04/2021
 #==== tempo de instalacao tempo de espera para cada comando
 #==== verificacao de versao do ubuntu com verificacao versao kernel
 #==== verificacao se usuario e root /removido por hora/
+#==== MOD 1.4 DATA:01/04/2021
+#==== correcao instalacao browser sem comandos
 ###########################################################################
 # Variável da Data Inicial para calcular o tempo de execução do script (VARIÁVEL MELHORADA)
 # opção do comando date: +%T (Time)
+dpkg-reconfigure debconf --frontend=noninteractive
 HORAINICIAL=`date +%T`
 LOG="/var/log/$(echo $0 | cut -d'/' -f2)"
 KERNEL=`uname -r | cut -d'.' -f1,2`
@@ -88,7 +91,7 @@ echo "#########################-------UPDATE------------10%---##################
 sudo apt-get update >>$LOG
 sleep 5
 echo "#########################-------INSTALL-BROWSER---15%---#############################"
-sudo apt-get install chromium-chromedriver -y 
+DEBIAN_FRONTEND=noninteractive apt-get install chromium-chromedriver -y  >>$LOG
 echo "#########################-------UPGRADE-----------20%---#############################"
 sudo apt-get full-upgrade -y >>$LOG
 sleep 5
@@ -107,7 +110,7 @@ echo "#########################-------CLONE-------------60%---##################
 git clone https://github.com/billbarsch/myzap.git >>$LOG
 sleep 5
 echo "#########################-------UPDATE-NPM--------70%---#############################"
-npm install -g npm@7.7.6 >>$LOG
+npm install -g npm@7.8.0 >>$LOG
 sleep 5
 echo "#########################-------CD MYZAP----------75%---#############################"
 cd myzap >>$LOG
