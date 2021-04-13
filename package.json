@@ -1,6 +1,6 @@
 {
     "name": "myzap",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "description": "Free OpenSource Whatsapp Api",
     "main": "index.js",
     "scripts": {
