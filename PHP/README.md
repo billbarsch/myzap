@@ -41,7 +41,7 @@ Para enviar uma mensagem:
 
 ## Melhorias Futuras
 
-- Adicionar todas as classes do Venom / WPPConnect
+- Adicionar todas as funções do Venom / WPPConnect
 
 ## Licença
 
