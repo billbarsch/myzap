@@ -1,7 +1,8 @@
 Classe PHP MyZap
 ========
 
-Classe pura e simples para estudos/implementação do MyZap. A ideia de não utilizar um framework é justamente para que todos que tenham uma minima noção de PHP consigam entender e modular conforme a necessidade.
+Classe pura e simples para estudos/implementação do MyZap. 
+A ideia de não utilizar um framework é justamente para que todos que tenham conhecimentos básicos do PHP, consigam entender e modular conforme a necessidade.
 
 ## Changelog
 
