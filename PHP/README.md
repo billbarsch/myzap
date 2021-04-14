@@ -30,7 +30,7 @@ Por favor, cheque o arquivo de [CHANGELOG](CHANGELOG.md).
 ?>
 ```
 
-## Exemplos: 
+## Exemplo: 
 O funcionamento básico, basta descomentar no `index.php` a função que deseja testar, alterar as váriaveis e executar.
 
 Para enviar uma mensagem:
