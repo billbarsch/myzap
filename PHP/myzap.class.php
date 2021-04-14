@@ -2,17 +2,17 @@
 
 class MyZap {
 
-	protected $options;
-	function __construct($options = null) {
+   protected $options;
+   function __construct($options = null) {
 
-		//...ADD YOUR LOCAL HOST/IP
-		$this->options = [
-			'LOCAL_HOST' => 'http://192.168.1.155:3333'
-		];
+	//...ADD YOUR LOCAL HOST/IP
+	$this->options = [
+		'LOCAL_HOST' => 'http://192.168.1.155:3333'
+	];
 
     }
 
-	protected function getServerVar($id) {
+    protected function getServerVar($id) {
         return isset($_SERVER[$id]) ? $_SERVER[$id] : '';
     }
 
@@ -122,7 +122,5 @@ class MyZap {
     public function sendContactVcard($data) {
     	return $this->sendCurl('post', __FUNCTION__ , $data);
     }
-
-
 
 }
