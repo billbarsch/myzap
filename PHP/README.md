@@ -15,9 +15,9 @@ Por favor, cheque o arquivo de [CHANGELOG](CHANGELOG.md).
 
 1 - Crie uma pasta em seu localhost chamada `myzap` por exemplo.
 
-2 - Copie o arquivo `index.php` e `myzap.class.php` para a pasta `myzap` do seu projeto.
+2 - Copie os arquivos `index.php` e `myzap.class.php` para a pasta `myzap`.
 
-3 - Altere a classe `myzap.class.php` com o ip/nome do seu `node` host
+3 - Altere o arquivo `myzap.class.php` com o ip/nome do seu `node` host
 
 ```php
 <?php
