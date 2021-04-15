@@ -45,30 +45,29 @@ class MyZap {
     protected function sendCurl($method, $function, $data){
     	$ch = curl_init();
     	if($method == "post"):
-			curl_setopt($ch, CURLOPT_URL, $this->options['LOCAL_HOST'].'/'.$function);
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-		else:
-			curl_setopt($ch, CURLOPT_URL, $this->options['LOCAL_HOST'].'/'.$function.'?'.http_build_query($data));
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-		endif;	
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-	    		//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);
-			curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-			curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-			curl_setopt($ch, CURLOPT_HTTPHEADER, [
-		    		'Content-Type: application/json',
-		    		'Cache-control: no-cache'
-		    ]
-			);	
-		$result = curl_exec($ch);
-		if($result === false):
-    		echo 'Curl error: ' . curl_error($ch); 
-    		die;
-		endif;
-		curl_close($ch);
-		return $this->response($result);	
+		curl_setopt($ch, CURLOPT_URL, $this->options['LOCAL_HOST'].'/'.$function);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+	else:
+		curl_setopt($ch, CURLOPT_URL, $this->options['LOCAL_HOST'].'/'.$function.'?'.http_build_query($data));
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+	endif;	
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+	//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);
+	curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+	curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, [
+		'Content-Type: application/json',
+		'Cache-control: no-cache'
+	]);	
+	$result = curl_exec($ch);
+	if($result === false):
+	    echo 'Curl error: ' . curl_error($ch); die;
+	endif;
+	curl_close($ch);
+
+	return $this->response($result);	
     }
 
     public function start($data) {
