@@ -42,6 +42,7 @@ Para enviar uma mensagem:
 ## Melhorias Futuras
 
 - Adicionar todas as funções do Venom / WPPConnect
+- Versão em Laravel
 
 ## Licença
 
