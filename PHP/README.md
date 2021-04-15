@@ -18,7 +18,7 @@ Por favor, cheque o arquivo de [CHANGELOG](CHANGELOG.md).
 
 2 - Copie os arquivos `index.php` e `myzap.class.php` para a pasta `myzap`.
 
-3 - Altere o arquivo `myzap.class.php` com o ip/nome do seu `node` host
+3 - Altere o arquivo `myzap.class.php` com o ip/nome do seu `node` host.
 
 ```php
 <?php
