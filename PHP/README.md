@@ -1,4 +1,4 @@
-Classe PHP MyZap
+Classe PHP MyZap 1.0
 ========
 
 Classe pura e simples para estudos/implementação do MyZap. 
