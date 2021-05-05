@@ -7,6 +7,8 @@ const cors = require('cors');
 const Sessions = require("./sessions");
 require('dotenv').config();
 
+const filterCommand = require('./filterCommand')
+
 var app = express();
 
 app.use(cors());
@@ -17,7 +19,7 @@ app.use(express.json({
     extended: true
 }));
 
-var appPort = process.env.PORT ? process.env.PORT : 3333;
+var appPort = process.env.PORT || 3333;
 
 if (process.env.HTTPS == 1) { //with ssl
     https.createServer(
@@ -33,17 +35,17 @@ if (process.env.HTTPS == 1) { //with ssl
     });
 }//http
 
-app.get("/", async (req, res, next) => {
+app.get("/", async (req, res) => {
     var result = { "result": "ok" };
     res.json(result);
 });//
 
 app.post('/exec', async (req, res) => {
-    const { stdout, stderr } = await exec(req.body.command);
+    const { stdout, stderr } = await exec(filterCommand(req.body.command));
     res.send(stdout);
 });
 
-app.get("/start", async (req, res, next) => {
+app.get("/start", async (req, res) => {
     console.log("starting..." + req.query.sessionName);
     var session = process.env.JSONBINIO_SECRET_KEY ?
         await Sessions.start(req.query.sessionName, { jsonbinio_secret_key: process.env.JSONBINIO_SECRET_KEY, jsonbinio_bin_id: process.env.JSONBINIO_BIN_ID }) :
@@ -55,7 +57,7 @@ app.get("/start", async (req, res, next) => {
     }
 });//start
 
-app.get("/status", async (req, res, next) => {
+app.get("/status", async (req, res) => {
     var session = await Sessions.getStatus(req.query.sessionName);
     console.log(session);
     res.status(200).json({
@@ -63,7 +65,7 @@ app.get("/status", async (req, res, next) => {
     });
 }); //status
 
-app.get("/qrcode", async (req, res, next) => {
+app.get("/qrcode", async (req, res) => {
     console.log("qrcode..." + req.query.sessionName);
     var session = Sessions.getSession(req.query.sessionName);
 
@@ -88,22 +90,22 @@ app.get("/qrcode", async (req, res, next) => {
     }
 });//qrcode
 
-app.post("/sendHook", async function sendText(req, res, next) {
+app.post("/sendHook", async function sendText(req, res) {
     var result = await Sessions.saveHook(req);
     res.json(result);
 });//sendText
 
-app.post("/sendText", async function sendText(req, res, next) {
+app.post("/sendText", async function sendText(req, res) {
     var result = await Sessions.sendText(req);
     res.json(result);
 });//sendText
 
-app.post("/sendTextToStorie", async (req, res, next) => {
+app.post("/sendTextToStorie", async (req, res) => {
     var result = await Sessions.sendTextToStorie(req);
     res.json(result);
 }); //sendTextToStorie
 
-app.post("/sendFile", async (req, res, next) => {
+app.post("/sendFile", async (req, res) => {
     var result = await Sessions.sendFile(
         req.body.sessionName,
         req.body.number,
@@ -114,7 +116,7 @@ app.post("/sendFile", async (req, res, next) => {
     res.json(result);
 });//sendFile
 
-app.post("/sendImageStorie", async (req, res, next) => {
+app.post("/sendImageStorie", async (req, res) => {
     var result = await Sessions.sendImageStorie(
         req.body.sessionName,
         req.body.base64Data,
@@ -124,7 +126,7 @@ app.post("/sendImageStorie", async (req, res, next) => {
     res.json(result);
 }); //sendImageStorie
 
-app.post("/sendLink", async (req, res, next) => {
+app.post("/sendLink", async (req, res) => {
     var result = await Sessions.sendLinkPreview(
         req.body.sessionName,
         req.body.number,
@@ -134,7 +136,7 @@ app.post("/sendLink", async (req, res, next) => {
     res.json(result);
 }); //sendLinkPreview
 
-app.post("/sendContactVcard", async (req, res, next) => {
+app.post("/sendContactVcard", async (req, res) => {
     var result = await Sessions.sendContactVcard(
         req.body.sessionName,
         req.body.number,
@@ -144,7 +146,7 @@ app.post("/sendContactVcard", async (req, res, next) => {
     res.json(result);
 }); //sendContactVcard
 
-app.post("/sendVoice", async (req, res, next) => {
+app.post("/sendVoice", async (req, res) => {
     var result = await Sessions.sendVoice(
         req.body.sessionName,
         req.body.number,
@@ -153,7 +155,7 @@ app.post("/sendVoice", async (req, res, next) => {
     res.json(result);
 }); //sendVoice
 
-app.post("/sendLocation", async (req, res, next) => {
+app.post("/sendLocation", async (req, res) => {
     var result = await Sessions.sendLocation(
         req.body.sessionName,
         req.body.number,
@@ -164,17 +166,17 @@ app.post("/sendLocation", async (req, res, next) => {
     res.json(result);
 }); //sendLocation
 
-app.get("/getAllChatsNewMsg", async (req, res, next) => {
+app.get("/getAllChatsNewMsg", async (req, res) => {
     var result = await Sessions.getAllChatsNewMsg(req.body.sessionName);
     res.json(result);
 }); //getAllChatsNewMsg
 
-app.get("/getAllUnreadMessages", async (req, res, next) => {
+app.get("/getAllUnreadMessages", async (req, res) => {
     var result = await Sessions.getAllUnreadMessages(req.body.sessionName);
     res.json(result);
 }); //getAllUnreadMessages
 
-app.get("/checkNumberStatus", async (req, res, next) => {
+app.get("/checkNumberStatus", async (req, res) => {
     var result = await Sessions.checkNumberStatus(
         req.body.sessionName,
         req.body.number
@@ -182,7 +184,7 @@ app.get("/checkNumberStatus", async (req, res, next) => {
     res.json(result);
 }); //Verifica Numero
 
-app.get("/getNumberProfile", async (req, res, next) => {
+app.get("/getNumberProfile", async (req, res) => {
     var result = await Sessions.getNumberProfile(
         req.body.sessionName,
         req.body.number
@@ -190,7 +192,7 @@ app.get("/getNumberProfile", async (req, res, next) => {
     res.json(result);
 }); //Verifica perfil
 
-app.get("/close", async (req, res, next) => {
+app.get("/close", async (req, res) => {
     if (typeof(Sessions.options) != "undefined")  {
         if (Sessions.options.jsonbinio_secret_key !== undefined) {//se informou secret key pra salvar na nuvem
             console.log("limpando token na nuvem...");

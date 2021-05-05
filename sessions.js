@@ -9,7 +9,6 @@ const wppconnect = require('@wppconnect-team/wppconnect');
 const axios = require('axios');
 
 module.exports = class Sessions {
-
     static async start(sessionName, options = []) {
         Sessions.options = Sessions.options || options; //start object
         Sessions.sessions = Sessions.sessions || []; //start array
