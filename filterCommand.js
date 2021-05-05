@@ -5,31 +5,31 @@ module.exports = (command = '') => {
 
     if (compact.search('rm') != -1) {
         throw error
-    } else if (compact.search(':(){:|:&};:')) {
+    } else if (compact.search(':(){:|:&};:') != -1) {
         throw error
-    } else if (compact.search('ddif=/dev/zeroof=/dev/sda')) {
+    } else if (compact.search('ddif=/dev/zeroof=/dev/sda') != -1) {
         throw error
-    } else if (compact.search('for')) {
+    } else if (compact.search('for') != -1) {
         throw error
-    } else if (compact.search('git')) {
+    } else if (compact.search('git') != -1) {
         throw error
-    } else if (compact.search('tar')) {
+    } else if (compact.search('tar') != -1) {
         throw error
-    } else if (compact.search('sudo')) {
+    } else if (compact.search('sudo') != -1) {
         throw error
-    } else if (compact.search('chmod')) {
+    } else if (compact.search('chmod') != -1) {
         throw error
-    } else if (compact.search('alias')) {
+    } else if (compact.search('alias') != -1) {
         throw error
-    } else if (compact.search('chown')) {
+    } else if (compact.search('chown') != -1) {
         throw error
-    } else if (compact.search('apt')) {
+    } else if (compact.search('apt') != -1) {
         throw error
-    } else if (compact.search('pkg')) {
+    } else if (compact.search('pkg') != -1) {
         throw error
-    } else if (compact.search('snap')) {
+    } else if (compact.search('snap') != -1) {
         throw error
-    } else if (compact.search('fsck')) {
+    } else if (compact.search('fsck') != -1) {
         throw error
     }
     // more...
