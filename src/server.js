@@ -69,5 +69,3 @@ if (process.env.HTTPS === 1) {
     console.log(`HTTP server running on port ${port}`)
   })
 }
-
-app.listen(port)
