@@ -2,7 +2,7 @@
     "name": "myzap",
     "version": "0.1.0",
     "description": "Free OpenSource Whatsapp Api",
-    "main": "index.js",
+    "main": "src/server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -16,5 +16,12 @@
         "express": "^4.17.1",
         "mime": "^2.5.2",
         "venom-bot": "^3.0.11"
+    },
+    "devDependencies": {
+        "eslint": "^7.26.0",
+        "eslint-config-standard": "^16.0.2",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^4.3.1"
     }
 }
