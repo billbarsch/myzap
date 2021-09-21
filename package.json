@@ -1,20 +1,57 @@
 {
-    "name": "myzap",
-    "version": "0.1.0",
-    "description": "Free OpenSource Whatsapp Api",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "Bill Barsch",
-    "license": "ISC",
-    "dependencies": {
-        "@wppconnect-team/wppconnect": "^*",
-        "axios": "^0.21.1",
-        "cors": "^2.8.5",
-        "dotenv": "^8.2.0",
-        "express": "^4.17.1",
-        "mime": "^2.5.2",
-        "venom-bot": "^3.0.11"
-    }
+  "name": "myzap2.0",
+  "description": "<h1 align=\"center\">\r     <a href=\"\">🔗 MyZAP</a>\r </h1>\r <p align=\"center\">🚀 Permite a integração do WhatsApp com qualquer aplicação por meio de requisições POST/GET</p>",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edupoli/MyZap2.0.git"
+  },
+  "keywords": [
+    "whatsapp",
+    "api",
+    "nodejs",
+    "opensource",
+    "javascript",
+    "wppconnect",
+    "venom"
+  ],
+  "author": "Eduardo Policarpo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edupoli/MyZap2.0/issues"
+  },
+  "homepage": "https://github.com/edupoli/MyZap2.0#readme",
+  "dependencies": {
+    "@wppconnect-team/wppconnect": "^*",
+    "assert": "^*",
+    "async-get-file": "^*",
+    "axios": "^0.21.1",
+    "buffer-to-stream": "^1.0.0",
+    "cors": "^*",
+    "dotenv": "^*",
+    "ejs": "^*",
+    "express": "^*",
+    "ffmpeg": "^*",
+    "firebase": "^*",
+    "fluent-ffmpeg": "^*",
+    "form-data": "^3.0.1",
+    "mime-types": "^2.1.31",
+    "moment": "^*",
+    "qrcode": "^*",
+    "request": "^*",
+    "request-promise": "^*",
+    "serve-index": "^*",
+    "socket.io": "^*",
+    "superagent": "^*",
+    "superagent-queue": "^*",
+    "url-exists": "^*",
+    "valid-url": "^*",
+    "venom-bot": "^*",
+    "whatsapp-web.js": "^*",
+    "yoo-hoo": "^*"
+  }
 }

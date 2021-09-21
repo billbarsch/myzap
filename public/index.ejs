@@ -1,0 +1,288 @@
+<!--
+    /*
+ * @Author: Eduardo Policarpo
+ * @contact: +55 43996611437
+ * @Date: 2021-05-10 18:09:49
+ * @LastEditTime: 2021-06-07 03:18:01
+ */
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>MyZAP 2.0</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<style>
+    .form-control[readonly] {
+        background-color: #fff
+    }
+
+    .textOnInput {
+        position: relative;
+    }
+
+    .textOnInput label {
+        position: absolute;
+        top: -15px;
+        left: 13px;
+        padding: 2px;
+        z-index: 1;
+    }
+
+    .textOnInput label:after {
+        content: " ";
+        background-color: #fff;
+        width: 100%;
+        height: 13px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: -1;
+    }
+
+    label {
+        font-size: 16px;
+        font-weight: 500;
+        display: inline-block;
+        margin-bottom: .5rem;
+    }
+
+    .form-control {
+        box-shadow: none !important;
+    }
+
+    fieldset.scheduler-border {
+        border: 1px solid lightgrey;
+        /*border: 1px groove #ddd !important;*/
+        padding: 0 1.4em 1.4em 1.4em !important;
+        margin: 0 0 1.5em 0 !important;
+        -webkit-box-shadow: 0px 0px 0px 0px #000;
+        box-shadow: 0px 0px 0px 0px #000;
+        border-radius: 5px;
+    }
+
+    legend.scheduler-border {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        width: auto;
+        padding: 0 10px;
+        border-bottom: none;
+    }
+
+    form button {
+        background: #4666F7;
+        padding: 10px;
+        border: 0;
+        margin-top: 20px;
+        color: #fff;
+        border-radius: 5px;
+        outline: 0;
+        cursor: pointer;
+        transition-duration: 200ms;
+        box-shadow: 0 2.8px 2.2px rgba(70, 102, 247, 0.034),
+            0 6.7px 5.3px rgba(70, 102, 247, 0.048),
+            0 12.5px 10px rgba(70, 102, 247, 0.06),
+            0 22.3px 17.9px rgba(70, 102, 247, 0.072),
+            0 41.8px 33.4px rgba(70, 102, 247, 0.086),
+            0 100px 80px rgba(70, 102, 247, 0.12);
+    }
+
+    form button:hover {
+        background: #263fb1;
+        transition-duration: 200ms;
+    }
+
+    form button:disabled {
+        background: #5b5e78;
+        cursor: not-allowed;
+    }
+
+    :placeholder-shown {
+        font-size: small;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h4>MyZAP 2.0</h4>
+        <div class="row" style="margin-top: 50px;">
+            <div class="col-sm-8">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <div class="textOnInput">
+                            <label for="session">Session Name:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="session" name="session"
+                                    placeholder="Nome para identificação da sessão">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="textOnInput">
+                            <label for="apitoken">API Token:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="apitoken" name="apitoken"
+                                    placeholder="Token da API para autenticação de acesso">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="textOnInput">
+                            <label for="sessionkey">Session KEY:</label>
+                            <div class="col-sm-10">
+                                <input type="sessionkey" class="form-control" id="sessionkey" name="sessionkey"
+                                    placeholder="Chave de autorização para requisições na API.">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="textOnInput">
+                            <label for="wh_status">Webhook Send Messages:</label>
+                            <div class="col-sm-10">
+                                <input type="wh_status" class="form-control" id="wh_status" name="wh_status"
+                                    placeholder="URL que recebe o Webhooks dos status das mensagens enviadas">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="textOnInput">
+                            <label for="wh_message">Webhook Received Messages:</label>
+                            <div class="col-sm-10">
+                                <input type="wh_message" class="form-control" id="wh_message" name="wh_message"
+                                    placeholder="URL que recebe o Webhooks dos status das mensagens recebidas">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="textOnInput">
+                            <label for="wh_connect">Webhook Status Connection:</label>
+                            <div class="col-sm-10">
+                                <input type="wh_connect" class="form-control" id="wh_connect" name="wh_connect"
+                                    placeholder="URL que recebe o status da conexão">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="textOnInput">
+                            <label for="wh_qrcode">Webhook QRCode:</label>
+                            <div class="col-sm-10">
+                                <input type="wh_qrcode" class="form-control" id="wh_qrcode" name="wh_qrcode"
+                                    placeholder="URL que recebe o webhooks do QRCODE do cliente">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" id="send-btn"
+                                onclick="alterSession(document.getElementById('session').value)">
+                                Enviar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-4">
+                <img id="image" src="/loading.gif" draggable="false" alt="qr-code">
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/axios.min.js"></script>
+    <script src="/js/socket.io.js"></script>
+
+    <script>
+
+        document.getElementById('image').style.visibility = "hidden";
+
+        async function getSession(session) {
+            const config = {
+                headers: {
+                    apitoken: document.getElementById("apitoken").value,
+                    sessionkey: document.getElementById("sessionkey").value
+                }
+            }
+
+            const data = {
+                session: document.getElementById("session").value,
+                wh_status: document.getElementById("wh_status").value,
+                wh_message: document.getElementById("wh_message").value,
+                wh_qrcode: document.getElementById("wh_qrcode").value,
+                wh_connect: document.getElementById("wh_connect").value,
+            }
+            axios.post("http://<%=host %>:<%=port %>/start", data, config)
+                .then((value) => {
+                    //alert(value)
+                })
+                .catch((err) => {
+                    //alert(err)
+                })
+
+        }
+
+        async function alterSession(session) {
+            if (!session) {
+                alert("Digite o nome da sessão antes de continuar...")
+            } else
+                if (!document.getElementById('apitoken').value) {
+                    alert("Digite o TOKEN da API antes de continuar...")
+                } else
+                    if (!document.getElementById('sessionkey').value) {
+                        alert("Digite a SESSION KEY da sessão antes de continuar...")
+                    }
+                    else {
+                        document.getElementById('image').style.visibility = "visible";
+                        document.getElementById('send-btn').disabled = true
+                        await getSession(session)
+                    }
+        }
+
+    </script>
+
+    <script>
+        const socket = io('http://<%=host %>:<%=port %>/');
+
+        socket.on('msg', (msg) => {
+            if (msg) {
+                document.getElementById('image').style.visibility = "hidden";
+                document.getElementById('send-btn').disabled = false
+                alert(msg.reason)
+            }
+
+        })
+
+        socket.on('qrCode', (qrCode) => {
+            let session = document.getElementById('session').value
+            if (session === qrCode.session) {
+
+                document.getElementById('image').src = qrCode.data
+            }
+        })
+
+        socket.on('whatsapp-status', (status) => {
+            if (status) {
+                alert('Whatsapp Aberto com sucesso')
+                document.getElementById('send-btn').disabled = false
+                document.getElementById('image').src = "/ok.jpg"
+            }
+            else {
+                document.getElementById('send-btn').disabled = false
+                document.getElementById('image').src = "/error.jpg"
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,34 +1,34 @@
 version: "3.5"
 services:
-  myzapdev:
+  myzap_2dev:
     build: 
       context: .
-      target: myzapdev
-    container_name: myzapdev
+      target: myzap_2dev
+    container_name: myzap_2dev
     working_dir: /usr/src/app
     volumes:
       - ${PATH_LOCAL}:/usr/src/app
     ports:
-      - 3333:${HOST_PORT}
+      - ${HOST_PORT}:${HOST_PORT}
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     networks:
       backend:
         aliases:
-          - myzapdev
+          - myzap_2dev
 
-  myzapprod:
+  myzap_2prod:
     build: 
       context: .
-      target: myzapprod
-    container_name: myzapprod
+      target: myzap_2prod
+    container_name: myzap_2prod
 #    image: gcr.io/maisagil/myzap
     ports:
-      - 3333:${HOST_PORT}
+      - ${HOST_PORT}:${HOST_PORT}
     networks:
       backend:
         aliases:
-          - myzapprod
+          - myzap_2prod
 networks:
   backend:
-    name: myzapnetwork
+    name: myzap_2network

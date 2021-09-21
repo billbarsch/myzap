@@ -1,0 +1,132 @@
+/*
+ * @Author: Eduardo Policarpo
+ * @contact: +55 43996611437
+ * @Date: 2021-05-10 18:09:49
+ * @LastEditTime: 2021-06-07 03:18:01
+ */
+html {
+    overflow: hidden;
+}
+
+html, body, #root {
+    width: 100%;
+    height: 100%;
+}
+
+#root {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    font-family: "Roboto", sans-serif;
+}
+
+#root img {
+    display: flex;
+    width: 300px;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+.layout {
+    margin: 0 auto;
+}
+
+.layout input {
+    border: 1px solid #E6E8EF;
+    box-shadow: 0 2.8px 2.2px rgba(70, 102, 247, 0.034),
+    0 6.7px 5.3px rgba(70, 102, 247, 0.048),
+    0 12.5px 10px rgba(70, 102, 247, 0.06),
+    0 22.3px 17.9px rgba(70, 102, 247, 0.072),
+    0 41.8px 33.4px rgba(70, 102, 247, 0.086),
+    0 100px 80px rgba(70, 102, 247, 0.12);
+    border-radius: 4px;
+    outline: 0;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.layout form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.layout form #title {
+    text-align: center;
+    font-weight: 600;
+}
+
+.layout form #description {
+    /*text-align: center;*/
+    font-weight: 400;
+    color: #777;
+    margin-top: -10px;
+}
+
+.layout form button {
+    background: #4666F7;
+    padding: 10px;
+    border: 0;
+    margin-top: 20px;
+    color: #fff;
+    border-radius: 5px;
+    outline: 0;
+    cursor: pointer;
+    transition-duration: 200ms;
+    box-shadow: 0 2.8px 2.2px rgba(70, 102, 247, 0.034),
+    0 6.7px 5.3px rgba(70, 102, 247, 0.048),
+    0 12.5px 10px rgba(70, 102, 247, 0.06),
+    0 22.3px 17.9px rgba(70, 102, 247, 0.072),
+    0 41.8px 33.4px rgba(70, 102, 247, 0.086),
+    0 100px 80px rgba(70, 102, 247, 0.12);
+}
+
+.layout form button:hover {
+    background: #263fb1;
+    transition-duration: 200ms;
+}
+
+.layout form button:disabled {
+    background: #5b5e78;
+    cursor: not-allowed;
+}
+
+.textOnInput {
+    position: relative;
+}
+
+.textOnInput label {
+    position: absolute;
+    top: -15px;
+    left: 13px;
+    padding: 2px;
+    z-index: 1;
+}
+
+.textOnInput label:after {
+    content: " ";
+    background-color: #fff;
+    width: 100%;
+    height: 13px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+label {
+    font-size: 16px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}

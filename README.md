@@ -1,140 +1,96 @@
-# MyZap - Free Open Source Whatsapp Api
+# MyZAP 2.0
 
-[![Video explicativo do projeto](https://img.youtube.com/vi/blOpjAS1Fik/0.jpg)](https://www.youtube.com/watch?v=blOpjAS1Fik)
+### Permite a integração do WhatsApp com qualquer aplicação por meio de requisições POST/GET:
+---
+<a href="https://github.com/edupoli/MyZap2.0/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/edupoli/MyZap2.0"></a>
+<img alt="GitHub all releases" src="https://img.shields.io/github/downloads/billbarsch/myzap2.0/total">
+<a href="https://github.com/edupoli/MyZap2.0/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/edupoli/MyZap2.0"></a>
+<a href="https://github.com/edupoli/MyZap2.0/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/edupoli/MyZap2.0"></a>
+<a href="https://github.com/edupoli/MyZap2.0"><img alt="GitHub license" src="https://img.shields.io/github/license/edupoli/MyZap2.0"></a>
+<a href="https://github.com/edupoli/MyZap2.0"><img alt="GitHub license" src="https://img.shields.io/badge/node-v14.0-green"></a>
+<img alt="Github All Contributors" src="https://img.shields.io/github/all-contributors/all-contributors/all-contributors/master">
+---
+Esta Api, segue os mesmos termos de serviço do WhatsApp. É importante que você leia atentamente a estes termos. Você é responsável pelo uso da ferramenta e pelas conseqüências do mau uso. Reforçamos que a API não é destinada para prática de SPAM e que o envio de mensagens indesejadas, viola os termos de serviço do WhatsApp. A violação dos termos pode acarretar no bloqueio e banimento definitivo de sua conta no WhatsApp.
 
+### Desenvolvedores e Suporte:
 
-[Grupo do Whatsapp: Link para o nosso grupo para tirar dúvidas e nos ajudarmos (clique aqui)](https://chat.whatsapp.com/DMehlYDcMWiKmlIsOLGAQM)
+- +55 (63) 99215-8117 - Bill Barsch
+- +55 (43) 99661-1437 - Eduardo Policarpo (Desenvolvedor Oficial)
 
+<a target="_blank" href="https://api.whatsapp.com/send?phone=554396611437&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP" target="_blank"><img title="WhatsApp do Suporte" height="50" width="190" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/WhatsApp_logo.svg/2000px-WhatsApp_logo.svg.png"></a>
 
+### Importante:
 
-Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom) ou o [WPPCONNECT](https://github.com/wppconnect-team/wppconnect), um navegador virtual sem interface gráfica que abre o whatsapp web e executa todos os comandos via código possibilitando assim a automação de todas as funções.
+Este projeto usa como base o [WPPCONNECT](https://github.com/wppconnect-team/wppconnect), e [Whatsapp-WEB.JS](https://github.com/pedroslopez/whatsapp-web.js/), e [Venom-bot](https://github.com/orkestral/venom) um navegador virtual sem interface gráfica que abre o whatsapp web e executa todos os comandos via código possibilitando assim a automação de todas as funções.
 
-## Setup
+### Instalação Básica - VPS UBUNTU/DEBIAN:
 
-`sudo apt install -y curl nano gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget build-essential apt-transport-https libgbm-dev`
-- para instalar todas as dependencias necessárias no sistema
+- Dependências:
+```
+sudo apt install -y curl nano git gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget build-essential apt-transport-https libgbm-dev
+```
 
-`curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -`
+- Para instalar o ChomeDrive
 
-`sudo apt install -y git nodejs`
-- para instalar git, nodejs
+```wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb ```
 
-`git clone https://github.com/billbarsch/myzap.git`
+```sudo apt install ./google-chrome-stable_current_amd64.deb```
 
-`cd myzap`
+- Para instalar o nodejs 16
 
-`npm install`
+```cd ~ ```
 
-`cp .env-example .env`
+```curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh```
+
+```sudo bash nodesource_setup.sh ```
+
+```sudo apt -y install nodejs```
+
+```node -v```
+
+- Clonar do GIT
+
+```git clone https://github.com/billbarsch/myzap2.0 ```
+
+```cd myzap```
+
+```npm install --allow-root --unsafe-perm=true```
+
+```cp env_exemplo .env```
+
 ```
 Dentro do arquivo .env:
-Para usar o venom como motor use a variavel:
-ENGINE=VENOM
-Para usar o WPPCONNECT como motor use a variavel:
-ENGINE=WPPCONNECT
+instruções sobre algumas opções e configurações
 ```
 
-### Start server
+- Iniciar o Servidor
 
-`node index.js`
+```node index.js```
 
-### keep processes alive at every server restart
+- Manter os processos ativos a cada reinicialização do servidor
 
-`npm install -y pm2 -g`
+```npm install -y pm2 -g```
+```pm2 start index.js```
+```pm2 startup```
 
-`pm2 start index.js`
+- Para instalar o certbot e criar o certificado SSL para domínios https:
 
-`pm2 startup`
+```sudo apt-get update && sudo apt-get install -y software-properties-common```
 
-## Usage
+```sudo add-apt-repository universe && sudo add-apt-repository ppa:certbot/certbot```
 
-### Start new whatsapp session
+```sudo apt-get update && sudo apt-get install -y certbot```
 
-`http://localhost:3333/start?sessionName=session1`
-
-### Get QRCode (quickly!!)
-
-`http://localhost:3333/qrcode?sessionName=session1&image=true`
-- png
-
-`http://localhost:3333/qrcode?sessionName=session1`
-- json (base64)
-
-### Send message (POST method)
-
-```javascript
-(async () => {
-  const response = await fetch('http://localhost:3333/sendText', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(
-        {
-            sessionName: "session1", 
-            number: '556334140378',
-            text:"Hello\nWorld"
-        }
-    )
-  });
-  const content = await response.json();
-
-  console.log(content);
-})();  
-```
-
-### Send File (POST method)
-
-```javascript
-(async () => {
-    const response = await fetch('http://localhost:3333/sendFile', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(
-        {
-            sessionName: "session1", 
-            number: '556334140378',
-            base64Data:"44696d61", //hexadecimal
-            fileName:"test.txt",
-            caption: "Document" //optional
-        }
-    )
-  });
-  const content = await response.json();
-
-  console.log(content);
-})();  
-```
-
-### Close whatsapp session
-
-`http://localhost:3333/close?sessionName=session1`
+```sudo certbot certonly --manual --force-renewal -d *.yourdomain.net -d yourdomain.net --agree-tos --no-bootstrap --manual-public-ip-logging-ok --preferred-challenges dns-01 --server https://acme-v02.api.letsencrypt.org/directory```
 
 
-## Salvar token do venom na nuvem (jsonbin.io) (opcional)
- - Crie uma conta grátis no https://jsonbin.io/ 
- - Crie um novo "bin" (objeto json) com quaisquer dados e copie o id dele e coloque no arquivo .env
- - Copie também o seu token de acesso à api do jsonbin.io e coloque no arquivo .env
+#### Documentação e manuais:
 
-```
-...
-JSONBINIO_BIN_ID=23452345345 <- deixar em branco caso não queira usar essa opção do jsonbin.io 
-JSONBINIO_SECRET_KEY=345234532452452345243 <- deixar em branco caso não queira usar essa opção do jsonbin.io
-...
-```
+Para uma instalação usando o WSL do Windows siga o manual escrito e anexo na pasta <a href="https://github.com/billbarsch/myzap2.0/tree/master/manuais/instalacao_local_windows_ubuntu_wsl" target="_blank"> Manuais do repositório.</a>
 
- - com esses dados o myzap irá gravar o token na nuvem e poderá ser executado em várias instancias diferentes por exemplo no Gooogle Cloud Run
+Para acesso às collections de requisições documentadas, Insomnia e Postman, ambas se encontram na pasta <a href="https://github.com/billbarsch/myzap2.0/tree/master/util" target="_blank"> Util </a> do repositório.
 
-## To install certbot and create ssl certificate to https domains:
+Para uma documentação mais interativa sobre as requisições: <a href="https://documenter.getpostman.com/view/15465271/Tzm3oxnt" target="_blank"> Clique aqui </a>
 
-`sudo apt-get update && sudo apt-get install -y software-properties-common`
+Para testar o myzap rodando em ambiente de produção gratuitamente: <a href="https://apigratis.com.br" target="_blank"> Clique aqui </a>
 
-`sudo add-apt-repository universe && sudo add-apt-repository ppa:certbot/certbot`
-
-`sudo apt-get update && sudo apt-get install -y certbot`
-
-`sudo certbot certonly --manual --force-renewal -d *.yourdomain.net -d yourdomain.net --agree-tos --no-bootstrap --manual-public-ip-logging-ok --preferred-challenges dns-01 --server https://acme-v02.api.letsencrypt.org/directory`

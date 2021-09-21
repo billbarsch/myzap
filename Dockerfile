@@ -1,4 +1,4 @@
-FROM ubuntu:18.04 AS myzapdev
+FROM ubuntu:18.04 AS myzap_2dev
 WORKDIR /usr/src/app
 RUN apt-get update && apt-get install -y \
     gconf-service \
@@ -41,23 +41,22 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     apt-transport-https \
     libgbm-dev \
-    && apt-get install curl -y \
-    && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+    git
+
+RUN apt-get install curl -y \
+    && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y \
-    git \
     nodejs
-#COPY package*.json ./
-#COPY .env-example ./.env
-#RUN npm install
-EXPOSE 3333
+
+EXPOSE 3332
 CMD npm install ; node index.js
 
-FROM myzapdev AS myzapprod
+FROM myzap_2dev AS myzap_2prod
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 COPY . .
 #RUN rm -rf .env
 COPY .env.prod ./.env
-EXPOSE 3333
+EXPOSE 3332
 CMD node index.js

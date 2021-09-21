@@ -1,7 +1,4 @@
-node_modules
-tokens*
-tmp
+node_modules/
+tokens/
 .env
-.env.prod
-deploy.sh
-database/*.sqlite
+teste.js
