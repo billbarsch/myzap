@@ -3,7 +3,7 @@
 ### Permite a integração do WhatsApp com qualquer aplicação por meio de requisições POST/GET:
 ---
 <a href="https://github.com/edupoli/MyZap2.0/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/edupoli/MyZap2.0"></a>
-<img alt="GitHub all releases" src="https://img.shields.io/github/downloads/billbarsch/myzap2.0/total">
+<img alt="GitHub all releases" src="https://img.shields.io/github/downloads/billbarsch/myzap/total">
 <a href="https://github.com/edupoli/MyZap2.0/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/edupoli/MyZap2.0"></a>
 <a href="https://github.com/edupoli/MyZap2.0/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/edupoli/MyZap2.0"></a>
 <a href="https://github.com/edupoli/MyZap2.0"><img alt="GitHub license" src="https://img.shields.io/github/license/edupoli/MyZap2.0"></a>
@@ -50,7 +50,7 @@ sudo apt install -y curl nano git gconf-service libasound2 libatk1.0-0 libc6 lib
 
 - Clonar do GIT
 
-```git clone https://github.com/billbarsch/myzap2.0 ```
+```git clone https://github.com/billbarsch/myzap ```
 
 ```cd myzap```
 
@@ -86,9 +86,9 @@ instruções sobre algumas opções e configurações
 
 #### Documentação e manuais:
 
-Para uma instalação usando o WSL do Windows siga o manual escrito e anexo na pasta <a href="https://github.com/billbarsch/myzap2.0/tree/master/manuais/instalacao_local_windows_ubuntu_wsl" target="_blank"> Manuais do repositório.</a>
+Para uma instalação usando o WSL do Windows siga o manual escrito e anexo na pasta <a href="https://github.com/billbarsch/myzap/tree/master/manuais/instalacao_local_windows_ubuntu_wsl" target="_blank"> Manuais do repositório.</a>
 
-Para acesso às collections de requisições documentadas, Insomnia e Postman, ambas se encontram na pasta <a href="https://github.com/billbarsch/myzap2.0/tree/master/util" target="_blank"> Util </a> do repositório.
+Para acesso às collections de requisições documentadas, Insomnia e Postman, ambas se encontram na pasta <a href="https://github.com/billbarsch/myzap/tree/master/util" target="_blank"> Util </a> do repositório.
 
 Para uma documentação mais interativa sobre as requisições: <a href="https://documenter.getpostman.com/view/15465271/Tzm3oxnt" target="_blank"> Clique aqui </a>
 
