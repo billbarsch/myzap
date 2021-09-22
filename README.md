@@ -19,6 +19,16 @@ Esta Api, segue os mesmos termos de serviço do WhatsApp. É importante que voc�
 
 <a target="_blank" href="https://api.whatsapp.com/send?phone=554396611437&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP" target="_blank"><img title="WhatsApp do Suporte" height="50" width="190" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/WhatsApp_logo.svg/2000px-WhatsApp_logo.svg.png"></a>
 
+
+### Grupos de discussão:
+- Link do grupo no whatsapp:
+[Grupo no whatsapp](https://chat.whatsapp.com/IDqZrBmBIYL50Mq63NfraA)
+[Grupo 2 no whatsapp](https://chat.whatsapp.com/CTVp994clKsKunqzczFfu7)
+
+- link do grupo no telegran:
+[Grupo no telegram](https://t.me/joinchat/tOiGjpK_0xg4OGZh)
+
+
 ### Importante:
 
 Este projeto usa como base o [WPPCONNECT](https://github.com/wppconnect-team/wppconnect), e [Whatsapp-WEB.JS](https://github.com/pedroslopez/whatsapp-web.js/), e [Venom-bot](https://github.com/orkestral/venom) um navegador virtual sem interface gráfica que abre o whatsapp web e executa todos os comandos via código possibilitando assim a automação de todas as funções.
