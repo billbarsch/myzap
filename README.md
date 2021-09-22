@@ -19,6 +19,7 @@ Esta Api, segue os mesmos termos de serviço do WhatsApp. É importante que voc�
 
 <a target="_blank" href="https://api.whatsapp.com/send?phone=554396611437&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP" target="_blank"><img title="WhatsApp do Suporte" height="50" width="190" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/WhatsApp_logo.svg/2000px-WhatsApp_logo.svg.png"></a>
 
+- A api é 100% gratis e opensource, caso tenha interesse em contratar um suporte pago, instalação, implementaçãoo [Eduardo Policarpo](https://api.whatsapp.com/send?phone=554396611437&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP) faz esse tipo de trabalho.
 
 ### Grupos de discussão:
 - Link do grupo no whatsapp:
