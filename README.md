@@ -25,7 +25,7 @@ Esta Api, segue os mesmos termos de serviço do WhatsApp. É importante que voc�
 [Grupo no whatsapp](https://chat.whatsapp.com/IDqZrBmBIYL50Mq63NfraA) | 
 [Grupo 2 no whatsapp](https://chat.whatsapp.com/CTVp994clKsKunqzczFfu7)
 
-- link do grupo no telegran:
+- Link do grupo no telegram:
 [Grupo no telegram](https://t.me/joinchat/tOiGjpK_0xg4OGZh)
 
 
