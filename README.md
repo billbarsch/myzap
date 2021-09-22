@@ -86,9 +86,9 @@ instruções sobre algumas opções e configurações
 
 #### Documentação e manuais:
 
-Para uma instalação usando o WSL do Windows siga o manual escrito e anexo na pasta <a href="https://github.com/billbarsch/myzap/tree/master/manuais/instalacao_local_windows_ubuntu_wsl" target="_blank"> Manuais do repositório.</a>
+Para uma instalação usando o WSL do Windows siga o manual escrito e anexo na pasta <a href="https://github.com/billbarsch/myzap/tree/myzap2.0/manuais/instalacao_local_windows_ubuntu_wsl" target="_blank"> Manuais do repositório.</a>
 
-Para acesso às collections de requisições documentadas, Insomnia e Postman, ambas se encontram na pasta <a href="https://github.com/billbarsch/myzap/tree/master/util" target="_blank"> Util </a> do repositório.
+Para acesso às collections de requisições documentadas, Insomnia e Postman, ambas se encontram na pasta <a href="https://github.com/billbarsch/myzap/tree/myzap2.0/util/postman" target="_blank"> Util </a> do repositório.
 
 Para uma documentação mais interativa sobre as requisições: <a href="https://documenter.getpostman.com/view/15465271/Tzm3oxnt" target="_blank"> Clique aqui </a>
 
