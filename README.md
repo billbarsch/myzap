@@ -67,7 +67,7 @@ sudo apt install -y curl nano git gconf-service libasound2 libatk1.0-0 libc6 lib
 
 ```npm install --allow-root --unsafe-perm=true```
 
-```cp env_exemplo .env```
+```cp .env_exemplo .env```
 
 ```
 Dentro do arquivo .env:
