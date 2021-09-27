@@ -147,6 +147,9 @@ module.exports = class Sessions {
         if (process.env.ENGINE === 'WPPCONNECT') {
             const client = await wppconnect.create({
                 session: session.name,
+                puppeteerOptions: {
+                    userDataDir: './tokens/' + session.name, // or your custom directory
+                },
                 catchQR: (base64Qrimg, asciiQR, attempts, urlCode) => {
                     session.state = "QRCODE";
                     session.qrcode = base64Qrimg;
