@@ -9,6 +9,7 @@ const Sessions = require('../controllers/sessions');
 const events = require('../controllers/events');
 const webhooks = require('../controllers/webhooks');
 const firebase = require('../firebase/db');
+const config = require('../config');
 const firestore = firebase.firestore();
 
 module.exports = class Venom {
