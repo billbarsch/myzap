@@ -4,24 +4,21 @@
  * @Date: 2021-05-10 18:09:49
  * @LastEditTime: 2021-06-07 03:18:01
  */
-const { Client } = require('whatsapp-web.js');
-const qrcode = require('qrcode-terminal');
-const qrcodeBase64 = require('qrcode');
-const { Launcher } = require('chrome-launcher');
+import { doc, db, getDoc } from '../firebase/db.js';
+import { Client } from "whatsapp-web.js";
+import qrcode from'qrcode-terminal';
+import qrcodeBase64 from'qrcode';
+import { Launcher } from'chrome-launcher';
 let chromeLauncher = Launcher.getInstallations()[0];
-const Sessions = require('../controllers/sessions');
-const events = require('../controllers/events');
-const webhooks = require('../controllers/webhooks');
-const firebase = require('../firebase/db');
-const firestore = firebase.firestore();
-const config = require('../config');
+import Sessions from'../controllers/sessions.js';
+import events from'../controllers/events.js';
+import webhooks from'../controllers/webhooks.js';
+import config from'../config.js';
 
-module.exports = class WhatsappWebJS {
+export default class WhatsappWebJS {
     static async start(req, res, session) {
         return new Promise(async (resolve, reject) => {
             try {
-                const Session = await firestore.collection('Sessions').doc(session);
-                const dados = await Session.get();
                 var useHere;
                 if (config.useHere === 'true') {
                     useHere = false
@@ -33,7 +30,10 @@ module.exports = class WhatsappWebJS {
                 }
                 console.log(useHere)
                 let client;
-                if (dados.exists) {
+
+                const Session = doc(db, "Sessions", session);
+                const dados = await getDoc(Session);
+                if (dados.exists() && dados.data().engine === process.env.ENGINE) {
                     console.log(`****** STARTING SESSION ${session} ******`)
                     client = new Client({
                         restartOnAuthFail: true,
@@ -55,7 +55,8 @@ module.exports = class WhatsappWebJS {
                             WABrowserId: dados.data().WABrowserId,
                             WASecretBundle: dados.data().WASecretBundle,
                             WAToken1: dados.data().WAToken1,
-                            WAToken2: dados.data().WAToken2
+                            WAToken2: dados.data().WAToken2,
+                            engine: process.env.ENGINE
                         }
                     });
 

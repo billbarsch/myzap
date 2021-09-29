@@ -4,12 +4,15 @@
  * @Date: 2021-05-10 18:09:49
  * @LastEditTime: 2021-06-07 03:18:01
  */
-const Sessions = require('../controllers/sessions');
-const superagent = require('superagent');
-require('superagent-queue');
-require('dotenv').config();
+import Sessions from '../controllers/sessions.js';
+import superagent  from 'superagent';
+import 'superagent-queue';
+import dotenv from 'dotenv'
+dotenv.config();
+//require('superagent-queue');
+//require('dotenv').config();
 
-module.exports = class Webhooks {
+export default class Webhooks {
 
     static async wh_messages(session, response) {
         let data = Sessions.getSession(session)

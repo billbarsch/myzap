@@ -5,11 +5,11 @@
  * @Date: 2021-05-10 18:09:49
  * @LastEditTime: 2021-06-07 03:18:01
  */
-const fs = require('fs');
-const mime = require('mime-types');
-const webhooks = require('./webhooks');
-const config = require('../config');
-module.exports = class Events {
+import fs from 'fs';
+import mime from 'mime-types';
+import webhooks from './webhooks.js';
+import config from '../config.js';
+export default class Events {
 
     static async receiveMessage(session, client) {
         if (config.engine === '1') {

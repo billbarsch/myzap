@@ -4,19 +4,18 @@
  * @Date: 2021-05-10 18:09:49
  * @LastEditTime: 2021-06-07 03:18:01
  */
-const express = require('express');
-const Router = express.Router();
-const engine = require('../engines/WhatsappWebJS');
-const Sessions = require('../controllers/sessions');
-const Mensagens = require('../functions/WhatsappWebJS/mensagens');
-const Status = require('../functions/WhatsappWebJS/status');
-const Auth = require('../functions/WPPConnect/auth');
-const config = require('../config');
-const { checkParams } = require('../middlewares/validations');
-const { checkNumber } = require('../middlewares/checkNumber');
-const firebase = require('../firebase/db');
-const firestore = firebase.firestore();
-const database = require('../firebase/functions');
+import express from'express';
+const Router =  express.Router();
+import engine from'../engines/WhatsappWebJS.js';
+import Sessions from'../controllers/sessions.js';
+import Mensagens from'../functions/WhatsappWebJS/mensagens.js';
+import Status from'../functions/WhatsappWebJS/status.js';
+import Auth from'../functions/WPPConnect/auth.js';
+import config from'../config.js';
+import { checkParams } from'../middlewares/validations.js';
+import { checkNumber } from'../middlewares/checkNumber.js';
+import {snapshot, setDoc, doc, db} from'../firebase/db.js';
+import database from'../firebase/functions.js';
 
 Router.post('/start', async (req, res) => {
     try {
@@ -82,10 +81,12 @@ Router.post('/start', async (req, res) => {
                             'WABrowserId': response.WABrowserId,
                             'WASecretBundle': response.WASecretBundle,
                             'WAToken1': response.WAToken1,
-                            'WAToken2': response.WAToken2
+                            'WAToken2': response.WAToken2,
+                            'engine': process.env.ENGINE
+
                         }
 
-                        await firestore.collection('Sessions').doc(session).set(data);
+                        await setDoc(doc(db, "Sessions", session), data);
 
                         res.status(200).json({
                             "result": 200,
@@ -180,4 +181,4 @@ Router.post('/sendTextToStorie', Status.sendTextToStorie);
 // Router.post('/unblockContact', Commands.unblockContact);
 // Router.post('/getNumberProfile', Commands.getNumberProfile);
 
-module.exports = Router;
+export default {Router};

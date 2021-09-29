@@ -3,6 +3,7 @@
   "description": "<h1 align=\"center\">\r     <a href=\"\">🔗 MyZAP</a>\r </h1>\r <p align=\"center\">🚀 Permite a integração do WhatsApp com qualquer aplicação por meio de requisições POST/GET</p>",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -36,7 +37,7 @@
     "ejs": "^*",
     "express": "^*",
     "ffmpeg": "^*",
-    "firebase": "^*",
+    "firebase": "^9.1.0",
     "fluent-ffmpeg": "^*",
     "form-data": "^3.0.1",
     "mime-types": "^2.1.31",
