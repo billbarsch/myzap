@@ -9,16 +9,15 @@
 
 'use strict';
 
-const firebase = require('./db');
-const SessionsDB = require('./model');
-const firestore = firebase.firestore();
+import { Sessions, db, doc, getDoc, setDoc, snapshot, deleteDoc, addDoc} from './db.js';
+import SessionsDB from './model.js';
 
-module.exports = class Firebase {
+export default class Firebase {
 
     static async addSession(req, res, next) {
         try {
             const data = req.body;
-            await firestore.collection('Sessions').doc(req.body.session).set(data);
+            await addDoc(Sessions, data);
             res.send('Record saved successfuly');
         } catch (error) {
             res.status(400).send(error.message);
@@ -27,13 +26,11 @@ module.exports = class Firebase {
 
     static async getAllSessions(req, res, next) {
         try {
-            const Sessions = await firestore.collection('Sessions');
-            const data = await Sessions.get();
             const SessionsArray = [];
-            if (data.empty) {
+            if (snapshot.empty) {
                 res.status(404).send('No Session record found');
             } else {
-                data.forEach(doc => {
+                snapshot.forEach(doc => {
                     const Session = new SessionsDB(
                         doc.id,
                         doc.data().session,
@@ -57,13 +54,11 @@ module.exports = class Firebase {
 
     static async getAllSessionsFulldata(req, res, next) {
         try {
-            const Sessions = await firestore.collection('Sessions');
-            const data = await Sessions.get();
             const SessionsArray = [];
-            if (data.empty) {
+            if (snapshot.empty) {
                 res.status(404).send('No Session record found');
             } else {
-                data.forEach(doc => {
+                snapshot.forEach(doc => {
                     const Session = new SessionsDB(
                         doc.id,
                         doc.data().session,
@@ -90,9 +85,8 @@ module.exports = class Firebase {
     static async getSession(req, res, next) {
         try {
             const id = req.body.id;
-            const Session = await firestore.collection('Sessions').doc(id);
-            const data = await Session.get();
-            if (!data.exists) {
+            const data = await getDoc(doc(db, "Sessions", id));
+            if (!data.exists()) {
                 res.status(404).send('Session with the given ID not found');
             } else {
                 res.send(data.data());
@@ -106,8 +100,7 @@ module.exports = class Firebase {
         try {
             const id = req.body.id;
             const data = req.body;
-            const Session = await firestore.collection('Sessions').doc(id);
-            await Session.update(data);
+            await setDoc(doc(db, "Sessions", id), data);
             res.send('Session record updated successfuly');
         } catch (error) {
             res.status(400).send(error.message);
@@ -124,17 +117,15 @@ module.exports = class Firebase {
                     "reason": "Session não informada"
                 })
             }
-            const Session = await firestore.collection('Sessions').doc(id);
-            const data = await Session.get();
-            if (!data.exists) {
+            const data = getDoc(doc(db, "Sessions", id));     
+            if (!data.exists()) {
                 res.status(404).json({
                     result: 404,
                     "status": "FAIL",
                     "reason": `Session ${id} não existe no firebase`
                 })
-            }
-            else {
-                await firestore.collection('Sessions').doc(id).delete();
+            }else {
+                await deleteDoc(doc(db, "Sessions", id));
                 res.status(200).json({
                     result: 200,
                     "status": "SUCCESS",

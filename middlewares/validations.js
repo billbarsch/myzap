@@ -4,8 +4,9 @@
  * @Date: 2021-05-10 18:09:49
  * @LastEditTime: 2021-06-07 03:18:01
  */
-const Sessions = require('../controllers/sessions')
-require('dotenv').config();
+import Sessions from '../controllers/sessions.js'
+import dotenv from "dotenv";
+dotenv.config();
 let engine = process?.env?.ENGINE;
 
 const checkParams = async (req, res, next) => {
@@ -63,4 +64,4 @@ const checkRegisteredNumber = async function (req, res) {
     return isRegistered;
 }
 
-exports.checkParams = checkParams
+export { checkParams }

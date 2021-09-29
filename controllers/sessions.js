@@ -4,8 +4,8 @@
  * @Date: 2021-05-10 18:09:49
  * @LastEditTime: 2021-06-07 03:18:01
  */
-const urlExists = require("url-exists");
-module.exports = class Sessions {
+import urlExists from "url-exists";
+export default class Sessions {
 
     static session = new Array()
     static checkPath(path) {

@@ -7,22 +7,18 @@
 # Modified By: Eduardo Policarpo                                               #
 ##############################################################################*/
 
-const database = require('./firebase/functions');
-const SessionsDB = require('./firebase/model');
-const firebase = require('./firebase/db');
-const firestore = firebase.firestore();
-const request = require('request-promise');
-const config = require('./config');
+import SessionsDB from "./firebase/model.js";
+import { snapshot} from './firebase/db.js';
+import request from "request-promise";
+import config from "./config.js";
 
 async function getAllSessions() {
     try {
-        const Sessions = await firestore.collection('Sessions');
-        const data = await Sessions.get();
         const SessionsArray = [];
-        if (data.empty) {
+        if (snapshot.empty) {
             return null;
         } else {
-            data.forEach(doc => {
+            snapshot.forEach(doc => {
                 const Session = new SessionsDB(
                     doc.id,
                     doc.data().session,
@@ -53,8 +49,7 @@ async function startAllSessions() {
             console.log('######### ERRO DE CONFIGURACAO NO FIREBASE #########')
             console.log('####### Missing or insufficient permissions. #######')
             console.log('### Verifique as permissões de escrita e leitura ###')
-        }
-        else {
+        } else {
             dados.map((item) => {
                 var options = {
                     'method': 'POST',
@@ -83,4 +78,4 @@ async function startAllSessions() {
         }
     }
 }
-module.exports.startAllSessions = startAllSessions;
+export default { startAllSessions };

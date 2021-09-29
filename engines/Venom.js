@@ -4,15 +4,14 @@
  * @Date: 2021-05-10 18:09:49
  * @LastEditTime: 2021-06-07 03:18:01
  */
-const venom = require('venom-bot');
-const Sessions = require('../controllers/sessions');
-const events = require('../controllers/events');
-const webhooks = require('../controllers/webhooks');
-const firebase = require('../firebase/db');
-const config = require('../config');
-const firestore = firebase.firestore();
+import venom from 'venom-bot';
+import Sessions from '../controllers/sessions.js';
+import events from '../controllers/events.js';
+import webhooks from '../controllers/webhooks.js';
+import { doc, db, getDoc } from '../firebase/db.js';
+import config from '../config';
 
-module.exports = class Venom {
+export default class Venom {
 
     static async start(req, res, session) {
 
@@ -41,7 +40,7 @@ module.exports = class Venom {
                         statusSession === 'qrReadFail' ||
                         statusSession === 'autocloseCalled' ||
                         statusSession === 'serverClose') {
-                        req.io.emit('whatsapp-status', false)
+                        req.io.emit('whatsapp-status', false);                      
                     }
                     if (statusSession === 'isLogged' ||
                         statusSession === 'qrReadSuccess' ||
@@ -102,7 +101,7 @@ module.exports = class Venom {
             let tokens = await client.getSessionTokenBrowser()
             let browser = []
             // browserless != '' ? browserless+'/devtools/inspector.html?token='+token_browser+'&wss='+browserless.replace('https://', '')+':443/devtools/page/'+client.page._target._targetInfo.targetId : null
-            webhooks.wh_connect(session, 'connected', info.wid.user, browser, tokens)
+            webhooks.wh_connect(session, 'connected', info, browser, tokens)
             events.receiveMessage(session, client)
             events.statusMessage(session, client)
             if (config.useHere === 'true') {
@@ -138,22 +137,22 @@ module.exports = class Venom {
             }
         );
     }
-
     static async getToken(session) {
         return new Promise(async (resolve, reject) => {
             try {
-                const Session = await firestore.collection('Sessions').doc(session);
-                const dados = await Session.get();
-                if (!dados.exists) {
-                    resolve('no results found')
-                } else {
+                const Session = doc(db, "Sessions", session);
+                const dados = await getDoc(Session);
+                if (dados.exists() && dados.data()?.engine === process.env.ENGINE) {
                     let data = {
                         'WABrowserId': dados.data().WABrowserId,
                         'WASecretBundle': dados.data().WASecretBundle,
                         'WAToken1': dados.data().WAToken1,
-                        'WAToken2': dados.data().WAToken2
+                        'WAToken2': dados.data().WAToken2,
+                        'Engine': process.env.ENGINE
                     }
                     resolve(data)
+                } else {
+                    resolve('no results found')
                 }
 
             } catch (error) {
