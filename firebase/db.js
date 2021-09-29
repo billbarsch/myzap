@@ -7,9 +7,31 @@
 # Modified By: Eduardo Policarpo                                               #
 ##############################################################################*/
 
-const firebase = require('firebase');
-const config = require('../config');
 
-const db = firebase.initializeApp(config.firebaseConfig);
+import config from "../config.js";
+import { initializeApp } from 'firebase/app';
+import { deleteDoc, 
+    getFirestore, 
+    collection, 
+    getDocs, 
+    setDoc, 
+    doc, 
+    getDoc, 
+    addDoc 
+} from 'firebase/firestore/lite';
 
-module.exports = db;
+const app = initializeApp(config.firebaseConfig);
+const db = getFirestore(app);
+
+const Sessions = await collection(db, 'Sessions');
+const snapshot = await getDocs(Sessions);
+
+export {snapshot};
+export {addDoc};
+export {setDoc};
+export {getDoc};
+export {doc};
+export {db};
+export {deleteDoc};
+export {Sessions};
+export default{ app };

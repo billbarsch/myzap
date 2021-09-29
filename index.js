@@ -5,20 +5,29 @@
  * @LastEditTime: 2021-06-07 03:18:01
  */
 'use strict';
-const cors = require('cors');
-const express = require('express');
+import  cors from  "cors";
+import express from "express";
 const app = express();
-const path = require('path')
-const server = require('http').Server(app);
-const serveIndex = require('serve-index');
-const motor = require('./engines');
-const config = require('./config');
-const { yo } = require('yoo-hoo');
-const router = motor.engines[process.env.ENGINE].router
-require('events').EventEmitter.prototype._maxListeners = 999;
-const { startAllSessions } = require('./startup');
+import path from "path";
+import { fileURLToPath } from 'url';
+import http from "http";
+import serveIndex from "serve-index";
+import motor from "./engines.js";
+import config from "./config.js";
+import { yo } from  "yoo-hoo";
+import events from "events";
+import startup from "./startup.js";
+import { Server } from "socket.io";
 
-const io = require('socket.io')(server, {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const server = http.Server(app);
+const router = motor.engines[process.env.ENGINE].router
+events.EventEmitter.prototype._maxListeners = 999;
+const { startAllSessions } = startup;
+
+const io = new Server(server, {
     cors: {
         origins: ["*"],
         methods: ["GET", "POST"],

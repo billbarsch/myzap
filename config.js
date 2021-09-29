@@ -8,8 +8,8 @@
 ##############################################################################*/
 
 //'use strict';
-const dotenv = require('dotenv');
-const assert = require('assert');
+import  dotenv  from "dotenv";
+import assert from "assert";
 
 dotenv.config();
 
@@ -37,7 +37,7 @@ assert(TOKEN, 'TOKEN is required, please set the ENGINE variable value in the .e
 assert(ENGINE, 'ENGINE is required, please set the ENGINE variable value in the .env file');
 
 
-module.exports = {
+export default {
     port: PORT,
     host: HOST,
     token: TOKEN,
@@ -54,5 +54,7 @@ module.exports = {
         appId: APP_ID
     },
     start_all_sessions: START_ALL_SESSIONS,
-    useHere: FORCE_CONNECTION_USE_HERE
+    useHere: FORCE_CONNECTION_USE_HERE,
+
+    
 }

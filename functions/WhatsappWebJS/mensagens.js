@@ -4,14 +4,16 @@
   @codigo escrito em 07/06/2021
   @Author Eduardo Policarpo
  */
-const Sessions = require('../../controllers/sessions');
-const get = require("async-get-file")
-const path = require('path')
-const fs = require('fs')
-const { MessageMedia, Location, Contact } = require('whatsapp-web.js');
-const util = require('util');
-const urlExists = util.promisify(require('url-exists'));
-const moment = require('moment');
+import Sessions from '../../controllers/sessions.js';
+import get from "async-get-file";
+import path from 'path'
+import fs from 'fs';
+import whatsappweb from "whatsapp-web.js";
+const { MessageMedia, Location, Contact } = whatsappweb;
+import util from 'util';
+import urlExistsImport from 'url-exists';
+const urlExists = util.promisify(urlExistsImport);
+import moment from 'moment';
 
 const mediadownloader = (url, path, callback) => {
     request.head(url, (err, res, body) => {
@@ -21,7 +23,7 @@ const mediadownloader = (url, path, callback) => {
     })
 }
 
-module.exports = class Mensagens {
+export default class Mensagens {
 
 
     static async sendText(req, res) {

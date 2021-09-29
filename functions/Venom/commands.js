@@ -4,12 +4,12 @@
  * @Date: 2021-05-10 18:09:49
  * @LastEditTime: 2021-06-07 03:18:01
  */
-const Sessions = require('../../controllers/sessions');
-const moment = require('moment')
+import Sessions from '../../controllers/sessions.js';
+import moment from 'moment';
 moment().format('DD-MM-YYYY hh:mm:ss');
 moment.locale('pt-br')
 
-module.exports = class Commands {
+export default class Commands {
 
   static async getBatteryLevel(req, res) {
     try {

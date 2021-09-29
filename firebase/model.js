@@ -7,9 +7,9 @@
 # Modified By: Eduardo Policarpo                                               #
 ##############################################################################*/
 
-class Sessions {
+export default class Sessions {
     constructor(id, session, apitoken, sessionkey, wh_status,
-        wh_message, wh_qrcode, wh_connect, WABrowserId, WASecretBundle, WAToken1, WAToken2) {
+        wh_message, wh_qrcode, wh_connect, WABrowserId, WASecretBundle, WAToken1, WAToken2, Engine) {
         this.id = id;
         this.session = session;
         this.apitoken = apitoken;
@@ -22,7 +22,7 @@ class Sessions {
         this.WASecretBundle = WASecretBundle;
         this.WAToken1 = WAToken1;
         this.WAToken2 = WAToken2;
+        this.Engine = Engine;
     }
 }
 
-module.exports = Sessions;
