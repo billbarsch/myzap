@@ -9,7 +9,7 @@ import Sessions from '../controllers/sessions.js';
 import events from '../controllers/events.js';
 import webhooks from '../controllers/webhooks.js';
 import { doc, db, getDoc } from '../firebase/db.js';
-import config from '../config';
+import config from '../config.js';
 
 export default class Venom {
 
