@@ -222,7 +222,9 @@
                 wh_qrcode: document.getElementById("wh_qrcode").value,
                 wh_connect: document.getElementById("wh_connect").value,
             }
-            axios.post("http://<%=host %>:<%=port %>/start", data, config)
+             
+            
+                axios.post("http://<%=host %>:<%=port %>/start", data, config)
                 .then((value) => {
                     //alert(value)
                 })
@@ -252,7 +254,7 @@
     </script>
 
     <script>
-        const socket = io('http://<%=host %>:<%=port %>/');
+        const socket = io('http://<%=host %>/');
 
         socket.on('msg', (msg) => {
             if (msg) {

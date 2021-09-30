@@ -65,8 +65,17 @@ io.on('connection', sock => {
     });
 });
 
+app.get('/', function (req, res) {
+  res.redirect('/start');
+});
+
 app.get('/start', function (req, res) {
-    res.render('index', { port: config.port, host: config.host })
+    if(config.site_url){
+        res.render('index', { site_url: config.site_url })
+    }else{
+        res.render('index', { site_url: `http://${config.host}:${config.port}` })
+    }
+
 });
 
 if (config.https == 1) {

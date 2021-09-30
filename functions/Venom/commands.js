@@ -49,7 +49,6 @@ export default class Commands {
     try {
       let data = Sessions.getSession(req.body.session)
       let response = await data.client.getHostDevice()
-      console.log(response)
       return res.status(200).json({
         "result": 200,
         "number": response.wid.user,
@@ -204,7 +203,6 @@ export default class Commands {
     try {
       let response = await data.client.loadAndGetAllMessagesInChat(number, true)
       let messages = response.map(function (data) {
-        console.log(data)
         return {
           "type": data.type,
           "author": data.verifiedName,

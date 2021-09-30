@@ -19,7 +19,6 @@ export default class Wppconnect {
         try {
             const client = await wppconnect.create({
                 session: session,
-                tokenStore: 'memory',
                 catchQR: (base64Qrimg, ascii) => {
                     webhooks.wh_qrcode(session, base64Qrimg)
                     this.exportQR(req, res, base64Qrimg, session);
@@ -39,14 +38,16 @@ export default class Wppconnect {
                         statusSession === 'qrReadFail' ||
                         statusSession === 'autocloseCalled' ||
                         statusSession === 'serverClose') {
-                        req.io.emit('whatsapp-status', false)  
+                        req.io.emit('whatsapp-status', false)
+
+              
                     }
                     if (statusSession === 'isLogged' ||
                         statusSession === 'qrReadSuccess' ||
                         statusSession === 'chatsAvailable' ||
                         statusSession === 'inChat') {
-                        req.io.emit('whatsapp-status', true)
-                    }
+                            req.io.emit('whatsapp-status', { status: true, sessionName: session } )
+                        }
 
                 },
                 headless: true,
@@ -86,7 +87,9 @@ export default class Wppconnect {
                     '--disable-accelerated-video-decode',
                 ],
 
-                createPathFileToken: false,
+                createPathFileToken: true,
+                tokenStore: 'file', // Define how work with tokens, that can be a custom interface
+                folderNameToken: './tokens', //folder name when saving tokens
                 sessionToken: {
                     WABrowserId: token.WABrowserId,
                     WASecretBundle: token.WASecretBundle,
@@ -142,7 +145,7 @@ export default class Wppconnect {
             try {
                 const Session = doc(db, "Sessions", session);
                 const dados = await getDoc(Session);
-                if (dados.exists() && dados.data()?.engine === process.env.ENGINE) {
+                if (dados.exists() && dados.data()?.Engine === process.env.ENGINE) {
                     let data = {
                         'WABrowserId': dados.data().WABrowserId,
                         'WASecretBundle': dados.data().WASecretBundle,

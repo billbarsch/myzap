@@ -222,7 +222,7 @@
                 wh_qrcode: document.getElementById("wh_qrcode").value,
                 wh_connect: document.getElementById("wh_connect").value,
             }
-            axios.post("http://<%=host %>:<%=port %>/start", data, config)
+            axios.post("<%=site_url%>/start", data, config)
                 .then((value) => {
                     //alert(value)
                 })
@@ -252,7 +252,9 @@
     </script>
 
     <script>
-        const socket = io('http://<%=host %>:<%=port %>/');
+        const socket = io('<%=site_url%>');
+        let session;
+        let status = 'whatsapp-status';
 
         socket.on('msg', (msg) => {
             if (msg) {
@@ -264,20 +266,20 @@
         })
 
         socket.on('qrCode', (qrCode) => {
-            let session = document.getElementById('session').value
+            session = document.getElementById('session').value
             if (session === qrCode.session) {
-
                 document.getElementById('image').src = qrCode.data
             }
         })
 
-        socket.on('whatsapp-status', (status) => {
-            if (status) {
-                alert('Whatsapp Aberto com sucesso')
+        
+
+        socket.on( status, (status) => {
+            if (status.status && status.sessionName === session ) {
                 document.getElementById('send-btn').disabled = false
                 document.getElementById('image').src = "/ok.jpg"
-            }
-            else {
+                alert('Whatsapp Aberto com sucesso');
+            }else {
                 document.getElementById('send-btn').disabled = false
                 document.getElementById('image').src = "/error.jpg"
             }

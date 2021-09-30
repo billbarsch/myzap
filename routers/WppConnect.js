@@ -13,11 +13,9 @@ import Commands from'../functions/WPPConnect/commands.js';
 import Groups from'../functions/WPPConnect/groups.js';
 import Mensagens from'../functions/WPPConnect/mensagens.js';
 import Auth from'../functions/WPPConnect/auth.js';
-import config from'../config.js';
 import { checkParams } from'../middlewares/validations.js';
 import { checkNumber } from'../middlewares/checkNumber.js';
 import database from'../firebase/functions.js';
-import { setDoc, doc, db} from'../firebase/db.js';
 
 Router.post('/start', Auth.start)
 // Sessões 
@@ -28,7 +26,6 @@ Router.post('/SessionConnect', checkParams, Auth.checkConnectionSession);
 Router.post('/deleteSession', database.deleteSession);
 Router.post('/getAllSessions', database.getAllSessions);
 Router.get('/getQrCode', Auth.getQrCode);
-
 // Mensagens
 Router.post('/sendText', checkParams, checkNumber, Mensagens.sendText);
 Router.post('/sendImage', checkParams, checkNumber, Mensagens.sendImage);

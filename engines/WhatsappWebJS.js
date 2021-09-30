@@ -61,7 +61,7 @@ export default class WhatsappWebJS {
                     });
 
                     client.on('ready', () => {
-                        req.io.emit('whatsapp-status', true);
+                        req.io.emit('whatsapp-status', { status: true, sessionName: session } )
                         console.log('READY... WhatsApp is ready');
                     });
                     client.on('auth_failure', () => {

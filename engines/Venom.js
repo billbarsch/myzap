@@ -13,9 +13,7 @@ import { doc, db, getDoc } from '../firebase/db.js';
 export default class Venom {
 
     static async start(req, res, session) {
-
         let token = await this.getToken(session);
-        console.log(token)
         try {
             const client = await venom.create(
                 session,
@@ -39,13 +37,14 @@ export default class Venom {
                         statusSession === 'qrReadFail' ||
                         statusSession === 'autocloseCalled' ||
                         statusSession === 'serverClose') {
-                        req.io.emit('whatsapp-status', false);                      
+                        req.io.emit('whatsapp-status', false);
+                      
                     }
                     if (statusSession === 'isLogged' ||
                         statusSession === 'qrReadSuccess' ||
                         statusSession === 'chatsAvailable' ||
                         statusSession === 'inChat') {
-                        req.io.emit('whatsapp-status', true)
+                        req.io.emit('whatsapp-status', { status: true, sessionName: session } )
                     }
                 },
                 {

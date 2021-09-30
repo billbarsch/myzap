@@ -10,9 +10,6 @@ import engine from'../../engines/WppConnect.js';
 import { setDoc, db, doc } from '../../firebase/db.js';
 
 export default class Auth {
-
-
-
     static async start(req, res) {
         try {
             if (Object.keys(config.firebaseConfig).length === 0) {
@@ -56,7 +53,6 @@ export default class Auth {
                             wa_token_1: req.headers['wa_token_1'] ? req.headers['wa_token_1'] : '',
                             wa_token_2: req.headers['wa_token_2'] ? req.headers['wa_token_2'] : '',
                         })
-    
                         let response = await engine.start(req, res, session)
                         if (response != undefined) {
                             let data = {
