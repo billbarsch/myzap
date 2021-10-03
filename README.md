@@ -25,7 +25,7 @@ Este projeto usa como base o [Venom-bot](https://github.com/orkestral/venom) ou 
 
 `npm install`
 
-`cp .env-example .env`
+`cp .env_example .env`
 ```
 Dentro do arquivo .env:
 Para usar o venom como motor use a variavel:
