@@ -77,7 +77,7 @@ instruções sobre algumas opções e configurações
 
 - Iniciar o Servidor
 
-```node index.js```
+```npm start```
 
 - Manter os processos ativos a cada reinicialização do servidor
 
