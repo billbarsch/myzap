@@ -12,7 +12,7 @@ import Status from'../functions/Venom/status.js';
 import Commands from'../functions/Venom/commands.js';
 import Groups from'../functions/Venom/groups.js';
 import Mensagens from'../functions/Venom/mensagens.js';
-import Auth from'../functions/WPPConnect/auth.js';
+import Auth from'../functions/Venom/auth.js';
 import config from'../config.js';
 import { checkParams } from'../middlewares/validations.js';
 import { checkNumber } from'../middlewares/checkNumber.js';
