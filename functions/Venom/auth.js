@@ -7,6 +7,8 @@
 import Sessions from '../../controllers/sessions.js';
 import config from '../../config.js';
 import engine from'../../engines/Venom.js';
+import { setDoc, db, doc } from '../../firebase/db.js';
+
 
 export default class Auth {
 
