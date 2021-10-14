@@ -14,12 +14,11 @@ const checkNumber = async (req, res, next) => {
     let data = Sessions.getSession(session)
 
     if (config.engine === '1') {
-        let profile = await data.client.isRegisteredUser(req.body.number + c)
-
         if (!number) {
             return res.status(401).send({ message: "Telefone não informado." });
         }
-        else
+        else {
+            let profile = await data.client.isRegisteredUser(req.body.number + c)
             if (!profile) {
                 return res.status(400).json({
                     response: false,
@@ -29,13 +28,13 @@ const checkNumber = async (req, res, next) => {
             } else {
                 next();
             }
+        }
     } else {
-        let profile = await data.client.checkNumberStatus(req.body.number + c)
-
         if (!number) {
             return res.status(401).send({ message: "Telefone não informado." });
         }
-        else
+        else {
+            let profile = await data.client.checkNumberStatus(req.body.number + c)
             if (!profile.numberExists) {
                 return res.status(400).json({
                     response: false,
@@ -45,6 +44,7 @@ const checkNumber = async (req, res, next) => {
             } else {
                 next();
             }
+        }
     }
 }
 
