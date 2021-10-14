@@ -142,7 +142,7 @@ export default class Venom {
             try {
                 const Session = doc(db, "Sessions", session);
                 const dados = await getDoc(Session);
-                if (dados.exists() && dados.data()?.engine === process.env.ENGINE) {
+                if (dados.exists() && dados.data()?.Engine === process.env.ENGINE) {
                     let data = {
                         'WABrowserId': dados.data().WABrowserId,
                         'WASecretBundle': dados.data().WASecretBundle,
