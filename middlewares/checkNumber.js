@@ -18,7 +18,7 @@ const checkNumber = async (req, res, next) => {
             return res.status(401).send({ message: "Telefone não informado." });
         }
         else {
-            let profile = await data.client.isRegisteredUser(req.body.number + c)
+            let profile = await data?.client?.isRegisteredUser(`${req?.body?.number}c`)
             if (!profile) {
                 return res.status(400).json({
                     response: false,
