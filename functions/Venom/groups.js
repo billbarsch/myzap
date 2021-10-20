@@ -15,12 +15,12 @@ export default class Group {
   static async getAllGroups(req, res) {
     try {
       let data = Sessions.getSession(req.body.session)
-      const response = await data.client.getAllGroups();
-      let groups = response.map(function (data) {
-        return {
-          'id': data.id.user,
-          'name': data.name,
-        }
+      const response = await data.client.getAllChats();
+      let groups = response.filter(function (data) {
+        return data?.isGroup
+      })
+      groups = groups.map(data => {
+        return { 'id': data?.id?.user, 'name': data?.name }
       })
       return res.status(200).json({
         "result": 200,
