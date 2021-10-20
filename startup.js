@@ -31,7 +31,8 @@ async function getAllSessions() {
                     doc.data().WABrowserId,
                     doc.data().WASecretBundle,
                     doc.data().WAToken1,
-                    doc.data().WAToken2
+                    doc.data().WAToken2,
+                    doc.data().Engine
                 );
                 SessionsArray.push(Session);
             });
