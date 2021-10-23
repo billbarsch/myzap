@@ -234,11 +234,11 @@ export default class Mensagens {
         let number = `${req?.body?.number}@c.us`;
         let name = req?.body?.path.split(/[\/\\]/).pop();
         try {
-            let response = await data.client.sendFileFromBase64(number, req?.body?.path, req?.body?.fileName, req?.body?.caption)
+            let response = await data.client.sendFileFromBase64(number, req?.body?.caption, req?.body?.fileName, req?.body?.path)
             return res.status(200).json({
                 result: 200,
                 type: 'file',
-                session: req.body.session,
+                session: req?.body?.session,
                 file: name,
                 data: response
             })
