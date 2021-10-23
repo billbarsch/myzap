@@ -183,9 +183,9 @@ export default class Mensagens {
                 message: "Informe o path. Exemplo: C:\\folder\\arquivo.xlsx para arquivo local ou URL caso o arquivo a ser enviado esteja na internet"
             });
         }
-        let data = Sessions.getSession(req.body.session)
-        let number = req.body.number + '@c.us';
-        let isURL = await urlExists(req.body.path);
+        let data = Sessions.getSession(req?.body?.session)
+        let number = `${req.body.number}@c.us`;
+        let isURL = await urlExists(req?.body?.path);
         let name = req.body.path.split(/[\/\\]/).pop();
 
         try {
@@ -205,7 +205,7 @@ export default class Mensagens {
                 })
             }
             if (!isURL) {
-                let response = await data.client.sendFile(number, req.body.path, 'File', req.body.caption)
+                let response = await data.client.sendFile(number, req?.body?.path, req?.body?.fileName, req?.body?.caption)
                 return res.status(200).json({
                     result: 200,
                     type: 'file',
