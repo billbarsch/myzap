@@ -230,11 +230,11 @@ export default class Mensagens {
                 message: "Informe o path em formato Base64"
             });
         }
-        let data = Sessions.getSession(req.body.session)
-        let number = req.body.number + '@c.us';
-        let name = req.body.path.split(/[\/\\]/).pop();
+        let data = Sessions.getSession(req?.body?.session)
+        let number = `${req?.body?.number}@c.us`;
+        let name = req?.body?.path.split(/[\/\\]/).pop();
         try {
-            let response = await data.client.sendFileFromBase64(number, req.body.path, 'File', req.body.caption)
+            let response = await data.client.sendFileFromBase64(number, req?.body?.path, req?.body?.fileName, req?.body?.caption)
             return res.status(200).json({
                 result: 200,
                 type: 'file',
