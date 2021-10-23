@@ -194,7 +194,7 @@ export default class Mensagens {
                 await get(req.body.path, {
                     directory: 'files-received'
                 });
-                let response = await data.client.sendFile(number, dir + name, 'File', req.body.caption)
+                let response = await data.client.sendFile(number, `${dir}${name}`, req?.body?.fileName, req?.body?.caption)
                 fs.unlink(path.basename("/files-received") + "/" + name, erro => console.log(""))
                 return res.status(200).json({
                     result: 200,
