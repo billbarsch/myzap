@@ -29,6 +29,9 @@ export default class Mensagens {
     static async sendText(req, res) {
         let { session, number, text } = req.body
         let data = Sessions.getSession(session)
+        let isGroup = req.body.isGroup;
+        number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
+
         if (!req.body.text) {
             return res.status(400).json({
                 status: 400,
@@ -37,7 +40,7 @@ export default class Mensagens {
         }
         else {
             try {
-                let response = await data.client.sendMessage(number + '@c.us', text)
+                let response = await data.client.sendMessage(number, text)
                 return res.status(200).json({
                     result: 200,
                     type: 'text',
@@ -478,7 +481,9 @@ export default class Mensagens {
 
     static async sendLink(req, res) {
         let data = Sessions.getSession(req.body.session)
-        let number = req.body.number + '@c.us';
+        let isGroup = req.body.isGroup;
+        let number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
+        
         if (!req.body.url) {
             return res.status(400).json({
                 status: 400,
