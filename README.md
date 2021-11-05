@@ -39,60 +39,102 @@ https://youtu.be/sTMtev62vUE
 
 ### Instalação Básica - VPS UBUNTU/DEBIAN:
 
-```sudo apt install -y curl nano git gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget build-essential apt-transport-https libgbm-dev```
+```bash 
+sudo apt install -y curl nano git gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget build-essential apt-transport-https libgbm-dev
+```
 
 ### Para instalar o ChomeDrive
 
-```wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb ```
+```bash
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
+```
 
-```sudo apt install ./google-chrome-stable_current_amd64.deb```
+```bash
+sudo apt install ./google-chrome-stable_current_amd64.deb
+```
 
 ### Para instalar o nodejs 16
 
-```cd ~ ```
+```bash 
+cd ~ 
+```
 
-```curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh```
+```bash 
+curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
+```
 
-```sudo bash nodesource_setup.sh ```
+```bash
+sudo bash nodesource_setup.sh 
+```
 
-```sudo apt -y install nodejs```
+```bash
+sudo apt -y install nodejs
+```
 
-```node -v```
+```bash
+node -v
+```
 
 ### Clonar do GIT
 
-```git clone https://github.com/billbarsch/myzap ```
-
-```cd myzap```
-
-```npm install --allow-root --unsafe-perm=true```
-
-```cp .env_exemplo .env```
-
+```bash
+git clone https://github.com/billbarsch/myzap 
 ```
+
+```bash
+cd myzap
+```
+
+```bash
+npm install --allow-root --unsafe-perm=true
+```
+
+```bash
+cp .env_exemplo .env
+```
+
+```bash
 Dentro do arquivo .env:
 instruções sobre algumas opções e configurações
 ```
 
 ### Iniciar o Servidor
 
-```npm start```
+```bash
+npm start
+```
 
 ### Manter os processos ativos a cada reinicialização do servidor
 
-```npm install -y pm2 -g```
-```pm2 start index.js```
-```pm2 startup```
+```bash 
+npm install -y pm2 -g
+```
+
+```bash 
+pm2 start index.js
+```
+
+```bash 
+pm2 startup
+```
 
 ### Para instalar o certbot e criar o certificado SSL para domínios https:
 
-```sudo apt-get update && sudo apt-get install -y software-properties-common```
+```bash 
+sudo apt-get update && sudo apt-get install -y software-properties-common
+```
 
-```sudo add-apt-repository universe && sudo add-apt-repository ppa:certbot/certbot```
+```bash 
+sudo add-apt-repository universe && sudo add-apt-repository ppa:certbot/certbot
+```
 
-```sudo apt-get update && sudo apt-get install -y certbot```
+```bash 
+sudo apt-get update && sudo apt-get install -y certbot
+```
 
-```sudo certbot certonly --manual --force-renewal -d *.yourdomain.net -d yourdomain.net --agree-tos --no-bootstrap --manual-public-ip-logging-ok --preferred-challenges dns-01 --server https://acme-v02.api.letsencrypt.org/directory```
+```bash 
+sudo certbot certonly --manual --force-renewal -d *.yourdomain.net -d yourdomain.net --agree-tos --no-bootstrap --manual-public-ip-logging-ok --preferred-challenges dns-01 --server https://acme-v02.api.letsencrypt.org/directory
+```
 
 ### Documentação e manuais:
 
