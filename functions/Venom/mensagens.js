@@ -16,7 +16,9 @@ export default class Mensagens {
 
     static async sendText(req, res) {
         let data = Sessions.getSession(req.body.session)
-        let number = req.body.number + '@c.us';
+        let isGroup = req.body.isGroup;
+        let number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
+
         if (!req.body.text) {
             return res.status(400).json({
                 status: 400,
@@ -222,6 +224,7 @@ export default class Mensagens {
             })
         }
     }
+
     static async sendFile64(req, res) {
         if (!req.body.path) {
             return res.status(400).send({
@@ -338,7 +341,6 @@ export default class Mensagens {
         }
     }
 
-
     static async sendVoiceBase64(req, res) {
         let data = Sessions.getSession(req.body.session)
         let number = req.body.number;
@@ -378,7 +380,9 @@ export default class Mensagens {
     static async sendLink(req, res) {
         let data = Sessions.getSession(req.body.session)
         let isURL = await urlExists(req.body.url);
-        let number = req.body.number + '@c.us';
+        let isGroup = req.body.isGroup;
+        let number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
+
         if (!req.body.url) {
             return res.status(400).json({
                 status: 400,

@@ -13,39 +13,45 @@ const checkNumber = async (req, res, next) => {
     let session = req.body.session
     let data = Sessions.getSession(session)
 
-    if (config.engine === '1') {
-        if (!number) {
-            return res.status(401).send({ message: "Telefone não informado." });
-        }
-        else {
-            let profile = await data?.client?.isRegisteredUser(`${req?.body?.number}c`)
-            if (!profile) {
-                return res.status(400).json({
-                    response: false,
-                    status: "error",
-                    message: 'O telefone informado nao esta registrado no whatsapp.'
-                })
-            } else {
-                next();
+    let isGroup = req.body.isGroup
+    if (isGroup === true) {
+        next();
+    }
+    else {
+        if (config.engine === '1') {
+            if (!number) {
+                return res.status(401).send({ message: "Telefone não informado." });
             }
-        }
-    } else {
-        if (!number) {
-            return res.status(401).send({ message: "Telefone não informado." });
-        }
-        else {
-            let profile = await data.client.checkNumberStatus(req.body.number + c)
-            if (!profile.numberExists) {
-                return res.status(400).json({
-                    response: false,
-                    status: "error",
-                    message: 'O telefone informado nao esta registrado no whatsapp.'
-                })
-            } else {
-                next();
+            else {
+                let profile = await data?.client?.isRegisteredUser(`${req?.body?.number}c`)
+                if (!profile) {
+                    return res.status(400).json({
+                        response: false,
+                        status: "error",
+                        message: 'O telefone informado nao esta registrado no whatsapp.'
+                    })
+                } else {
+                    next();
+                }
+            }
+        } else {
+            if (!number) {
+                return res.status(401).send({ message: "Telefone não informado." });
+            }
+            else {
+                let profile = await data.client.checkNumberStatus(req.body.number + c)
+                if (!profile.numberExists) {
+                    return res.status(400).json({
+                        response: false,
+                        status: "error",
+                        message: 'O telefone informado nao esta registrado no whatsapp.'
+                    })
+                } else {
+                    next();
+                }
             }
         }
     }
 }
 
-export  { checkNumber }
+export { checkNumber }
