@@ -34,6 +34,10 @@ A api é 100% grátis e opensource, caso tenha interesse em contratar um suporte
 
 Este projeto usa como base o [WPPCONNECT](https://github.com/wppconnect-team/wppconnect), e [Whatsapp-WEB.JS](https://github.com/pedroslopez/whatsapp-web.js/), e [Venom-bot](https://github.com/orkestral/venom) um navegador virtual sem interface gráfica que abre o whatsapp web e executa todos os comandos via código possibilitando assim a automação de todas as funções.
 
+### Testar o myzap sem instalação
+
+Para testar o myzap rodando em ambiente de produção gratuitamente: <a href="https://apigratis.com.br" target="_blank"> Clique aqui </a>
+
 ### Video exemplo
 https://youtu.be/sTMtev62vUE
 
@@ -143,6 +147,3 @@ Para uma instalação usando o WSL do Windows siga o manual escrito e anexo na p
 Para acesso às collections de requisições documentadas, Insomnia e Postman, ambas se encontram na pasta <a href="https://github.com/billbarsch/myzap/tree/myzap2.0/util/postman" target="_blank"> Util </a> do repositório.
 
 Para uma documentação mais interativa sobre as requisições: <a href="https://documenter.getpostman.com/view/15465271/Tzm3oxnt" target="_blank"> Clique aqui </a>
-
-Para testar o myzap rodando em ambiente de produção gratuitamente: <a href="https://apigratis.com.br" target="_blank"> Clique aqui </a>
-
