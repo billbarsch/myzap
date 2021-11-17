@@ -117,7 +117,7 @@ sudo certbot certonly --manual --force-renewal -d *.yourdomain.net -d yourdomain
 --server https://acme-v02.api.letsencrypt.org/directory
 ```
 
-[Template NGINX proxy reverso](https://github.com/billbarsch/myzap/tree/myzap2.0/nginx/ "Templates NGINX proxy reverso")
+[Template NGINX proxy reverso](https://github.com/AlanMartines/myzap/tree/myzap2.0/nginx "Templates NGINX proxy reverso")
 
 ### Documentação e manuais:
 
