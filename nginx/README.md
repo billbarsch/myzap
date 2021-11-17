@@ -70,7 +70,7 @@ server {
 
 ```sh
 # Habilitando a autenticação
-sudo apt install apache2-utils - y
+sudo apt install apache2-utils -y
 sudo htpasswd -c /etc/nginx/.htpasswd <usuario>
 ```
 
