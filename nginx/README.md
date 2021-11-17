@@ -9,6 +9,10 @@ sudo vim /etc/nginx/conf.d/myzap.conf
 
 ```
 # Arquivo de configuração nginx
+upstream backend {
+    server 127.0.0.1:3333 max_fails=3 fail_timeout=30s;
+}
+#
 server {
        listen 80;
        listen [::]:80;
@@ -46,7 +50,7 @@ server {
        access_log /var/log/nginx/myzap.access.log;
 
        location / {
-                proxy_pass http://127.0.0.1:3333;
+                proxy_pass http://backend;
                 proxy_set_header Host $host;
                 proxy_set_header X-Real-IP $remote_addr;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -56,7 +60,7 @@ server {
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection "Upgrade";
                 proxy_read_timeout  90;
-                proxy_redirect      http://127.0.0.1:3333  https://myzap.seudominio.com.br;
+                proxy_redirect      http://backend  https://myzap.seudominio.com.br;
         }
 }
 #
@@ -77,21 +81,25 @@ sudo vim /etc/nginx/conf.d/authmyzap.conf
 
 ```
 # Arquivo de configuração nginx
+upstream backend {
+    server 127.0.0.1:3333 max_fails=3 fail_timeout=30s;
+}
+#
 server {
        listen 80;
        listen [::]:80;
-           server_name myzap.seudominio.com.br;
+           server_name authmyzap.seudominio.com.br;
            return 301 https://$host$request_uri;
 }
 #
 server {
        listen 443 ssl;
        listen [::]:443 ssl;
-       server_name myzap.seudominio.com.br;
+       server_name authmyzap.seudominio.com.br;
 
 	   # Configuração do certificado gerado pelo letsencrypt (cerbot)
-	   ssl_certificate /etc/letsencrypt/live/myzap.seudominio.com.br/fullchain.pem
-	   ssl_certificate_key /etc/letsencrypt/live/myzap.seudominio.com.br/privkey.pem
+	   ssl_certificate /etc/letsencrypt/live/authmyzap.seudominio.com.br/fullchain.pem
+	   ssl_certificate_key /etc/letsencrypt/live/authmyzap.seudominio.com.br/privkey.pem
 
 		ssl_protocols TLSv1.3;
 		ssl_prefer_server_ciphers on;
@@ -111,12 +119,12 @@ server {
 		add_header X-Content-Type-Options nosniff;
 		add_header X-XSS-Protection "1; mode=block";
 
-       access_log /var/log/nginx/myzap.access.log;
+       access_log /var/log/nginx/authmyzap.access.log;
 
        location / {
 				auth_basic "Restricted Content";
 				auth_basic_user_file /etc/nginx/.htpasswd;
-                proxy_pass http://127.0.0.1:3333;
+                proxy_pass http://backend/start;
                 proxy_set_header Host $host;
                 proxy_set_header X-Real-IP $remote_addr;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -126,7 +134,7 @@ server {
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection "Upgrade";
                 proxy_read_timeout  90;
-                proxy_redirect      http://127.0.0.1:3333  https://myzap.seudominio.com.br;
+                proxy_redirect      http://backend/start  https://authmyzap.seudominio.com.br;
         }
 }
 #
