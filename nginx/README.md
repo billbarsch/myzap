@@ -124,7 +124,7 @@ server {
        location /start {
 				auth_basic "Restricted Content";
 				auth_basic_user_file /etc/nginx/.htpasswd;
-                proxy_pass http://backend/start;
+                proxy_pass http://backend;
                 proxy_set_header Host $host;
                 proxy_set_header X-Real-IP $remote_addr;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -134,7 +134,7 @@ server {
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection "Upgrade";
                 proxy_read_timeout  90;
-                proxy_redirect      http://backend/start  https://authmyzap.seudominio.com.br;
+                proxy_redirect      http://backend  https://authmyzap.seudominio.com.br;
         }
 }
 #
