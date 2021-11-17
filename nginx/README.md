@@ -20,6 +20,7 @@ server {
            return 301 https://$host$request_uri;
 }
 #
+#
 server {
        listen 443 ssl;
        listen [::]:443 ssl;
