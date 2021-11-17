@@ -38,7 +38,7 @@
 	engine=$(whiptail --title "Escolha qual ENGINE ira usar" --menu "Escolha uma opcao na lista abaixo" --fb 15 60 4 \
 	"1" "Whatsapp-WEB-JS" \
 	"2" "WPPConnect" \
-	"4" "Venom" 3>&1 1>&2 2>&3) ; saida=$?
+	"3" "Venom" 3>&1 1>&2 2>&3) ; saida=$?
 		if [[ $saida -ne '0' ]] ; then echo "saindo..." ; exit ; fi
 
 	while true ; do
