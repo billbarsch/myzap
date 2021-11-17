@@ -204,7 +204,12 @@
     <script src="/js/socket.io.js"></script>
 
     <script>
-
+        let url;
+        let host = '<%=host %>'
+        let host_ssl = '<%=host_ssl %>'
+        let port = '<%=port %>'
+        url = host != '' ? `${host}:${port}` : host_ssl
+        
         document.getElementById('image').style.visibility = "hidden";
 
         async function getSession(session) {
@@ -222,7 +227,7 @@
                 wh_qrcode: document.getElementById("wh_qrcode").value,
                 wh_connect: document.getElementById("wh_connect").value,
             }
-            axios.post("http://<%=host %>:<%=port %>/start", data, config)
+            axios.post(url + "/start", data, config)
                 .then((value) => {
                     //alert(value)
                 })
@@ -252,7 +257,7 @@
     </script>
 
     <script>
-        const socket = io('http://<%=host %>:<%=port %>/');
+        const socket = io(url + '/', {transports: ['websocket'] });
 
         socket.on('msg', (msg) => {
             if (msg) {
