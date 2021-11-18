@@ -26,8 +26,8 @@ server {
        server_name myzap.seudominio.com.br;
 
 	   # Configuração do certificado gerado pelo letsencrypt (cerbot)
-	   ssl_certificate /etc/letsencrypt/live/myzap.seudominio.com.br/fullchain.pem
-	   ssl_certificate_key /etc/letsencrypt/live/myzap.seudominio.com.br/privkey.pem
+	   ssl_certificate /etc/letsencrypt/live/myzap.seudominio.com.br/fullchain.pem;
+	   ssl_certificate_key /etc/letsencrypt/live/myzap.seudominio.com.br/privkey.pem;
 
 		ssl_protocols TLSv1.3;
 		ssl_prefer_server_ciphers on;
@@ -98,8 +98,8 @@ server {
        server_name authmyzap.seudominio.com.br;
 
 	   # Configuração do certificado gerado pelo letsencrypt (cerbot)
-	   ssl_certificate /etc/letsencrypt/live/authmyzap.seudominio.com.br/fullchain.pem
-	   ssl_certificate_key /etc/letsencrypt/live/authmyzap.seudominio.com.br/privkey.pem
+	   ssl_certificate /etc/letsencrypt/live/authmyzap.seudominio.com.br/fullchain.pem;
+	   ssl_certificate_key /etc/letsencrypt/live/authmyzap.seudominio.com.br/privkey.pem;
 
 		ssl_protocols TLSv1.3;
 		ssl_prefer_server_ciphers on;
