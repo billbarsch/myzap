@@ -117,5 +117,9 @@
   ],
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.associations": {
+    "*.env.development": "env",
+    "*.env.production": "env"
   }
 }
