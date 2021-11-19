@@ -9,59 +9,59 @@ sudo vim /etc/nginx/conf.d/myzap.conf
 
 ```
 # Arquivo de configuração nginx
-upstream backend {
-    server 127.0.0.1:3333 max_fails=3 fail_timeout=30s;
+upstream myzapserver {
+	server 127.0.0.1:3333 max_fails=3 fail_timeout=30s;
 }
 #
 server {
-       listen 80;
-       listen [::]:80;
-           server_name myzap.seudominio.com.br;
-           return 301 https://$host$request_uri;
+	listen 80;
+	listen [::]:80;
+	server_name myzap.seudominio.com.br;
+	return 301 https://$host$request_uri;
 }
 #
 server {
-       listen 443 ssl;
-       listen [::]:443 ssl;
-       server_name myzap.seudominio.com.br;
+	listen 443 ssl;
+	listen [::]:443 ssl;
+	server_name myzap.seudominio.com.br;
 
-	   # Configuração do certificado gerado pelo letsencrypt (cerbot)
-	   ssl_certificate /etc/letsencrypt/live/myzap.seudominio.com.br/fullchain.pem
-	   ssl_certificate_key /etc/letsencrypt/live/myzap.seudominio.com.br/privkey.pem
+	# Configuração do certificado gerado pelo letsencrypt (cerbot)
+	ssl_certificate /etc/letsencrypt/live/myzap.seudominio.com.br/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/myzap.seudominio.com.br/privkey.pem;
 
-		ssl_protocols TLSv1.3;
-		ssl_prefer_server_ciphers on;
-		ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
-		ssl_ecdh_curve secp384r1;
-		ssl_session_timeout  10m;
-		ssl_session_cache shared:SSL:10m;
-		ssl_session_tickets off;
-		ssl_stapling on;
-		ssl_stapling_verify on;
-		resolver 8.8.8.8 8.8.4.4 valid=300s;
-		resolver_timeout 5s;
-		# Disable strict transport security for now. You can uncomment the following
-		# line if you understand the implications.
-		#add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload";
-		add_header X-Frame-Options DENY;
-		add_header X-Content-Type-Options nosniff;
-		add_header X-XSS-Protection "1; mode=block";
+	ssl_protocols TLSv1.3;
+	ssl_prefer_server_ciphers on;
+	ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
+	ssl_ecdh_curve secp384r1;
+	ssl_session_timeout 10m;
+	ssl_session_cache shared:SSL:10m;
+	ssl_session_tickets off;
+	ssl_stapling on;
+	ssl_stapling_verify on;
+	resolver 8.8.8.8 8.8.4.4 valid=300s;
+	resolver_timeout 5s;
+	# Disable strict transport security for now. You can uncomment the following
+	# line if you understand the implications.
+	#add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload";
+	add_header X-Frame-Options DENY;
+	add_header X-Content-Type-Options nosniff;
+	add_header X-XSS-Protection "1; mode=block";
 
-       access_log /var/log/nginx/myzap.access.log;
+	access_log /var/log/nginx/myzap.access.log;
 
-       location / {
-                proxy_pass http://backend;
-                proxy_set_header Host $host;
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header X-Forwarded-Proto $scheme;
-                proxy_buffering off;
-                #upgrade to WebSocket protocol when requested
-                proxy_set_header Upgrade $http_upgrade;
-                proxy_set_header Connection "Upgrade";
-                proxy_read_timeout  90;
-                proxy_redirect      http://backend  https://myzap.seudominio.com.br;
-        }
+	location / {
+		proxy_pass http://myzapserver;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_buffering off;
+		#upgrade to WebSocket protocol when requested
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "Upgrade";
+		proxy_read_timeout 90;
+		proxy_redirect http://myzapserver https://myzap.seudominio.com.br;
+	}
 }
 #
 ```
@@ -81,61 +81,76 @@ sudo vim /etc/nginx/conf.d/authmyzap.conf
 
 ```
 # Arquivo de configuração nginx
-upstream backend {
-    server 127.0.0.1:3333 max_fails=3 fail_timeout=30s;
+upstream myzapserver {
+	server 127.0.0.1:3333 max_fails=3 fail_timeout=30s;
 }
 #
 server {
-       listen 80;
-       listen [::]:80;
-           server_name authmyzap.seudominio.com.br;
-           return 301 https://$host$request_uri;
+	listen 80;
+	listen [::]:80;
+	server_name myzap.seudominio.com.br;
+	return 301 https://$host$request_uri;
 }
 #
 server {
-       listen 443 ssl;
-       listen [::]:443 ssl;
-       server_name authmyzap.seudominio.com.br;
+	listen 443 ssl;
+	listen [::]:443 ssl;
+	server_name myzap.seudominio.com.br;
 
-	   # Configuração do certificado gerado pelo letsencrypt (cerbot)
-	   ssl_certificate /etc/letsencrypt/live/authmyzap.seudominio.com.br/fullchain.pem
-	   ssl_certificate_key /etc/letsencrypt/live/authmyzap.seudominio.com.br/privkey.pem
+	# Configuração do certificado gerado pelo letsencrypt (cerbot)
+	ssl_certificate /etc/letsencrypt/live/myzap.seudominio.com.br/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/myzap.seudominio.com.br/privkey.pem;
 
-		ssl_protocols TLSv1.3;
-		ssl_prefer_server_ciphers on;
-		ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
-		ssl_ecdh_curve secp384r1;
-		ssl_session_timeout  10m;
-		ssl_session_cache shared:SSL:10m;
-		ssl_session_tickets off;
-		ssl_stapling on;
-		ssl_stapling_verify on;
-		resolver 8.8.8.8 8.8.4.4 valid=300s;
-		resolver_timeout 5s;
-		# Disable strict transport security for now. You can uncomment the following
-		# line if you understand the implications.
-		#add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload";
-		add_header X-Frame-Options DENY;
-		add_header X-Content-Type-Options nosniff;
-		add_header X-XSS-Protection "1; mode=block";
+	ssl_protocols TLSv1.3;
+	ssl_prefer_server_ciphers on;
+	ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
+	ssl_ecdh_curve secp384r1;
+	ssl_session_timeout 10m;
+	ssl_session_cache shared:SSL:10m;
+	ssl_session_tickets off;
+	ssl_stapling on;
+	ssl_stapling_verify on;
+	resolver 8.8.8.8 8.8.4.4 valid=300s;
+	resolver_timeout 5s;
+	# Disable strict transport security for now. You can uncomment the following
+	# line if you understand the implications.
+	#add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload";
+	add_header X-Frame-Options DENY;
+	add_header X-Content-Type-Options nosniff;
+	add_header X-XSS-Protection "1; mode=block";
 
-       access_log /var/log/nginx/authmyzap.access.log;
+	access_log /var/log/nginx/myzap.access.log;
 
-       location /start {
-				auth_basic "Restricted Content";
-				auth_basic_user_file /etc/nginx/.htpasswd;
-                proxy_pass http://backend;
-                proxy_set_header Host $host;
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header X-Forwarded-Proto $scheme;
-                proxy_buffering off;
-                #upgrade to WebSocket protocol when requested
-                proxy_set_header Upgrade $http_upgrade;
-                proxy_set_header Connection "Upgrade";
-                proxy_read_timeout  90;
-                proxy_redirect      http://backend  https://authmyzap.seudominio.com.br;
-        }
+	location / {
+		proxy_pass http://myzapserver;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_buffering off;
+		#upgrade to WebSocket protocol when requested
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "Upgrade";
+		proxy_read_timeout 90;
+		proxy_redirect http://myzapserver https://myzap.seudominio.com.br;
+	}
+
+	location /start {
+		auth_basic "Restricted Content";
+		auth_basic_user_file /etc/nginx/.htpasswd;
+		proxy_pass http://myzapserver;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_buffering off;
+		#upgrade to WebSocket protocol when requested
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "Upgrade";
+		proxy_read_timeout 90;
+		proxy_redirect http://myzapserver https://myzap.seudominio.com.br;
+	}
+
 }
 #
 ```
