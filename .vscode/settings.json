@@ -1,0 +1,124 @@
+{
+  "material-icon-theme.folders.theme": "specific", // Tipo dos iconens dos arquivos
+  "material-icon-theme.folders.color": "#ef5350",
+  "workbench.editor.showTabs": true,
+  "workbench.editor.enablePreview": false,
+  "editor.formatOnSave": true, // Formata o código sempre que salvamos
+  "workbench.startupEditor": "newUntitledFile", // Abre sempre um arquivo em branco
+  "editor.minimap.enabled": false, // Desabilita o Mini Map
+  "terminal.integrated.cursorStyle": "underline", // Deixa o cursor do terminal como underline
+  "git.enableSmartCommit": true, // Habilita Smart Commit do GIT
+  "git.autofetch": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": false,
+  "editor.tabSize": 2,
+  "beautify.config": {
+    "js": {
+      "allowed_file_extensions": ["js", "jsonc", "jshintrc", "jsbeautifyrc"],
+      "brace_style": "collapse", // [collapse|expand|end-expand|none] Put braces on the same line as control statements (default), or put braces on own line (Allman / ANSI style), or just put end braces on own line, or attempt to keep them where they are
+      "break_chained_methods": false, // Break chained method calls across subsequent lines
+      "e4x": false, // Pass E4X xml literals through untouched
+      "end_with_newline": false, // End output with newline
+      "indent_char": " ", // Indentation character
+      "indent_level": 0, // Initial indentation level
+      "indent_size": 2, // Indentation size
+      "indent_with_tabs": false, // Indent with tabs, overrides `indent_size` and `indent_char`
+      "jslint_happy": false, // If true, then jslint-stricter mode is enforced
+      "keep_array_indentation": false, // Preserve array indentation
+      "keep_function_indentation": false, // Preserve function indentation
+      "max_preserve_newlines": 0, // Maximum number of line breaks to be preserved in one chunk (0 disables)
+      "preserve_newlines": true, // Whether existing line breaks should be preserved
+      "space_after_anon_function": false, // Should the space before an anonymous function's parens be added, "function()" vs "function ()"
+      "space_before_conditional": true, // Should the space before conditional statement be added, "if(true)" vs "if (true)"
+      "space_in_empty_paren": false, // Add padding spaces within empty paren, "f()" vs "f( )"
+      "space_in_paren": false, // Add padding spaces within paren, ie. f( a, b )
+      "unescape_strings": false, // Should printable characters in strings encoded in \xNN notation be unescaped, "example" vs "\x65\x78\x61\x6d\x70\x6c\x65"
+      "wrap_line_length": 0 // Lines should wrap at next opportunity after this number of characters (0 disables)
+    }
+  },
+  "remote.extensionKind": {
+    "eamodio.gitlens": ["workspace"],
+    "ms-vscode.vscode-node-azure-pack": ["workspace"],
+    "ms-vscode.powershell": ["workspace"],
+    "ms-python.python": ["workspace"]
+  },
+  "[yaml]": {
+    "editor.autoIndent": "advanced"
+  },
+  "[dockercompose]": {
+    "editor.autoIndent": "advanced"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "sync.autoUpload": true,
+  "[json]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.donotVerifyTags": true,
+  "explorer.confirmDelete": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "window.zoomLevel": -2,
+  //"php.validate.executablePath": "C:/Php/php.exe",
+  "[xml]": {
+    "editor.defaultFormatter": "fabianlauer.vs-code-xml-format"
+  },
+  "[nginx]": {
+    "editor.defaultFormatter": "raynigon.nginx-formatter"
+  },
+  "better-comments.tags": [
+    {
+      "tag": "!",
+      "color": "#FF2D00",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "?",
+      "color": "#3498DB",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "//",
+      "color": "#474747",
+      "strikethrough": true,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "todo",
+      "color": "#FF8C00",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "*",
+      "color": "#98C379",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    }
+  ],
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.associations": {
+    "*.env*": "dotenv"
+  }
+}
