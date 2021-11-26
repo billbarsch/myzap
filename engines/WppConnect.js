@@ -97,7 +97,7 @@ export default class Wppconnect {
             })
 
             wppconnect.defaultLogger.level = 'silly';
-            let info = await client.getHostDevice()
+            let info = await client.getWid()
             let tokens = await client.getSessionTokenBrowser()
             let browser = []
             // browserless != '' ? browserless+'/devtools/inspector.html?token='+token_browser+'&wss='+browserless.replace('https://', '')+':443/devtools/page/'+client.page._target._targetInfo.targetId : null
