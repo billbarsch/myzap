@@ -126,6 +126,7 @@ export default class Wppconnect {
         }
         return false
     }
+		
     static async exportQR(req, res, qrCode, session) {
         qrCode = qrCode.replace('data:image/png;base64,', '');
         const imageBuffer = Buffer.from(qrCode, 'base64');
