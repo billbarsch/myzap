@@ -2,3 +2,4 @@ node_modules/
 tokens/
 .env
 teste.js
+debug.log
