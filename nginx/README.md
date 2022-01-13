@@ -9,7 +9,8 @@ sudo vim /etc/nginx/conf.d/myzap.conf
 
 ```
 # Arquivo de configuração nginx
-upstream myzapserver {
+#
+upstream servermyzap {
 	server 127.0.0.1:3333 max_fails=3 fail_timeout=30s;
 }
 #
@@ -24,11 +25,11 @@ server {
 	listen 443 ssl;
 	listen [::]:443 ssl;
 	server_name myzap.seudominio.com.br;
-
+	#
 	# Configuração do certificado gerado pelo letsencrypt (cerbot)
 	ssl_certificate /etc/letsencrypt/live/myzap.seudominio.com.br/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/myzap.seudominio.com.br/privkey.pem;
-
+	#
 	ssl_protocols TLSv1.3;
 	ssl_prefer_server_ciphers on;
 	ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
@@ -46,11 +47,11 @@ server {
 	add_header X-Frame-Options DENY;
 	add_header X-Content-Type-Options nosniff;
 	add_header X-XSS-Protection "1; mode=block";
-
+	#
 	access_log /var/log/nginx/myzap.access.log;
-
+	#
 	location / {
-		proxy_pass http://myzapserver;
+		proxy_pass http://servermyzap;
 		proxy_set_header Host $host;
 		proxy_set_header X-Real-IP $remote_addr;
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -60,8 +61,21 @@ server {
 		proxy_set_header Upgrade $http_upgrade;
 		proxy_set_header Connection "Upgrade";
 		proxy_read_timeout 90;
-		proxy_redirect http://myzapserver https://myzap.seudominio.com.br;
+		proxy_redirect off;
+		#proxy_redirect http://myzapserver https://myzap.connectzap.com.br;
 	}
+	#
+	location /socket.io/ {
+		proxy_pass http://servermyzap;
+		proxy_redirect off;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "upgrade";
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	}
+	#
 }
 #
 ```
@@ -81,7 +95,8 @@ sudo vim /etc/nginx/conf.d/authmyzap.conf
 
 ```
 # Arquivo de configuração nginx
-upstream myzapserver {
+#
+upstream servermyzap {
 	server 127.0.0.1:3333 max_fails=3 fail_timeout=30s;
 }
 #
@@ -96,11 +111,11 @@ server {
 	listen 443 ssl;
 	listen [::]:443 ssl;
 	server_name myzap.seudominio.com.br;
-
+	#
 	# Configuração do certificado gerado pelo letsencrypt (cerbot)
 	ssl_certificate /etc/letsencrypt/live/myzap.seudominio.com.br/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/myzap.seudominio.com.br/privkey.pem;
-
+	#
 	ssl_protocols TLSv1.3;
 	ssl_prefer_server_ciphers on;
 	ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
@@ -118,11 +133,11 @@ server {
 	add_header X-Frame-Options DENY;
 	add_header X-Content-Type-Options nosniff;
 	add_header X-XSS-Protection "1; mode=block";
-
+	#
 	access_log /var/log/nginx/myzap.access.log;
-
+	#
 	location / {
-		proxy_pass http://myzapserver;
+		proxy_pass http://servermyzap;
 		proxy_set_header Host $host;
 		proxy_set_header X-Real-IP $remote_addr;
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -132,13 +147,14 @@ server {
 		proxy_set_header Upgrade $http_upgrade;
 		proxy_set_header Connection "Upgrade";
 		proxy_read_timeout 90;
-		proxy_redirect http://myzapserver https://myzap.seudominio.com.br;
+		proxy_redirect off;
+		#proxy_redirect http://myzapserver https://myzap.connectzap.com.br;
 	}
-
+	#
 	location /start {
 		auth_basic "Restricted Content";
 		auth_basic_user_file /etc/nginx/.htpasswd;
-		proxy_pass http://myzapserver;
+		proxy_pass http://servermyzap;
 		proxy_set_header Host $host;
 		proxy_set_header X-Real-IP $remote_addr;
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -148,9 +164,21 @@ server {
 		proxy_set_header Upgrade $http_upgrade;
 		proxy_set_header Connection "Upgrade";
 		proxy_read_timeout 90;
-		proxy_redirect http://myzapserver https://myzap.seudominio.com.br;
+		proxy_redirect off;
+		#proxy_redirect http://myzapserver https://myzap.connectzap.com.br;
 	}
-
+	#
+	location /socket.io/ {
+		proxy_pass http://servermyzap;
+		proxy_redirect off;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "upgrade";
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	}
+	#
 }
 #
 ```
