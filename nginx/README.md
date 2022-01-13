@@ -62,7 +62,6 @@ server {
 		proxy_set_header Connection "Upgrade";
 		proxy_read_timeout 90;
 		proxy_redirect off;
-		#proxy_redirect http://myzapserver https://myzap.connectzap.com.br;
 	}
 	#
 	location /socket.io/ {
@@ -148,7 +147,6 @@ server {
 		proxy_set_header Connection "Upgrade";
 		proxy_read_timeout 90;
 		proxy_redirect off;
-		#proxy_redirect http://myzapserver https://myzap.connectzap.com.br;
 	}
 	#
 	location /start {
@@ -165,7 +163,6 @@ server {
 		proxy_set_header Connection "Upgrade";
 		proxy_read_timeout 90;
 		proxy_redirect off;
-		#proxy_redirect http://myzapserver https://myzap.connectzap.com.br;
 	}
 	#
 	location /socket.io/ {
