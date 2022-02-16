@@ -189,29 +189,32 @@ sudo vim /etc/nginx/nginx.conf
 ```
 
 - **http:**
+  > Essa configuração nos permitirão fazer upload em todo o site
 
 ```sh
  http {
 	 ...
-	 client_max_body_size 100M;
+	 client_max_body_size 200M;
  }
 ```
 
 - **server:**
+  > Essa configuração nos permitirão fazer upload em um servidor específico
 
 ```sh
 server {
 	 ...
-	 client_max_body_size 100M;
+	 client_max_body_size 200M;
 }
 ```
 
 - **location:**
+  > Essa configuração nos permitirão fazer upload em um bloco específico
 
 ```sh
 location / {
 	 ...
-	 client_max_body_size 100M;
+	 client_max_body_size 200M;
 }
 ```
 
