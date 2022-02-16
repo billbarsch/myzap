@@ -8,7 +8,6 @@
 -->
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset='utf-8'>
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -19,12 +18,10 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 	<link
 		href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
 		rel="stylesheet">
 </head>
-
 <body>
 	<div class="container">
 		<div class="text-center"></div>
@@ -82,13 +79,10 @@
 								placeholder="URL que recebe o webhooks do QRCODE do cliente">
 						</div>
 					</div>
-
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
 							<button type="button" id="send-btn" onclick="alterSession(document.getElementById('session').value)">
 								Enviar
 							</button>
-						</div>
 					</div>
 				</form>
 			</div>
@@ -98,7 +92,6 @@
 		</div>
 	</div>
 	</div>
-	<!-- JavaScript (Opcional) -->
 	<!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -109,6 +102,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
+		<!-- JavaScript (Opcional) -->
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/js/axios/axios.min.js"></script>
 	<script src="/js/socket/socket.io.js"></script>
@@ -135,6 +129,7 @@
 				wh_qrcode: document.getElementById("wh_qrcode").value,
 				wh_connect: document.getElementById("wh_connect").value,
 			}
+			//
 			axios.post(url + "/start", data, config)
 				.then((value) => {
 					//alert(value);
@@ -145,30 +140,30 @@
 		}
 
 		async function alterSession(session) {
-			document.getElementById('send-btn').disabled = false
-			document.getElementById('image').src = "imagens/loading.gif"
+			document.getElementById('send-btn').disabled = false;
+			document.getElementById('image').src = "imagens/loading.gif";
 			if (!session) {
-				document.getElementById('send-btn').disabled = false
-				document.getElementById('image').src = "imagens/readqrcode.jpg"
+				document.getElementById('send-btn').disabled = false;
+				document.getElementById('image').src = "imagens/readqrcode.jpg";
 
-				alert("Digite o nome da sessão antes de continuar...")
+				alert("Digite o nome da sessão antes de continuar...");
 			} else
 				if (!document.getElementById('apitoken').value) {
-					document.getElementById('send-btn').disabled = false
-					document.getElementById('image').src = "imagens/readqrcode.jpg"
+					document.getElementById('send-btn').disabled = false;
+					document.getElementById('image').src = "imagens/readqrcode.jpg";
 
-					alert("Digite o TOKEN da API antes de continuar...")
+					alert("Digite o TOKEN da API antes de continuar...");
 				} else
 					if (!document.getElementById('sessionkey').value) {
-						document.getElementById('send-btn').disabled = false
-						document.getElementById('image').src = "imagens/readqrcode.jpg"
+						document.getElementById('send-btn').disabled = false;
+						document.getElementById('image').src = "imagens/readqrcode.jpg";
 
-						alert("Digite a SESSION KEY da sessão antes de continuar...")
+						alert("Digite a SESSION KEY da sessão antes de continuar...");
 					}
 					else {
 						document.getElementById('image').style.visibility = "visible";
-						document.getElementById('send-btn').disabled = true
-						await getSession(session)
+						document.getElementById('send-btn').disabled = true;
+						await getSession(session);
 					}
 		}
 
@@ -177,29 +172,27 @@
 		socket.on('msg', (msg) => {
 			if (msg) {
 				document.getElementById('image').style.visibility = "hidden";
-				document.getElementById('send-btn').disabled = false
-				alert(msg.reason)
+				document.getElementById('send-btn').disabled = false;
+				alert(msg.reason);
 			}
 
 		});
 
 		socket.on('qrCode', (qrCode) => {
-			let session = document.getElementById('session').value
+			let session = document.getElementById('session').value;
 			if (session === qrCode.session) {
-
-				document.getElementById('image').src = qrCode.data
+				document.getElementById('image').src = qrCode.data;
 			}
 		});
 
 		socket.on('whatsapp-status', (status) => {
-			console.log(status);
 			if (status) {
-				alert('Whatsapp Aberto com sucesso')
-				document.getElementById('send-btn').disabled = false
-				document.getElementById('image').src = "imagens/ok.jpg"
+				alert('Whatsapp Aberto com sucesso');
+				document.getElementById('send-btn').disabled = false;
+				document.getElementById('image').src = "imagens/ok.jpg";
 			} else {
-				document.getElementById('send-btn').disabled = false
-				document.getElementById('image').src = "imagens/error.jpg"
+				document.getElementById('send-btn').disabled = false;
+				document.getElementById('image').src = "imagens/error.jpg";
 			}
 		});
 
