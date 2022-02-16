@@ -47,9 +47,11 @@ export default class Events {
 						break;
 
 					case 'image':
+						/*
 						fs.writeFileSync(`files-received/${fileName}`, buffer.data, { encoding: 'base64' }, (err) => {
 							console.log('arquivo baixado!')
 						});
+						*/
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'image',
@@ -69,9 +71,11 @@ export default class Events {
 
 						break;
 					case 'sticker':
+						/*
 						fs.writeFileSync(`files-received/${fileName}`, buffer.data, { encoding: 'base64' }, (err) => {
 							console.log('arquivo baixado!')
 						});
+						*/
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'sticker',
@@ -92,9 +96,11 @@ export default class Events {
 						break;
 
 					case 'audio':
+						/*
 						fs.writeFileSync(`files-received/${fileName}`, buffer.data, { encoding: 'base64' }, (err) => {
 							console.log('arquivo baixado!')
 						});
+						*/
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'audio',
@@ -113,9 +119,11 @@ export default class Events {
 						break;
 
 					case 'ptt':
+						/*
 						fs.writeFileSync(`files-received/${fileName}`, buffer.data, { encoding: 'base64' }, (err) => {
 							console.log('arquivo baixado!')
 						});
+						*/
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'ptt',
@@ -134,9 +142,11 @@ export default class Events {
 						break;
 
 					case 'video':
+						/*
 						fs.writeFileSync(`files-received/${fileName}`, buffer.data, { encoding: 'base64' }, (err) => {
 							console.log('arquivo baixado!')
 						});
+						*/
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'video',
@@ -177,9 +187,11 @@ export default class Events {
 						break;
 
 					case 'document':
+						/*
 						fs.writeFileSync(`files-received/${fileName}`, buffer.data, { encoding: 'base64' }, (err) => {
 							console.log('arquivo baixado!')
 						});
+						*/
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'document',
@@ -297,9 +309,11 @@ export default class Events {
 						break;
 
 					case 'image':
+						/*
 						fs.writeFileSync(`files-received/${fileName}`, buffer, (err) => {
 							console.log('arquivo baixado!')
 						});
+						*/
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'image',
@@ -319,9 +333,11 @@ export default class Events {
 
 						break;
 					case 'sticker':
+						/*
 						fs.writeFileSync(`files-received/${fileName}`, buffer, (err) => {
 							console.log('arquivo baixado!')
 						});
+						*/
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'sticker',
@@ -342,9 +358,11 @@ export default class Events {
 						break;
 
 					case 'audio':
+						/*
 						fs.writeFileSync(`files-received/${fileName}`, buffer, (err) => {
 							console.log('arquivo baixado!')
 						});
+						*/
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'audio',
@@ -363,9 +381,11 @@ export default class Events {
 						break;
 
 					case 'ptt':
+						/*
 						fs.writeFileSync(`files-received/${fileName}`, buffer, (err) => {
 							console.log('arquivo baixado!')
 						});
+						*/
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'ptt',
@@ -384,9 +404,11 @@ export default class Events {
 						break;
 
 					case 'video':
+						/*
 						fs.writeFileSync(`files-received/${fileName}`, buffer, (err) => {
 							console.log('arquivo baixado!')
 						});
+						*/
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'video',
@@ -427,9 +449,11 @@ export default class Events {
 						break;
 
 					case 'document':
+						/*
 						fs.writeFileSync(`files-received/${fileName}`, buffer, (err) => {
 							console.log('arquivo baixado!')
 						});
+						*/
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'document',
