@@ -134,7 +134,6 @@
 				});
 
 		}
-
 		async function alterSession(session) {
 			document.getElementById('send-btn').disabled = false;
 			document.getElementById('image').src = "imagens/loading.gif";
@@ -171,28 +170,29 @@
 						await getSession(session);
 					}
 		}
-
 		const socket = io(url + '/', { transports: ['websocket'] });
-
 		socket.on('msg', (msg) => {
 			if (msg) {
 				document.getElementById('image').style.visibility = "hidden";
 				document.getElementById('send-btn').disabled = false;
-				alert(msg.reason);
+				document.getElementById('image').src = "imagens/readqrcode.jpg";
+				// alert(msg.reason);
+				Swal.fire(msg.reason);
 			}
-
 		});
-
 		socket.on('qrCode', (qrCode) => {
 			let session = document.getElementById('session').value;
 			if (session === qrCode.session) {
 				document.getElementById('image').src = qrCode.data;
 			}
 		});
-
 		socket.on('whatsapp-status', (status) => {
 			if (status) {
-				alert('Whatsapp Aberto com sucesso');
+				Swal.fire({
+					icon: 'success',
+					title: 'Sucesso',
+					text: 'Whatsapp Aberto com sucesso'
+				});
 				document.getElementById('send-btn').disabled = false;
 				document.getElementById('image').src = "imagens/ok.jpg";
 			} else {
@@ -200,9 +200,7 @@
 				document.getElementById('image').src = "imagens/error.jpg";
 			}
 		});
-
 	</script>
-
 </body>
 
 </html>
