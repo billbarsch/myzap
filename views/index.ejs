@@ -150,14 +150,20 @@
 				if (!document.getElementById('apitoken').value) {
 					document.getElementById('send-btn').disabled = false;
 					document.getElementById('image').src = "imagens/readqrcode.jpg";
-
-					alert("Digite o TOKEN da API antes de continuar...");
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Digite o TOKEN da API antes de continuar...'
+					});
 				} else
 					if (!document.getElementById('sessionkey').value) {
 						document.getElementById('send-btn').disabled = false;
 						document.getElementById('image').src = "imagens/readqrcode.jpg";
-
-						alert("Digite a SESSION KEY da sessão antes de continuar...");
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Digite a SESSION KEY da sessão antes de continuar...'
+						});
 					}
 					else {
 						document.getElementById('image').style.visibility = "visible";
