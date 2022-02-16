@@ -4,8 +4,6 @@ let host_ssl = '<%=host_ssl %>'
 let port = '<%=port %>'
 url = host_ssl == '' ? `http://${host}:${port}` : `https://${host_ssl}`
 
-//document.getElementById('image').style.visibility = "hidden";
-
 async function getSession(session) {
 	const config = {
 		headers: {
