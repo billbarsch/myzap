@@ -19,6 +19,7 @@ export default class Events {
 				let response = []
 				if (message.hasMedia == true || message.type == 'ptt' || message.type == 'document' || message.type == 'video' || message.type == 'image' || message.type == 'sticker') {
 					var buffer = await message.downloadMedia();
+					var string64 = buffer.toString('base64');
 					var telefone = ((String(`${message.from}`).split('@')[0]).substr(2));
 					let date_ob = new Date();
 					let date = ("0" + date_ob.getDate()).slice(-2);
@@ -64,7 +65,7 @@ export default class Events {
 							"content": message.body,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": await client?.downloadMedia(message?.id),
+							"base64": string64, //await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -88,7 +89,7 @@ export default class Events {
 							"content": message.body,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": await client?.downloadMedia(message?.id),
+							"base64": string64, //await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -112,7 +113,7 @@ export default class Events {
 							"phone": message.from.split('@')[0],
 							"mimetype": message.mimetype,
 							"file": fileName,
-							"base64": await client?.downloadMedia(message?.id),
+							"base64": string64, //await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -135,7 +136,7 @@ export default class Events {
 							"phone": message.from.split('@')[0],
 							"mimetype": message.mimetype,
 							"file": fileName,
-							"base64": await client?.downloadMedia(message?.id),
+							"base64": string64, //await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -159,7 +160,7 @@ export default class Events {
 							"content": message.body,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": await client?.downloadMedia(message?.id),
+							"base64": string64, //await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -204,7 +205,7 @@ export default class Events {
 							"mimetype": message.mimetype,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": await client?.downloadMedia(message?.id),
+							"base64": string64, //await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -325,7 +326,7 @@ export default class Events {
 							"content": message.body,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": await client?.downloadMedia(message?.id),
+							"base64": string64, //await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -349,7 +350,7 @@ export default class Events {
 							"content": message.body,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": await client?.downloadMedia(message?.id),
+							"base64": string64, //await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -373,7 +374,7 @@ export default class Events {
 							"phone": message.from.split('@')[0],
 							"mimetype": message.mimetype,
 							"file": fileName,
-							"base64": await client?.downloadMedia(message?.id),
+							"base64": string64, //await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -396,7 +397,7 @@ export default class Events {
 							"phone": message.from.split('@')[0],
 							"mimetype": message.mimetype,
 							"file": fileName,
-							"base64": await client?.downloadMedia(message?.id),
+							"base64": string64, //await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -420,7 +421,7 @@ export default class Events {
 							"content": message.body,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": await client?.downloadMedia(message?.id),
+							"base64": string64, //await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -465,7 +466,7 @@ export default class Events {
 							"mimetype": message.mimetype,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": await client?.downloadMedia(message?.id),
+							"base64": string64, //await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
