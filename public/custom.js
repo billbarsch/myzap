@@ -34,12 +34,21 @@ async function alterSession(session) {
 	document.getElementById('send-btn').disabled = false
 	document.getElementById('image').src = "imagens/loading.gif"
 	if (!session) {
+		document.getElementById('send-btn').disabled = false
+		document.getElementById('image').src = "imagens/readqrcode.jpg"
+
 		alert("Digite o nome da sessão antes de continuar...")
 	} else
 		if (!document.getElementById('apitoken').value) {
+			document.getElementById('send-btn').disabled = false
+			document.getElementById('image').src = "imagens/readqrcode.jpg"
+
 			alert("Digite o TOKEN da API antes de continuar...")
 		} else
 			if (!document.getElementById('sessionkey').value) {
+				document.getElementById('send-btn').disabled = false
+				document.getElementById('image').src = "imagens/readqrcode.jpg"
+
 				alert("Digite a SESSION KEY da sessão antes de continuar...")
 			}
 			else {
