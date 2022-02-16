@@ -35,50 +35,43 @@
 					<div class="form-group">
 						<div class="textOnInput">
 							<label for="session">Session Name:</label>
-							<input type="text" class="form-control" id="session" name="session"
-								placeholder="Nome para identificação da sessão">
+							<input type="text" class="form-control" id="session" name="session" placeholder="Nome para identificação da sessão">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="textOnInput">
 							<label for="apitoken">API Token:</label>
-							<input type="text" class="form-control" id="apitoken" name="apitoken"
-								placeholder="Token da API para autenticação de acesso">
+							<input type="text" class="form-control" id="apitoken" name="apitoken" placeholder="Token da API para autenticação de acesso">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="textOnInput">
 							<label for="sessionkey">Session KEY:</label>
-							<input type="sessionkey" class="form-control" id="sessionkey" name="sessionkey"
-								placeholder="Chave de autorização para requisições na API.">
+							<input type="sessionkey" class="form-control" id="sessionkey" name="sessionkey" placeholder="Chave de autorização para requisições na API.">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="textOnInput">
 							<label for="wh_status">Webhook Send Messages:</label>
-							<input type="wh_status" class="form-control" id="wh_status" name="wh_status"
-								placeholder="URL que recebe o Webhooks dos status das mensagens enviadas">
+							<input type="wh_status" class="form-control" id="wh_status" name="wh_status" placeholder="URL que recebe o Webhooks dos status das mensagens enviadas">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="textOnInput">
 							<label for="wh_message">Webhook Received Messages:</label>
-							<input type="wh_message" class="form-control" id="wh_message" name="wh_message"
-								placeholder="URL que recebe o Webhooks dos status das mensagens recebidas">
+							<input type="wh_message" class="form-control" id="wh_message" name="wh_message" placeholder="URL que recebe o Webhooks dos status das mensagens recebidas">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="textOnInput">
 							<label for="wh_connect">Webhook Status Connection:</label>
-							<input type="wh_connect" class="form-control" id="wh_connect" name="wh_connect"
-								placeholder="URL que recebe o status da conexão">
+							<input type="wh_connect" class="form-control" id="wh_connect" name="wh_connect" placeholder="URL que recebe o status da conexão">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="textOnInput">
 							<label for="wh_qrcode">Webhook QRCode:</label>
-							<input type="wh_qrcode" class="form-control" id="wh_qrcode" name="wh_qrcode"
-								placeholder="URL que recebe o webhooks do QRCODE do cliente">
+							<input type="wh_qrcode" class="form-control" id="wh_qrcode" name="wh_qrcode" placeholder="URL que recebe o webhooks do QRCODE do cliente">
 						</div>
 					</div>
 					<div class="form-group">
@@ -89,7 +82,7 @@
 				</form>
 			</div>
 			<div class="col-md-6">
-				<img class="img-fluid" id="image" src="imagens/readqrcode.jpg" draggable="false" alt="qr-code">
+				<img class="img-fluid" id="image" src="/imagens/readqrcode.jpg" draggable="false" alt="qr-code">
 			</div>
 		</div>
 	</div>
@@ -132,14 +125,13 @@
 				}).catch((err) => {
 					//alert(err);
 				});
-
 		}
 		async function alterSession(session) {
 			document.getElementById('send-btn').disabled = false;
 			document.getElementById('image').src = "imagens/loading.gif";
 			if (!session) {
 				document.getElementById('send-btn').disabled = false;
-				document.getElementById('image').src = "imagens/readqrcode.jpg";
+				document.getElementById('image').src = "/imagens/readqrcode.jpg";
 				Swal.fire({
 					icon: 'error',
 					title: 'Oops...',
@@ -148,7 +140,7 @@
 			} else
 				if (!document.getElementById('apitoken').value) {
 					document.getElementById('send-btn').disabled = false;
-					document.getElementById('image').src = "imagens/readqrcode.jpg";
+					document.getElementById('image').src = "/imagens/readqrcode.jpg";
 					Swal.fire({
 						icon: 'error',
 						title: 'Oops...',
@@ -157,7 +149,7 @@
 				} else
 					if (!document.getElementById('sessionkey').value) {
 						document.getElementById('send-btn').disabled = false;
-						document.getElementById('image').src = "imagens/readqrcode.jpg";
+						document.getElementById('image').src = "/imagens/readqrcode.jpg";
 						Swal.fire({
 							icon: 'error',
 							title: 'Oops...',
@@ -175,7 +167,7 @@
 			if (msg) {
 				document.getElementById('image').style.visibility = "hidden";
 				document.getElementById('send-btn').disabled = false;
-				document.getElementById('image').src = "imagens/readqrcode.jpg";
+				document.getElementById('image').src = "/imagens/readqrcode.jpg";
 				// alert(msg.reason);
 				Swal.fire(msg.reason);
 			}
@@ -194,10 +186,10 @@
 					text: 'Whatsapp Aberto com sucesso'
 				});
 				document.getElementById('send-btn').disabled = false;
-				document.getElementById('image').src = "imagens/ok.jpg";
+				document.getElementById('image').src = "/imagens/ok.jpg";
 			} else {
 				document.getElementById('send-btn').disabled = false;
-				document.getElementById('image').src = "imagens/error.jpg";
+				document.getElementById('image').src = "/imagens/error.jpg";
 			}
 		});
 	</script>
