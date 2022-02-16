@@ -21,9 +21,9 @@ async function getSession(session) {
 	}
 	axios.post(url + "/start", data, config)
 		.then((value) => {
-			//alert(value)
+			alert(value);
 		}).catch((err) => {
-			//alert(err)
+			alert(err);
 		});
 
 }
