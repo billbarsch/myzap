@@ -26,61 +26,70 @@
 
 <body>
 	<div class="container">
-		<div class="text-center"></div>
-		<h4>MyZAP 2.0</h4>
-		<!--Grid row-->
-		<div class="row justify-content-center align-items-center">
-			<div class="col-md-6">
-				<form class="form-horizontal">
-					<div class="form-group">
-						<div class="textOnInput">
-							<label for="session">Session Name:</label>
-							<input type="text" class="form-control" id="session" name="session" placeholder="Nome para identificação da sessão">
+		<div class="text-center">
+			<h4>MyZAP 2.0</h4>
+			<!--Grid row-->
+			<div class="row justify-content-center align-items-center">
+				<div class="col-md-6">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<div class="textOnInput">
+								<label for="session">Session Name:</label>
+								<input type="text" class="form-control" id="session" name="session"
+									placeholder="Nome para identificação da sessão">
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<div class="textOnInput">
-							<label for="apitoken">API Token:</label>
-							<input type="text" class="form-control" id="apitoken" name="apitoken" placeholder="Token da API para autenticação de acesso">
+						<div class="form-group">
+							<div class="textOnInput">
+								<label for="apitoken">API Token:</label>
+								<input type="text" class="form-control" id="apitoken" name="apitoken"
+									placeholder="Token da API para autenticação de acesso">
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<div class="textOnInput">
-							<label for="sessionkey">Session KEY:</label>
-							<input type="sessionkey" class="form-control" id="sessionkey" name="sessionkey" placeholder="Chave de autorização para requisições na API.">
+						<div class="form-group">
+							<div class="textOnInput">
+								<label for="sessionkey">Session KEY:</label>
+								<input type="sessionkey" class="form-control" id="sessionkey" name="sessionkey"
+									placeholder="Chave de autorização para requisições na API.">
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<div class="textOnInput">
-							<label for="wh_status">Webhook Send Messages:</label>
-							<input type="wh_status" class="form-control" id="wh_status" name="wh_status" placeholder="URL que recebe o Webhooks dos status das mensagens enviadas">
+						<div class="form-group">
+							<div class="textOnInput">
+								<label for="wh_status">Webhook Send Messages:</label>
+								<input type="wh_status" class="form-control" id="wh_status" name="wh_status"
+									placeholder="URL que recebe o Webhooks dos status das mensagens enviadas">
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<div class="textOnInput">
-							<label for="wh_message">Webhook Received Messages:</label>
-							<input type="wh_message" class="form-control" id="wh_message" name="wh_message" placeholder="URL que recebe o Webhooks dos status das mensagens recebidas">
+						<div class="form-group">
+							<div class="textOnInput">
+								<label for="wh_message">Webhook Received Messages:</label>
+								<input type="wh_message" class="form-control" id="wh_message" name="wh_message"
+									placeholder="URL que recebe o Webhooks dos status das mensagens recebidas">
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<div class="textOnInput">
-							<label for="wh_connect">Webhook Status Connection:</label>
-							<input type="wh_connect" class="form-control" id="wh_connect" name="wh_connect" placeholder="URL que recebe o status da conexão">
+						<div class="form-group">
+							<div class="textOnInput">
+								<label for="wh_connect">Webhook Status Connection:</label>
+								<input type="wh_connect" class="form-control" id="wh_connect" name="wh_connect"
+									placeholder="URL que recebe o status da conexão">
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<div class="textOnInput">
-							<label for="wh_qrcode">Webhook QRCode:</label>
-							<input type="wh_qrcode" class="form-control" id="wh_qrcode" name="wh_qrcode" placeholder="URL que recebe o webhooks do QRCODE do cliente">
+						<div class="form-group">
+							<div class="textOnInput">
+								<label for="wh_qrcode">Webhook QRCode:</label>
+								<input type="wh_qrcode" class="form-control" id="wh_qrcode" name="wh_qrcode"
+									placeholder="URL que recebe o webhooks do QRCODE do cliente">
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<button type="button" class="btn btn-primary" id="send-btn" name="send-btn" onclick="alterSession(document.getElementById('session').value)">Iniciar</button>
-					</div>
-				</form>
-			</div>
-			<div class="col-md-6">
-				<img class="img-fluid" id="image" src="/imagens/readqrcode.jpg" draggable="false" alt="qr-code">
+						<div class="form-group">
+							<button type="button" class="btn btn-primary" id="send-btn" name="send-btn"
+								onclick="alterSession(document.getElementById('session').value)">Iniciar</button>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-6">
+					<img class="img-fluid" id="image" src="/imagens/readqrcode.jpg" draggable="false" alt="qr-code">
+				</div>
 			</div>
 		</div>
 	</div>
