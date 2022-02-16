@@ -268,8 +268,7 @@ export default class Events {
 				await webhooks.wh_messages(session, response)
 			});
 
-		}
-		else {
+		} else {
 			await client.onMessage(async message => {
 				let type = message.type
 				if (type == 'chat' && message.subtype == 'url') {
@@ -530,7 +529,7 @@ export default class Events {
 
 				await webhooks.wh_messages(session, response)
 
-			})
+			});
 		}
 	}
 
