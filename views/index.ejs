@@ -192,6 +192,7 @@
 		});
 
 		socket.on('whatsapp-status', (status) => {
+			console.log(status);
 			if (status) {
 				alert('Whatsapp Aberto com sucesso')
 				document.getElementById('send-btn').disabled = false
