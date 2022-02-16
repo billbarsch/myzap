@@ -48,11 +48,11 @@ export default class Events {
 						break;
 
 					case 'image':
-						/*
+						//
 						fs.writeFileSync(`files-received/${fileName}`, buffer.data, { encoding: 'base64' }, (err) => {
 							console.log('arquivo baixado!')
 						});
-						*/
+						//
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'image',
@@ -65,18 +65,18 @@ export default class Events {
 							"content": message.body,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": string64, //await client?.downloadMedia(message?.id),
+							"base64": await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
 
 						break;
 					case 'sticker':
-						/*
+						//
 						fs.writeFileSync(`files-received/${fileName}`, buffer.data, { encoding: 'base64' }, (err) => {
 							console.log('arquivo baixado!')
 						});
-						*/
+						//
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'sticker',
@@ -89,7 +89,7 @@ export default class Events {
 							"content": message.body,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": string64, //await client?.downloadMedia(message?.id),
+							"base64": await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -97,11 +97,11 @@ export default class Events {
 						break;
 
 					case 'audio':
-						/*
+						//
 						fs.writeFileSync(`files-received/${fileName}`, buffer.data, { encoding: 'base64' }, (err) => {
 							console.log('arquivo baixado!')
 						});
-						*/
+						//
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'audio',
@@ -113,18 +113,18 @@ export default class Events {
 							"phone": message.from.split('@')[0],
 							"mimetype": message.mimetype,
 							"file": fileName,
-							"base64": string64, //await client?.downloadMedia(message?.id),
+							"base64": await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
 						break;
 
 					case 'ptt':
-						/*
+						//
 						fs.writeFileSync(`files-received/${fileName}`, buffer.data, { encoding: 'base64' }, (err) => {
 							console.log('arquivo baixado!')
 						});
-						*/
+						//
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'ptt',
@@ -136,18 +136,18 @@ export default class Events {
 							"phone": message.from.split('@')[0],
 							"mimetype": message.mimetype,
 							"file": fileName,
-							"base64": string64, //await client?.downloadMedia(message?.id),
+							"base64": await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
 						break;
 
 					case 'video':
-						/*
+						//
 						fs.writeFileSync(`files-received/${fileName}`, buffer.data, { encoding: 'base64' }, (err) => {
 							console.log('arquivo baixado!')
 						});
-						*/
+						//
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'video',
@@ -160,7 +160,7 @@ export default class Events {
 							"content": message.body,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": string64, //await client?.downloadMedia(message?.id),
+							"base64": await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -188,11 +188,11 @@ export default class Events {
 						break;
 
 					case 'document':
-						/*
+						//
 						fs.writeFileSync(`files-received/${fileName}`, buffer.data, { encoding: 'base64' }, (err) => {
 							console.log('arquivo baixado!')
 						});
-						*/
+						//
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'document',
@@ -205,7 +205,7 @@ export default class Events {
 							"mimetype": message.mimetype,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": string64, //await client?.downloadMedia(message?.id),
+							"base64": await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -309,11 +309,11 @@ export default class Events {
 						break;
 
 					case 'image':
-						/*
+						//
 						fs.writeFileSync(`files-received/${fileName}`, buffer, (err) => {
 							console.log('arquivo baixado!')
 						});
-						*/
+						//
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'image',
@@ -326,18 +326,18 @@ export default class Events {
 							"content": message.body,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": string64, //await client?.downloadMedia(message?.id),
+							"base64": await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
 
 						break;
 					case 'sticker':
-						/*
+						//
 						fs.writeFileSync(`files-received/${fileName}`, buffer, (err) => {
 							console.log('arquivo baixado!')
 						});
-						*/
+						//
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'sticker',
@@ -350,7 +350,7 @@ export default class Events {
 							"content": message.body,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": string64, //await client?.downloadMedia(message?.id),
+							"base64": await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -358,11 +358,11 @@ export default class Events {
 						break;
 
 					case 'audio':
-						/*
+						//
 						fs.writeFileSync(`files-received/${fileName}`, buffer, (err) => {
 							console.log('arquivo baixado!')
 						});
-						*/
+						//
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'audio',
@@ -374,18 +374,18 @@ export default class Events {
 							"phone": message.from.split('@')[0],
 							"mimetype": message.mimetype,
 							"file": fileName,
-							"base64": string64, //await client?.downloadMedia(message?.id),
+							"base64": await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
 						break;
 
 					case 'ptt':
-						/*
+						//
 						fs.writeFileSync(`files-received/${fileName}`, buffer, (err) => {
 							console.log('arquivo baixado!')
 						});
-						*/
+						//
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'ptt',
@@ -397,18 +397,18 @@ export default class Events {
 							"phone": message.from.split('@')[0],
 							"mimetype": message.mimetype,
 							"file": fileName,
-							"base64": string64, //await client?.downloadMedia(message?.id),
+							"base64": await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
 						break;
 
 					case 'video':
-						/*
+						//
 						fs.writeFileSync(`files-received/${fileName}`, buffer, (err) => {
 							console.log('arquivo baixado!')
 						});
-						*/
+						//
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'video',
@@ -421,7 +421,7 @@ export default class Events {
 							"content": message.body,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": string64, //await client?.downloadMedia(message?.id),
+							"base64": await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
@@ -449,11 +449,11 @@ export default class Events {
 						break;
 
 					case 'document':
-						/*
+						//
 						fs.writeFileSync(`files-received/${fileName}`, buffer, (err) => {
 							console.log('arquivo baixado!')
 						});
-						*/
+						//
 						response = {
 							"wook": 'RECEIVE_MESSAGE',
 							"type": 'document',
@@ -466,7 +466,7 @@ export default class Events {
 							"mimetype": message.mimetype,
 							"caption": message.caption != undefined ? message.caption : "",
 							"file": fileName,
-							"base64": string64, //await client?.downloadMedia(message?.id),
+							"base64": await client?.downloadMedia(message?.id),
 							"status": "RECEIVED",
 							"timestamp": message.timestamp,
 						}
