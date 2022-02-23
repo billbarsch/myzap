@@ -15,7 +15,7 @@ export default class Events {
 		if (config.engine === '1') {
 			client.on('message', async (message) => {
 				let type = message.type
-
+				console.log(message);
 				let response = []
 				if (message.hasMedia == true || message.type == 'ptt' || message.type == 'document' || message.type == 'video' || message.type == 'image' || message.type == 'sticker') {
 					var buffer = await message.downloadMedia();
