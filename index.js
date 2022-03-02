@@ -114,6 +114,17 @@ app.post("/sendFile", async (req, res, next) => {
     res.json(result);
 });//sendFile
 
+app.post("/sendImage", async (req, res, next) => {
+    var result = await Sessions.sendImage(
+        req.body.sessionName,
+        req.body.number,
+        req.body.base64Data,
+        req.body.fileName,
+        req.body.caption
+    );
+    res.json(result);
+});//sendImage
+
 app.post("/sendImageStorie", async (req, res, next) => {
     var result = await Sessions.sendImageStorie(
         req.body.sessionName,
