@@ -187,8 +187,8 @@ app.get("/getAllUnreadMessages", async (req, res, next) => {
 
 app.get("/checkNumberStatus", async (req, res, next) => {
     var result = await Sessions.checkNumberStatus(
-        req.body.sessionName,
-        req.body.number
+        req.query.sessionName,
+        req.query.number
     );
     res.json(result);
 }); //Verifica Numero
