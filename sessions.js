@@ -407,7 +407,6 @@ module.exports = class Sessions {
         }
     } //message
     
-    /*
     static async sendImage(sessionName, number, base64Data, fileName, caption) {
         var session = Sessions.getSession(sessionName);
         if (session) {
@@ -427,7 +426,6 @@ module.exports = class Sessions {
             return { result: "error", message: "NOTFOUND" };
         }
     } //sendImage
-    */
 
     static async sendImageStorie(sessionName, base64Data, fileName, caption) {
         var session = Sessions.getSession(sessionName);
