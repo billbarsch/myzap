@@ -416,7 +416,8 @@ module.exports = class Sessions {
                     var filePath = path.join(folderName, fileName);
                     fs.writeFileSync(filePath, base64Data, 'base64');
                     console.log(filePath);
-                    return await client.sendFile64(number + '@c.us', filePath, fileName, caption);
+                    console.log(fileName);
+                    return await client.sendImage(number + '@c.us', filePath, fileName, caption);
                 }); //client.then(
                 return { result: "success" };
             } else {
