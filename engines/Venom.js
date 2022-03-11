@@ -88,7 +88,7 @@ export default class Venom {
                         '--disable-accelerated-video-decode',
                     ],
 										puppeteerOptions: {
-											userDataDir: config.patch_for_md ? `${config.patch_for_md}/WPP-${session}` : undefined, // or your custom directory
+											userDataDir: config.patch_for_md ? `${config.patch_for_md}/VENOM-${session}` : undefined, // or your custom directory
 										},
                     createPathFileToken: false,
                 },
