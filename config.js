@@ -14,6 +14,7 @@ import assert from "assert";
 dotenv.config();
 
 const {
+	DEVICE_NAME,
   PORT,
   HOST,
   TOKEN,
@@ -40,6 +41,7 @@ assert(ENGINE, 'ENGINE is required, please set the ENGINE variable value in the 
 
 
 export default {
+	device_name: DEVICE_NAME,
   port: PORT,
   host: HOST,
   token: TOKEN,
