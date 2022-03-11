@@ -34,6 +34,7 @@ const {
   FORCE_CONNECTION_USE_HERE
 } = process.env;
 
+
 assert(PORT, 'PORT is required, please set the PORT variable value in the .env file');
 assert(HOST, 'HOST is required, please set the HOST variable value in the .env file');
 assert(TOKEN, 'TOKEN is required, please set the ENGINE variable value in the .env file');
