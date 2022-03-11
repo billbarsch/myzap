@@ -49,6 +49,8 @@ export default class Wppconnect {
                     }
 
                 },
+								whatsappVersion: config.whatsappVersion ? `${config.whatsappVersion}` : '', // whatsappVersion: '2.2204.13',
+								deviceName: config.device_name ? `${config.device_name}` : 'My-Zap',
                 headless: true,
                 logQR: true,
                 browserWS: '', //browserless !=  '' ? browserless.replace('https://', 'wss://')+'?token='+token_browser : '',
@@ -85,7 +87,9 @@ export default class Wppconnect {
                     '--disable-app-list-dismiss-on-blur',
                     '--disable-accelerated-video-decode',
                 ],
-
+								puppeteerOptions: {
+									userDataDir: config.patch_for_md ? `${config.patch_for_md}/WPP-${session}` : undefined, // or your custom directory
+								},
                 createPathFileToken: false,
                 sessionToken: {
                     WABrowserId: token.WABrowserId,

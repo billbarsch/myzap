@@ -14,6 +14,7 @@ import assert from "assert";
 dotenv.config();
 
 const {
+	WA_VERSION,
 	DEVICE_NAME,
   PORT,
   HOST,
@@ -42,6 +43,7 @@ assert(ENGINE, 'ENGINE is required, please set the ENGINE variable value in the 
 
 
 export default {
+	whatsappVersion: WA_VERSION,
 	device_name: DEVICE_NAME,
   port: PORT,
   host: HOST,
