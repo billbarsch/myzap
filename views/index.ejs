@@ -208,7 +208,7 @@
         let host = '<%=host %>'
         let host_ssl = '<%=host_ssl %>'
         let port = '<%=port %>'
-        url = host_ssl == '' ? `http://${host}:${port}` : `https://${host_ssl}`
+        url = host_ssl == '' ? `${host}:${port}` : host_ssl
         
         document.getElementById('image').style.visibility = "hidden";
 
