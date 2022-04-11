@@ -44,6 +44,14 @@ Este projeto usa como base o [WPPCONNECT](https://github.com/wppconnect-team/wpp
 
 Para testar o myzap rodando em ambiente de produção gratuitamente: <a href="https://apigratis.com.br" target="_blank"> Clique aqui </a>
 
+### Para atualizar a lib (Venom, Wpp-connect, WhatsApp JS)
+
+```npm update @wppconnect-team/wppconnect --force```
+
+```npm update orkestral/venom-bot --force```
+
+```npm update pedroslopez/whatsapp-web.js --force```
+
 ### Video exemplo
 
 https://youtu.be/sTMtev62vUE
