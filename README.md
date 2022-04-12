@@ -52,6 +52,12 @@ Para testar o myzap rodando em ambiente de produção gratuitamente: <a href="ht
 
 ```npm update pedroslopez/whatsapp-web.js --force```
 
+### Atualização para o wpp-connect
+
+```npm install @wppconnect-team/wppconnect@1.12.8
+npm install @wppconnect/wa-version@1.1.55
+npm install @wppconnect/wa-js@1.2.5```
+
 ### Video exemplo
 
 https://youtu.be/sTMtev62vUE
