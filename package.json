@@ -40,7 +40,7 @@
     "ejs": "^*",
     "express": "^*",
     "ffmpeg": "^*",
-    "firebase": "^^9.1.0",
+    "firebase": "^9.1.0",
     "fluent-ffmpeg": "^*",
     "form-data": "^4.0.0",
     "mime-types": "^2.1.35",
