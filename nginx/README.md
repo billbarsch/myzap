@@ -1,10 +1,15 @@
-## Template NGINX proxy reverso
+#### Template NGINX proxy reverso
 
-#### Configuração simples
+```sh
+# Remover site default do Nginx
+sudo rm /etc/nginx/sites-enabled/default
+```
+
+1. Configuração simples
 
 ```sh
 # Comando para criar o arquivo de configuração
-sudo vim /etc/nginx/conf.d/myzap.conf
+sudo vim /etc/nginx/sites-available/myzap.conf
 ```
 
 ```
@@ -114,7 +119,7 @@ server {
 #
 ```
 
-#### Protegendo a rota /start
+1. OU - Configuração protegendo a rota /start
 
 ```sh
 # Habilitando a autenticação
@@ -124,7 +129,7 @@ sudo htpasswd -c /etc/nginx/.htpasswd <usuario>
 
 ```sh
 # Comando para criar o arquivo de configuração
-sudo vim /etc/nginx/conf.d/authmyzap.conf
+sudo vim /etc/nginx/sites-available/myzap.conf
 ```
 
 ```
@@ -274,6 +279,17 @@ server {
 #
 ```
 
+2. Salve o arquivo e mova o para a pasta de sites-enabled
+```sh
+sudo ln -s /etc/nginx/sites-available/myzap /etc/nginx/sites-enabled/myzap
+```
+
+3. Reinicie o servidor da web NGINX para aplicar as alterações:
+```sh
+sudo systemctl restart nginx
+```
+
+---------------------------------------------------------------------------------
 #### Fix Limit File Upload Size in NGINX (client intended to send too large body)
 
 1. Edite o arquivo /etc/nginx/nginx.conf:
@@ -311,10 +327,7 @@ location / {
 
 > **Obs.:** Valor infomado como forma de exemplo.
 
-2. Salve o arquivo e reinicie o servidor da web NGINX para aplicar as alterações:
-
-   - **systemd**
-
+2. Salve o arquivo nginx.conf e reinicie o servidor da web NGINX para aplicar as alterações:
 ```sh
-	sudo systemctl restart nginx
+sudo systemctl restart nginx
 ```
