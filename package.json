@@ -26,11 +26,11 @@
   "bugs": {
     "url": "https://github.com/edupoli/MyZap2.0/issues"
   },
-  "homepage": "https://github.com/edupoli/MyZap2.0#readme",
-  "dependencies": {
-		"@wppconnect-team/wppconnect": "^*",
-		"@wppconnect/wa-js": "^*",
-		"@wppconnect/wa-version": "^*",
+    "homepage": "https://github.com/edupoli/MyZap2.0#readme",
+    "dependencies": {
+    "@wppconnect-team/wppconnect": "^*",
+    "@wppconnect/wa-js": "^*",
+    "@wppconnect/wa-version": "^*",
     "assert": "^*",
     "async-get-file": "^*",
     "axios": "^0.26.1",
@@ -55,7 +55,7 @@
     "url-exists": "^*",
     "valid-url": "^*",
     "venom-bot": "^*",
-    "whatsapp-web.js": "^*",
+    "github:pedroslopez/whatsapp-web.js",
     "yoo-hoo": "^*"
   }
 }
