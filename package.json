@@ -55,7 +55,7 @@
     "url-exists": "^*",
     "valid-url": "^*",
     "venom-bot": "^*",
-    "github:pedroslopez/whatsapp-web.js",
+    "whatsapp-web.js": "github:pedroslopez/whatsapp-web.js",
     "yoo-hoo": "^*"
   }
 }
