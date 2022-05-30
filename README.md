@@ -48,9 +48,9 @@ Para testar o myzap rodando em ambiente de produção gratuitamente: <a href="ht
 
 ```npm update @wppconnect-team/wppconnect --force```
 
-```npm update orkestral/venom-bot --force```
+```npm update venom-bot --force```
 
-```npm update pedroslopez/whatsapp-web.js --force```
+```npm update whatsapp-web.js --force```
 
 ### Atualização para o wpp-connect
 
@@ -113,16 +113,20 @@ npm start
 
 ```bash
 npm install -y pm2 -g
-pm2 start index.js
+pm2 start index.js --name myzap
 pm2 startup
 ```
 
-### Para instalar o certbot
-
+### Para instalar o certbot (Versões antigas do Ubuntu)
 ```bash
 sudo apt-get update && sudo apt-get install -y software-properties-common
 sudo add-apt-repository universe && sudo add-apt-repository ppa:certbot/certbot
 sudo apt-get update && sudo apt-get install -y certbot
+```
+
+### Para instalar o certbot (Ubuntu 20.04+)
+```bash
+sudo apt install certbot python3-certbot-nginx
 ```
 
 ### Criar o certificado SSL para domínios https:
