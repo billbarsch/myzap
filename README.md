@@ -13,6 +13,8 @@
 <img alt="Github All Contributors" src="https://img.shields.io/github/all-contributors/all-contributors/all-contributors/master">
 
 ---
+[<img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white">](https://documenter.getpostman.com/view/11074732/UVkqrZtZ)
+[<img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white">](https://api.whatsapp.com/send?phone=554396611437&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP)
 
 Esta Api, segue os mesmos termos de serviço do WhatsApp. É importante que você leia atentamente a estes termos. Você é responsável pelo uso da ferramenta e pelas conseqüências do mau uso. Reforçamos que a API não é destinada para prática de SPAM e que o envio de mensagens indesejadas, viola os termos de serviço do WhatsApp. A violação dos termos pode acarretar no bloqueio e banimento definitivo de sua conta no WhatsApp.
 
@@ -22,9 +24,7 @@ Esta Api, segue os mesmos termos de serviço do WhatsApp. É importante que voc�
 
 +55 (43) 99661-1437 - Eduardo Policarpo (Desenvolvedor Oficial)
 
-<a target="_blank" href="https://api.whatsapp.com/send?phone=554396611437&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP" target="_blank"><img title="WhatsApp do Suporte" height="50" width="190" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/WhatsApp_logo.svg/2000px-WhatsApp_logo.svg.png"></a>
-
-A api é 100% grátis e opensource, caso tenha interesse em contratar um suporte pago, instalação ou implementação, o [Eduardo Policarpo](https://api.whatsapp.com/send?phone=554396611437&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP) faz esse tipo de trabalho.
+A API é 100% gratuita e Open Source, caso tenha interesse em contratar um suporte pago, instalação ou implementação, o [Eduardo Policarpo](https://api.whatsapp.com/send?phone=554396611437&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP) faz esse tipo de trabalho.
 
 ### Grupos de discussão:
 
@@ -54,15 +54,21 @@ Para testar o myzap rodando em ambiente de produção gratuitamente: <a href="ht
 
 ### Atualização para o wpp-connect
 
-```
-npm install @wppconnect-team/wppconnect@1.12.8
-npm install @wppconnect/wa-version@1.1.55
-npm install @wppconnect/wa-js@1.2.5
+```bash
+npm install @wppconnect-team/wppconnect
+npm install @wppconnect/wa-version
+npm install @wppconnect/wa-js
 ```
 
-### Video exemplo
+### Videos de exemplos
 
 https://youtu.be/sTMtev62vUE
+
+https://youtu.be/_IAizSgo0iw
+
+https://youtu.be/sTMtev62vUE
+
+https://youtu.be/puM4BzLaNoQ
 
 ### Instalação Básica - VPS UBUNTU/DEBIAN:
 
@@ -132,10 +138,15 @@ sudo certbot certonly --manual --force-renewal -d *.yourdomain.net -d yourdomain
 --agree-tos --no-bootstrap --manual-public-ip-logging-ok --preferred-challenges dns-01 \
 --server https://acme-v02.api.letsencrypt.org/directory
 ```
-
 [Template NGINX proxy reverso](https://github.com/AlanMartines/myzap/tree/myzap2.0/nginx "Templates NGINX proxy reverso")
 
-### Documentação e manuais:
+### Paineis gratuitos e pagos desenvolvido por terceiros
+
+https://github.com/smartsolucoesgo/sendMyZap
+
+https://github.com/APIBrasil/apibrasil-whatsapp
+
+### Mais documentações e manuais:
 
 Para uma instalação usando o WSL do Windows siga o manual escrito e anexo na pasta <a href="https://github.com/billbarsch/myzap/tree/myzap2.0/manuais/instalacao_local_windows_ubuntu_wsl" target="_blank"> Manuais do repositório.</a>
 
