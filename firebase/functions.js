@@ -117,7 +117,7 @@ export default class Firebase {
                     "reason": "Session não informada"
                 })
             }
-            const data = getDoc(doc(db, "Sessions", id));     
+            const data = await getDoc(doc(db, "Sessions", id));     
             if (!data.exists()) {
                 res.status(404).json({
                     result: 404,
