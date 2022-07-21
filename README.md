@@ -24,6 +24,8 @@ Esta Api, segue os mesmos termos de serviço do WhatsApp. É importante que voc�
 
 +55 (43) 99661-1437 - Eduardo Policarpo (Desenvolvedor Oficial)
 
++55 (31) 99435-9434 - Jonathan Henrique (Parceiro)
+
 A API é 100% gratuita e Open Source, caso tenha interesse em contratar um suporte pago, instalação ou implementação, o [Eduardo Policarpo](https://api.whatsapp.com/send?phone=554396611437&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP) faz esse tipo de trabalho.
 
 ### Grupos de discussão:
