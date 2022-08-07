@@ -93,15 +93,15 @@
 
 <script>
 
-    let HOST = '<%=host %>' //get value this .env
-    let HOST_SSL = '<%=host_ssl %>' //get value this .env
-    let PORT = '<%=port %>' //get value this .env
-    let NAME = '<%=app_name %>' //get value this .env
+    let host = '<%=host %>' //get value this .env
+    let host_ssl = '<%=host_ssl %>' //get value this .env
+    let port = '<%=port %>' //get value this .env
+    let app_name = '<%=app_name %>' //get value this .env
 
-    document.getElementById("app_name").value = NAME
+    document.getElementById("app_name").value = app_name ?? 'MYZAP 2.0'
 
     let session;
-    const url = HOST != '' ? `${HOST}:${PORT}` : HOST_SSL
+    const url = host != '' ? `${host}:${port}` : host_ssl
     
     async function getSession(session) {
 
