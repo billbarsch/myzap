@@ -78,7 +78,7 @@ io.on('connection', sock => {
   });
 });
 
-app.get('/start', function(req, res) {
+app.get('/start', function (req, res) {
   res.render('index', {
     port: config.port,
     host: config.host,
@@ -88,27 +88,27 @@ app.get('/start', function(req, res) {
 
 if (config.https == 1) {
   https.createServer({
-      key: fs.readFileSync(config.ssl_key_path),
-      cert: fs.readFileSync(config.ssl_cert_path)
-    },
+    key: fs.readFileSync(config.ssl_key_path),
+    cert: fs.readFileSync(config.ssl_cert_path)
+  },
     server).listen(config.port, async (error) => {
-    if (error) {
-      console.log(error)
-    } else {
-      console.log('\n\nWelcome to')
-      yo('MyZAP', {
-        color: 'rainbow',
-        spacing: 1,
-      });
-      console.log(`Http server running on ${config.host}:${config.port}\n\n`);
-      if (config.start_all_sessions === 'true') {
-        let result = await startAllSessions()
-        if (result != undefined) {
-          console.log(result)
+      if (error) {
+        console.log(error)
+      } else {
+        console.log('\n\nWelcome to')
+        yo('MyZAP', {
+          color: 'rainbow',
+          spacing: 1,
+        });
+        console.log(`Http server running on ${config.host}:${config.port}\n\n`);
+        if (config.start_all_sessions === 'true') {
+          let result = await startAllSessions()
+          if (result != undefined) {
+            console.log(result)
+          }
         }
       }
-    }
-  });
+    });
 } else {
   server.listen(config.port, async (error) => {
     if (error) {
