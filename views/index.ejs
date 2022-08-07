@@ -93,16 +93,20 @@
 
 <script>
 
+    let session;
+
     let host = '<%=host %>' //get value this .env
     let host_ssl = '<%=host_ssl %>' //get value this .env
     let port = '<%=port %>' //get value this .env
 
-    document.getElementById("show_app_name").value = "MYZAP 2.0"
+    app_name = document.getElementById("show_app_name");
+    app_name.value = "MYZAP 2.0";
 
-    let session;
     const url = host != '' ? `${host}:${port}` : host_ssl
     
     async function getSession(session) {
+
+        document.getElementById("image").src = "/qrcode.jpg";
 
         const config = {
             headers: {
@@ -118,12 +122,10 @@
             wh_qrcode: document.getElementById("wh_qrcode").value,
             wh_connect: document.getElementById("wh_connect").value,
         }
-
-        document.getElementById("image").src = "/loading.gif";
         
         axios.post(url + "/start", data, config)
         .then(() => {
-            document.getElementById("image").src = "/qrcode.jpg";
+            document.getElementById("image").src = "/loading.gif";
         })
         .catch((error) => {
 
