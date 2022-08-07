@@ -18,7 +18,7 @@
         <div class="container p-4">
 
             <div class="text-center">
-                <h1 class="pb-4"> <%=APP_NAME %></h1>
+                <h1 class="pb-4" id="app_name"></h1>
             </div>
 
             <form class="row" onsubmit="return false;">
@@ -96,6 +96,11 @@
     let HOST = '<%=HOST %>' //get value this .env
     let HOST_SSL = '<%=HOST_SSL %>' //get value this .env
     let PORT = '<%=PORT %>' //get value this .env
+    let APP_NAME = '<%=APP_NAME %>' //get value this .env
+
+    if(APP_NAME != null){
+        document.getElementById("app_name").value = APP_NAME
+    }
 
     let session;
     const url = host != '' ? `${HOST}:${PORT}` : HOST_SSL
