@@ -14,6 +14,7 @@ import assert from "assert";
 dotenv.config();
 
 const {
+  APP_NAME,
   PORT,
   HOST,
   TOKEN,
@@ -44,6 +45,7 @@ export default {
   token: TOKEN,
   https: HTTPS,
   host_ssl: DOMAIN_SSL,
+  app_name: APP_NAME,
   engine: ENGINE,
   ssl_key_path: SSL_KEY_PATH,
   ssl_cert_path: SSL_CERT_PATH,
