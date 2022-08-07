@@ -9,32 +9,24 @@ import cors from "cors";
 import express from "express";
 const app = express();
 import path from "path";
-import {
-  fileURLToPath
-} from 'url';
+import { fileURLToPath } from 'url';
 import http from "http";
 import serveIndex from "serve-index";
 import motor from "./engines.js";
 import config from "./config.js";
-import {
-  yo
-} from "yoo-hoo";
+import { yo } from "yoo-hoo";
 import events from "events";
 import startup from "./startup.js";
-import {
-  Server
-} from "socket.io";
+import { Server } from "socket.io";
 
-const __filename = fileURLToPath(
-  import.meta.url);
+const __filename = fileURLToPath( import.meta.url);
 const __dirname = path.dirname(__filename);
+
+events.EventEmitter.prototype._maxListeners = 999;
 
 const server = http.Server(app);
 const router = motor.engines[process.env.ENGINE].router
-events.EventEmitter.prototype._maxListeners = 999;
-const {
-  startAllSessions
-} = startup;
+const { startAllSessions } = startup;
 
 const io = new Server(server, {
   cors: {

@@ -11,8 +11,6 @@ import { setDoc, db, doc } from '../../firebase/db.js';
 
 export default class Auth {
 
-
-
     static async start(req, res) {
         try {
             if (Object.keys(config.firebaseConfig).length === 0) {
@@ -107,8 +105,6 @@ export default class Auth {
             })
         }
     }
-    
-
 
     static async logoutSession(req, res) {
         let data = Sessions.getSession(req.body.session)
@@ -125,8 +121,6 @@ export default class Auth {
             });
         }
     }
-
-
 
     static async closeSession(req, res) {
         let session = req.body.session;

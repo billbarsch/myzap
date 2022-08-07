@@ -28,6 +28,7 @@ export default class Commands {
       })
     }
   }
+
   static async getConnectionState(req, res) {
     try {
       let data = Sessions.getSession(req.body.session)
@@ -68,7 +69,6 @@ export default class Commands {
       })
     }
   }
-
 
   static async getAllContacts(req, res) {
     try {
