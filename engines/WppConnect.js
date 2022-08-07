@@ -51,7 +51,7 @@ export default class Wppconnect {
                 headless: true,
                 logQR: true,
                 browserWS: '', //browserless !=  '' ? browserless.replace('https://', 'wss://')+'?token='+token_browser : '',
-                useChrome: false,
+                useChrome: true,
                 updatesLog: false,
                 autoClose: 90000,
                 browserArgs: [
