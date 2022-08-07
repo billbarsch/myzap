@@ -98,9 +98,7 @@
     let PORT = '<%=port %>' //get value this .env
     let APP_NAME = '<%=app_name %>' //get value this .env
 
-    if(APP_NAME != null){
-        document.getElementById("app_name").value = APP_NAME
-    }
+    document.getElementById("app_name").value = APP_NAME
 
     let session;
     const url = HOST != '' ? `${HOST}:${PORT}` : HOST_SSL
