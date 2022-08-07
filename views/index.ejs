@@ -126,8 +126,6 @@
         axios.post(url + "/start", data, config)
         .then(() => {
 
-            //document.getElementById("image").src = "/qrcode.jpg";
-
         })
         .catch((error) => {
 
@@ -196,6 +194,8 @@
         let session = document.getElementById('session').value
         if (session === qrCode.session) {
             document.getElementById('image').src = qrCode.data
+            document.getElementById('image').classList.remove("w-100");
+            document.getElementById('image').classList.add("w-50");
         }
 
         document.getElementById('show-log').insertAdjacentHTML(session);
