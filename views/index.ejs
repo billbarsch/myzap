@@ -92,11 +92,13 @@
 
 <script>
 
+    let session;
     let url;
-    let host = 'http://localhost'
-    let host_ssl = ''
-    let port = '3333'
-    url = host_ssl == '' ? `${host}:${port}` : host_ssl
+    let host = '<%=host %>'
+    let host_ssl = '<%=host_ssl %>'
+    let port = '<%=port %>'
+    
+    const url = host != '' ? `${host}:${port}` : host_ssl
     
     async function getSession(session) {
 
@@ -136,20 +138,33 @@
 
     async function alterSession(session) {
         if (!session) {
-            alert("Digite o nome da sessão antes de continuar...")
-        } else
-            if (!document.getElementById('apitoken').value) {
-                alert("Digite o TOKEN da API antes de continuar...")
-            } else
-                if (!document.getElementById('sessionkey').value) {
-                    alert("Digite a SESSION KEY da sessão antes de continuar...")
-                }
-                else {
-                    document.getElementById('image').style.visibility = "visible";
-                    document.getElementById('send-btn').disabled = true
-                    await getSession(session)
-                }
+            
+             Swal.fire(
+                'Error!!',
+                'Digite o nome da sessão para começar...',
+                'error'
+            )
+        
+        } else if (!document.getElementById('apitoken').value) {
 
+              Swal.fire(
+                'Error!!',
+                'Digite o TOKEN da API para começar...',
+                'error'
+            )
+
+        } else if (!document.getElementById('sessionkey').value) {
+            Swal.fire(
+                'Error!!',
+                'Digite a SESSION KEY da sessão para começar...',
+                'error'
+            )
+        }
+        else {
+            document.getElementById('image').style.visibility = "visible";
+            document.getElementById('send-btn').disabled = true
+            await getSession(session)
+        }
         
     }
 
