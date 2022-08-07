@@ -12,12 +12,13 @@
         <style>
             html { zoom: 80%; }
         </style>
+
     </head>
     <body class="text-black">
         <div class="container p-4">
 
             <div class="text-center">
-                <h1 class="pb-4">MYZAP 2.0</h1>
+                <h1 class="pb-4"> <%=APP_NAME %></h1>
             </div>
 
             <form class="row" onsubmit="return false;">
@@ -92,12 +93,12 @@
 
 <script>
 
+    let HOST = '<%=HOST %>' //get value this .env
+    let HOST_SSL = '<%=HOST_SSL %>' //get value this .env
+    let PORT = '<%=PORT %>' //get value this .env
+
     let session;
-    let host = '<%=host %>'
-    let host_ssl = '<%=host_ssl %>'
-    let port = '<%=port %>'
-    
-    const url = host != '' ? `${host}:${port}` : host_ssl
+    const url = host != '' ? `${HOST}:${PORT}` : HOST_SSL
     
     async function getSession(session) {
 
@@ -129,6 +130,7 @@
                 title: 'Oops...',
                 text: error?.message,
             })
+
             console.log(error)
 
         })
@@ -184,9 +186,9 @@
     })
 
     socket.on('qrCode', (qrCode) => {
+
         let session = document.getElementById('session').value
         if (session === qrCode.session) {
-
             document.getElementById('image').src = qrCode.data
         }
 
@@ -195,12 +197,25 @@
     })
 
     socket.on('whatsapp-status', (status) => {
+
         if (status) {
-            alert('Whatsapp Aberto com sucesso')
+
+            Swal.fire(
+                'Nice!',
+                'Whatsapp Conectado com sucesso!',
+                'success'
+            )
+            
             document.getElementById('send-btn').disabled = false
             document.getElementById('image').src = "/ok.png"
-        }
-        else {
+        }else {
+
+            Swal.fire(
+                'Error!!',
+                'Erro ao conectar o WhatsApp, verifique o log da API.',
+                'error'
+            )
+            
             document.getElementById('send-btn').disabled = false
             document.getElementById('image').src = "/error.png"
         }
