@@ -18,7 +18,7 @@
         <div class="container p-4">
 
             <div class="text-center">
-                <h1 class="pb-4" id="show_app_name"></h1>
+                <h1 class="pb-4">MYZAP 2.0</h1>
             </div>
 
             <form class="row" onsubmit="return false;">
@@ -98,9 +98,6 @@
     let host = '<%=host %>' //get value this .env
     let host_ssl = '<%=host_ssl %>' //get value this .env
     let port = '<%=port %>' //get value this .env
-
-    app_name = document.getElementById("show_app_name");
-    app_name.value = "MYZAP 2.0";
 
     const url = host != '' ? `${host}:${port}` : host_ssl
     
