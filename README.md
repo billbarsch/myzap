@@ -34,9 +34,6 @@ MyZap®️ é uma API REST FULL 100% gratuita e Open Source, caso tenha interess
 
 - Execute este comando em um novo servidor Ubuntu 20x com pelo menos 2 GB de RAM
 
-## #Vps & Dedicados✅
-- Caso precise contratar servidor VPS, indicamos a [Owen Brasil](https://owenbrasil.com)
-
 ## Grupos de Apoio
 
 <a href="https://chat.whatsapp.com/IDqZrBmBIYL50Mq63NfraA">
