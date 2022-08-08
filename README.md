@@ -54,7 +54,7 @@ MyZap®️ é uma API REST FULL 100% gratuita e Open Source, caso tenha interess
 
 ## Registro de todas as alterações:
 
-- [Changelog](https://github.com/billbarsch/myzap/blob/main/docs/CHANGELOG.md)
+- [Changelog](https://github.com/billbarsch/myzap/blob/myzap2.0/docs/CHANGELOG.md)
 
 ## Demostração MyZap:
 
