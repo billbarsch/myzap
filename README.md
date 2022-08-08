@@ -34,6 +34,9 @@ MyZap®️ é uma API REST FULL 100% gratuita e Open Source, caso tenha interess
 
 - Execute este comando em um novo servidor Ubuntu 20x com pelo menos 2 GB de RAM
 
+## Documentação Postman & Examples: 
+A documentação da API está disponível online [Aqui](https://documenter.getpostman.com/view/11074732/UVkqrZtZ) . Você também pode importar o arquivo de coleção Postman em seu aplicativo Postman alternativamente.
+
 ## Grupos de Apoio
 
 <a href="https://chat.whatsapp.com/IDqZrBmBIYL50Mq63NfraA">
