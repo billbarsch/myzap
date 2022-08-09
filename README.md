@@ -63,6 +63,11 @@ A documentação da API está disponível online [Aqui](https://documenter.getpo
 
 👉 Para testar o myzap rodando em ambiente de produção gratuitamente: <a href="https://apigratis.com.br" target="_blank"> Clique aqui </a>
 
+## Cliente PHP
+```composer require jhowbhz/package-apigratis```
+
+👉 <a href="https://github.com/APIBrasil/package-apigratis" target="_blank"> Acessar repositorio</a>
+
 
 ## Atividades Recentes [![Time period](https://images.repography.com/28032565/billbarsch/myzap/recent-activity/e9752906386eaaf073221d572080d318_badge.svg)](https://repography.com)
 [![Pull request status graph](https://images.repography.com/28032565/billbarsch/myzap/recent-activity/e9752906386eaaf073221d572080d318_prs.svg)](https://github.com/billbarsch/myzap/pulls)
