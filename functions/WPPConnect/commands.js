@@ -202,7 +202,7 @@ export default class Commands {
     let data = Sessions.getSession(req.body.session)
     let number = req.body.number + '@c.us';
     try {
-      let response = await data.client.loadAndGetAllMessagesInChat(number, true)
+      let response = await data.client.getMessages(number, {fromMe: false})
       let messages = response.map(function (data) {
         console.log(data)
         return {
