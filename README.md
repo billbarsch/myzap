@@ -30,7 +30,7 @@ MyZap®️ é uma API REST FULL 100% gratuita e Open Source, caso tenha interess
 - A API MyZap foi desenvolvido com base nos motores [Venom](https://github.com/orkestral/venom), [WPPConnect](https://github.com/wppconnect-team/wppconnect) & [whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js/), desenvolvido por [BillBarsch](https://github.com/billbarsch) & [Eduardo Policarpo](https://github.com/billbarsch).
 
 ## #Instalação automatica com 1 clique; Copiou? Colou!😎
- 👉  curl -sSL https://sh.myzap.net/install.sh | sh
+ 👉    curl -sSL https://sh.owenbrasil.com/myzap.sh | bash
 
 - Execute este comando em um novo servidor Ubuntu 20x com pelo menos 2 GB de RAM
 
