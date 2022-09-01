@@ -594,4 +594,45 @@ export default class Mensagens {
             }
         }
     }
+    
+    /* Envia mensagem com botões
+    @Author: Gabriel Silva
+    @Company: Power Iguana
+    @Date: 2022-08-12
+    */
+    
+   static async sendButton(req, res) {
+        let data = Sessions.getSession(req.body.session)
+        let isGroup = req.body.isGroup;
+        let number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
+
+        if (!req.body.text) {
+            return res.status(400).json({
+                status: 400,
+                error: "Text não foi informado"
+            })
+        }
+        else {
+            try {
+                let response = await data.client.sendText(number, req.body.text, {useTemplateButtons: true, buttons: req.body.buttons, title: req.body.title, footer: req.body.footer})
+                return res.status(200).json({
+                    result: 200,
+                    type: 'text',
+                    session: req.body.session,
+                    messageId: response.id,
+                    from: response.from.split('@')[0],
+                    to: response.chatId.user,
+                    content: response.content
+                })
+            } catch (error) {
+                return res.status(500).json({
+                    result: 500,
+                    error: error
+                })
+            }
+        }
+    }
+
+    
+    
 }
