@@ -22,12 +22,19 @@
 </p>
 
 ## Sobre
+MyZap®️ é uma API REST FULL 100% gratuita e Open Source
 
-MyZap®️ é uma API REST FULL 100% gratuita e Open Source, caso tenha interesse em contratar um suporte Oficial✅ pago, instalação ou implementação, o [Eduardo Policarpo](https://api.whatsapp.com/send?phone=554396611437&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP), [Everton Nogueira](https://api.whatsapp.com/send?phone=5511912891716&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP) & [Jonathan Henrique](https://api.whatsapp.com/send?phone=5531994359434&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP) , faz esse tipo de trabalho.
+Este projeto usa como base o [WPPCONNECT](https://github.com/wppconnect-team/wppconnect), e [Whatsapp-WEB.JS](https://github.com/pedroslopez/whatsapp-web.js/), e [Venom-bot](https://github.com/orkestral/venom) um navegador virtual sem interface gráfica que abre o whatsapp web e executa todos os comandos via código possibilitando assim a automação de todas as funções.
 
-## Referência
 
-- A API MyZap foi desenvolvido com base nos motores [Venom](https://github.com/orkestral/venom), [WPPConnect](https://github.com/wppconnect-team/wppconnect) & [whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js/), desenvolvido por [BillBarsch](https://github.com/billbarsch) & [Eduardo Policarpo](https://github.com/billbarsch).
+## Desenvolvedores e Suporte
+
+- +55 (63) 99215-8117 - [BillBarsch](https://github.com/billbarsch)
+- +55 (43) 99661-1437 - [Eduardo Policarpo](https://github.com/edupoli) (Desenvolvedor Oficial)
+#### Para suporte direto com o desenvolver da API chame no WhatsApp
+<a target="_blank" href="https://api.whatsapp.com/send?phone=554396611437&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP" target="_blank"><img title="WhatsApp do Suporte" height="50" width="190" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/WhatsApp_logo.svg/2000px-WhatsApp_logo.svg.png"></a>
+
+Temos alguns COLABORADORES que prestam suporte, caso precise entre em contato com [Everton Nogueira](https://api.whatsapp.com/send?phone=5511912891716&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP) ou [Jonathan Henrique](https://api.whatsapp.com/send?phone=5531994359434&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP) 
 
 ## #Instalação automatica com 1 clique; Copiou? Colou!😎
  👉    curl -sSL https://sh.owenbrasil.com/myzap.sh | bash
