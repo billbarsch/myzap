@@ -62,9 +62,12 @@ Router.post('/removeParticipant', checkParams, checkNumber, Groups.removePartici
 Router.post('/promoteParticipant', checkParams, checkNumber, Groups.promoteParticipant);
 Router.post('/demoteParticipant', checkParams, checkNumber, Groups.demoteParticipant);
 Router.post('/getGroupAdmins', checkParams, Groups.getGroupAdmins);
-Router.post('/changePrivacyGroup', checkParams, Groups.changePrivacyGroup); //nova
+Router.post('/changePrivacyGroup', checkParams, Groups.changePrivacyGroup); 
 Router.post('/getGroupInviteLink', checkParams, Groups.getGroupInviteLink);
-Router.post('/setGroupPic', checkParams, Groups.setGroupPic); // ver funcao nao exite
+Router.post('/setGroupPic', checkParams, Groups.setGroupPic); // ver funcao nao exite (parece que tem sim, não testado)
+Router.post('/setGroupDescription', checkParams, Groups.setGroupDescription); //nova sarb
+Router.post('/setGroupSubject', checkParams, Groups.setGroupSubject); //nova sarb
+
 
 // // Status
 Router.post('/sendTextToStorie', checkParams, Status.sendTextToStorie);
