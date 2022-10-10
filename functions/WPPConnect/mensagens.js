@@ -50,7 +50,8 @@ export default class Mensagens {
         try {
             const { caption, path } = req.body;
             let data = Sessions.getSession(req.body.session)
-            let number = req.body.number + '@c.us';
+            let isGroup = req.body.isGroup;
+            let number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
             if (!path) {
                 return res.status(400).send({
                     status: 400,
@@ -69,7 +70,7 @@ export default class Mensagens {
                 from: response.me.wid._serialized.split('@')[0],
                 to: response.to.remote.user,
                 file: req.body.url,
-                mimetype: response.mimeType,//ok
+                mimetype: response.mimeType, //ok
 
             })
         } catch (error) {
@@ -89,7 +90,8 @@ export default class Mensagens {
             });
         }
         let data = Sessions.getSession(req.body.session)
-        let number = req.body.number + '@c.us';
+        let isGroup = req.body.isGroup;
+        let number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
         let isURL = await urlExists(req.body.path);
         let name = req.body.path.split(/[\/\\]/).pop();
         try {
@@ -138,7 +140,8 @@ export default class Mensagens {
             });
         }
         let data = Sessions.getSession(req.body.session)
-        let number = req.body.number + '@c.us';
+        let isGroup = req.body.isGroup;
+        let number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
         let isURL = await urlExists(req.body.path);
         let name = req.body.path.split(/[\/\\]/).pop();
         try {
@@ -186,7 +189,8 @@ export default class Mensagens {
             });
         }
         let data = Sessions.getSession(req?.body?.session)
-        let number = `${req.body.number}@c.us`;
+        let isGroup = req.body.isGroup;
+        let number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
         let isURL = await urlExists(req?.body?.path);
         let name = req.body.path.split(/[\/\\]/).pop();
 
@@ -233,7 +237,8 @@ export default class Mensagens {
             });
         }
         let data = Sessions.getSession(req?.body?.session)
-        let number = `${req?.body?.number}@c.us`;
+        let isGroup = req.body.isGroup;
+        let number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
         let name = req?.body?.path.split(/[\/\\]/).pop();
         try {
             let response = await data.client.sendFileFromBase64(number, req?.body?.path, req?.body?.fileName, req?.body?.caption)
@@ -263,7 +268,8 @@ export default class Mensagens {
             });
         }
         let data = Sessions.getSession(req.body.session)
-        let number = req.body.number + '@c.us';
+        let isGroup = req.body.isGroup;
+        let number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
         let isURL = await urlExists(req.body.path);
 
         if (isURL) {
@@ -379,7 +385,7 @@ export default class Mensagens {
         let isURL = await urlExists(req.body.url);
         let isGroup = req.body.isGroup;
         let number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
-        
+
         if (!req.body.url) {
             return res.status(400).json({
                 status: 400,
@@ -416,7 +422,8 @@ export default class Mensagens {
 
     static async sendContact(req, res) {
         let data = Sessions.getSession(req.body.session)
-        let number = req.body.number + '@c.us';
+        let isGroup = req.body.isGroup;
+        let number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
         if (!req.body.contact) {
             return res.status(400).json({
                 status: 400,
@@ -451,7 +458,8 @@ export default class Mensagens {
 
     static async sendLocation(req, res) {
         let data = Sessions.getSession(req.body.session)
-        let number = req.body.number + '@c.us';
+        let isGroup = req.body.isGroup;
+        let number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
         if (!req.body.lat) {
             return res.status(400).json({
                 status: 400,
@@ -533,7 +541,8 @@ export default class Mensagens {
 
     static async forwardMessages(req, res) {
         let data = Sessions.getSession(req.body.session)
-        let number = req.body.number + '@c.us';
+        let isGroup = req.body.isGroup;
+        let number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
         if (!req.body.text) {
             return res.status(400).json({
                 status: 400,
@@ -594,14 +603,14 @@ export default class Mensagens {
             }
         }
     }
-    
+
     /* Envia mensagem com botões
     @Author: Gabriel Silva
     @Company: Power Iguana
     @Date: 2022-08-12
     */
-    
-   static async sendButton(req, res) {
+
+    static async sendButton(req, res) {
         let data = Sessions.getSession(req.body.session)
         let isGroup = req.body.isGroup;
         let number = isGroup === true ? req.body.number + '@g.us' : req.body.number + '@c.us';
@@ -614,7 +623,7 @@ export default class Mensagens {
         }
         else {
             try {
-                let response = await data.client.sendText(number, req.body.text, {useTemplateButtons: true, buttons: req.body.buttons, title: req.body.title, footer: req.body.footer})
+                let response = await data.client.sendText(number, req.body.text, { useTemplateButtons: false, buttons: req.body.buttons, title: req.body.title, footer: req.body.footer })
                 return res.status(200).json({
                     result: 200,
                     type: 'text',
@@ -633,6 +642,6 @@ export default class Mensagens {
         }
     }
 
-    
-    
+
+
 }

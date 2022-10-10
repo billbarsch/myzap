@@ -408,4 +408,57 @@ export default class Group {
       })
     }
   }
+
+  static async setGroupDescription(req, res) {
+    try {
+      let data = Sessions.getSession(req.body.session)
+      let newtext = req.body.newtext;
+      if (!req.body.groupid) {
+        return res.status(400).json({
+          'result': 'error',
+          'reason': 'Deve ser informado o ID do Grupo'
+        })
+      } else {
+        const g = '@g.us'
+        data.client.setGroupDescription(req.body.groupid + g, newtext);
+        return res.status(200).json({
+          "result": 200,
+          "messages": "SUCCESS"
+        })
+      }
+    } catch (error) {
+      return res.status(400).json({
+        "result": 400,
+        "status": "FAIL",
+        "error": error
+      })
+    }
+  }
+
+  static async setGroupSubject(req, res) {
+    try {
+      let data = Sessions.getSession(req.body.session)
+      let newtext = req.body.newtext;
+      if (!req.body.groupid) {
+        return res.status(400).json({
+          'result': 'error',
+          'reason': 'Deve ser informado o ID do Grupo'
+        })
+      } else {
+        const g = '@g.us'
+        data.client.setGroupSubject(req.body.groupid + g, newtext);
+        return res.status(200).json({
+          "result": 200,
+          "messages": "SUCCESS"
+        })
+      }
+    } catch (error) {
+      return res.status(400).json({
+        "result": 400,
+        "status": "FAIL",
+        "error": error
+      })
+    }
+  }
+
 }

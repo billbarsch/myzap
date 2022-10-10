@@ -290,6 +290,23 @@ export default class Events {
 
                         break;
 
+                    case 'buttons_response':
+                        response = {
+                            "wook": 'RECEIVE_MESSAGE',
+                            "type": 'buttons_response',
+                            "id": message.id,
+                            "session": session,
+                            "isGroupMsg": message.isGroupMsg,
+                            "author": message.author ? message.author : null,
+                            "sender": message.to.split('@')[0],
+                            "phone": message.from.split('@')[0],
+                            "content": message.body,
+                            "status": "RECEIVED",
+                            "timestamp": message.timestamp,
+                        }
+
+                        break;
+
                     case 'image':
                         fs.writeFileSync(`files-received/${fileName}`, buffer, (err) => {
                             console.log('arquivo baixado!')

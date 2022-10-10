@@ -4,20 +4,20 @@
  * @Date: 2021-05-10 18:09:49
  * @LastEditTime: 2021-06-07 03:18:01
  */
-import express from'express';
+import express from 'express';
 const Router = express.Router();
-import engine from'../engines/WppConnect.js';
-import Sessions from'../controllers/sessions.js';
-import Status from'../functions/WPPConnect/status.js';
-import Commands from'../functions/WPPConnect/commands.js';
-import Groups from'../functions/WPPConnect/groups.js';
-import Mensagens from'../functions/WPPConnect/mensagens.js';
-import Auth from'../functions/WPPConnect/auth.js';
-import config from'../config.js';
-import { checkParams } from'../middlewares/validations.js';
-import { checkNumber } from'../middlewares/checkNumber.js';
-import database from'../firebase/functions.js';
-import { setDoc, doc, db} from'../firebase/db.js';
+import engine from '../engines/WppConnect.js';
+import Sessions from '../controllers/sessions.js';
+import Status from '../functions/WPPConnect/status.js';
+import Commands from '../functions/WPPConnect/commands.js';
+import Groups from '../functions/WPPConnect/groups.js';
+import Mensagens from '../functions/WPPConnect/mensagens.js';
+import Auth from '../functions/WPPConnect/auth.js';
+import config from '../config.js';
+import { checkParams } from '../middlewares/validations.js';
+import { checkNumber } from '../middlewares/checkNumber.js';
+import database from '../firebase/functions.js';
+import { setDoc, doc, db } from '../firebase/db.js';
 
 Router.post('/start', Auth.start)
 // Sessões 
@@ -65,6 +65,8 @@ Router.post('/getGroupAdmins', checkParams, Groups.getGroupAdmins);
 Router.post('/changePrivacyGroup', checkParams, Groups.changePrivacyGroup); //nova
 Router.post('/getGroupInviteLink', checkParams, Groups.getGroupInviteLink);
 Router.post('/setGroupPic', checkParams, Groups.setGroupPic); // ver funcao nao exite
+Router.post('/setGroupDescription', checkParams, Groups.setGroupDescription);
+Router.post('/setGroupSubject', checkParams, Groups.setGroupSubject);
 
 // // Status
 Router.post('/sendTextToStorie', checkParams, Status.sendTextToStorie);
