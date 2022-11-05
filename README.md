@@ -31,6 +31,7 @@ Este projeto usa como base o [WPPCONNECT](https://github.com/wppconnect-team/wpp
 
 - +55 (63) 99215-8117 - [BillBarsch](https://github.com/billbarsch)
 - +55 (43) 99661-1437 - [Eduardo Policarpo](https://github.com/edupoli) (Desenvolvedor Oficial)
+- +55 (31) 99435-9434 - [Jonathan Henrique](https://github.com/jhowbhz) (Parceiro)
 #### Para suporte direto com o desenvolver da API chame no WhatsApp
 <a target="_blank" href="https://api.whatsapp.com/send?phone=554396611437&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP" target="_blank"><img title="WhatsApp do Suporte" height="50" width="190" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/WhatsApp_logo.svg/2000px-WhatsApp_logo.svg.png"></a>
 
