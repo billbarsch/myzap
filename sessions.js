@@ -149,11 +149,8 @@ module.exports = class Sessions {
                 session: session.name,
                 puppeteerOptions: {
                     userDataDir: './tokens/' + session.name, // or your custom directory
-                    args: [
-                        '--no-sandbox',
-                    ],
-                    headless: false,
-                    ignoreHTTPSErrors: true,
+                    // headless: false,
+                    // ignoreHTTPSErrors: true,
                     executablePath: '/root/.cache/puppeteer/chrome/linux-1095492/chrome-linux/chrome'
                 },
                 catchQR: (base64Qrimg, asciiQR, attempts, urlCode) => {
