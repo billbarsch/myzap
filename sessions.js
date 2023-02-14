@@ -152,7 +152,16 @@ module.exports = class Sessions {
                 session: session.name,
                 puppeteerOptions: {
                     userDataDir: './tokens/' + session.name, // or your custom directory
-                    executablePath: executablePath(),
+                    args: [
+                        '--no-sandbox',
+                        '--disable-setuid-sandbox',
+                        '--disable-dev-shm-usage',
+                        '--disable-accelerated-2d-canvas',
+                        '--no-first-run',
+                        '--no-zygote',
+                        '--single-process',
+                        '--disable-gpu'
+                    ],
                 },
                 catchQR: (base64Qrimg, asciiQR, attempts, urlCode) => {
                     session.state = "QRCODE";
