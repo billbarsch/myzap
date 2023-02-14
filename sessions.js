@@ -8,6 +8,9 @@ const venom = require('venom-bot');
 const wppconnect = require('@wppconnect-team/wppconnect');
 const axios = require('axios');
 
+// require executablePath from puppeteer
+const {executablePath} = require('puppeteer');
+
 module.exports = class Sessions {
 
     static async start(sessionName, options = []) {
@@ -149,6 +152,7 @@ module.exports = class Sessions {
                 session: session.name,
                 puppeteerOptions: {
                     userDataDir: './tokens/' + session.name, // or your custom directory
+                    executablePath: executablePath(),
                 },
                 catchQR: (base64Qrimg, asciiQR, attempts, urlCode) => {
                     session.state = "QRCODE";
