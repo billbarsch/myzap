@@ -26,10 +26,10 @@ if (process.env.HTTPS == 1) { //with ssl
             cert: fs.readFileSync(process.env.SSL_CERT_PATH)
         },
         app).listen(appPort);
-    console.log("Https server running on port " + appPort);
+    console.log(pegaDataHora() + "Https server running on port " + appPort);
 } else { //http
     app.listen(appPort, () => {
-        console.log("Http server running on port " + appPort);
+        console.log(pegaDataHora() + "Http server running on port " + appPort);
     });
 }//http
 
@@ -44,7 +44,7 @@ app.post('/exec', async (req, res) => {
 });
 
 app.get("/start", async (req, res, next) => {
-    console.log("starting..." + req.query.sessionName);
+    console.log(pegaDataHora() + "starting..." + req.query.sessionName);
     var session = process.env.JSONBINIO_SECRET_KEY ?
         await Sessions.start(req.query.sessionName, { jsonbinio_secret_key: process.env.JSONBINIO_SECRET_KEY, jsonbinio_bin_id: process.env.JSONBINIO_BIN_ID }) :
         await Sessions.start(req.query.sessionName);
@@ -57,14 +57,14 @@ app.get("/start", async (req, res, next) => {
 
 app.get("/status", async (req, res, next) => {
     var session = await Sessions.getStatus(req.query.sessionName);
-    console.log(session);
+    console.log(pegaDataHora() + session);
     res.status(200).json({
         result: (!session.state) ? 'NOT_FOUND' : session.state
     });
 }); //status
 
 app.get("/qrcode", async (req, res, next) => {
-    console.log("qrcode..." + req.query.sessionName);
+    console.log(pegaDataHora() + "qrcode..." + req.query.sessionName);
     var session = Sessions.getSession(req.query.sessionName);
 
     if (session != false) {
@@ -204,7 +204,7 @@ app.get("/getNumberProfile", async (req, res, next) => {
 app.get("/close", async (req, res, next) => {
     if (typeof(Sessions.options) != "undefined")  {
         if (Sessions.options.jsonbinio_secret_key !== undefined) {//se informou secret key pra salvar na nuvem
-            console.log("limpando token na nuvem...");
+            console.log(pegaDataHora() + "limpando token na nuvem...");
             //salva dados do token da sessão na nuvem
             var data = JSON.stringify({ "nada": "nada" });
             var config = {
@@ -219,10 +219,10 @@ app.get("/close", async (req, res, next) => {
             };
             await axios(config)
                 .then(function (response) {
-                    console.log(JSON.stringify(response.data));
+                    console.log(pegaDataHora() + JSON.stringify(response.data));
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    console.log(pegaDataHora() + error);
                 });
         }
     }
@@ -234,13 +234,13 @@ process.stdin.resume();//so the program will not close instantly
 
 async function exitHandler(options, exitCode) {
     if (options.cleanup) {
-        console.log('cleanup');
+        console.log(pegaDataHora() + 'cleanup');
         await Sessions.getSessions().forEach(async session => {
             await Sessions.closeSession(session.sessionName);
         });
     }
     if (exitCode || exitCode === 0) {
-        console.log(exitCode);
+        console.log(pegaDataHora() + exitCode);
     }
 
     if (options.exit) {
@@ -256,3 +256,9 @@ process.on('SIGUSR1', exitHandler.bind(null, { exit: true }));
 process.on('SIGUSR2', exitHandler.bind(null, { exit: true }));
 //catches uncaught exceptions
 process.on('uncaughtException', exitHandler.bind(null, { exit: true }));
+
+function pegaDataHora() {
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate() + ': ';
+    return date;
+}
