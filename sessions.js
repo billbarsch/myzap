@@ -154,7 +154,7 @@ module.exports = class Sessions {
                     ],
                     headless: false,
                     ignoreHTTPSErrors: true,
-                    executablePath: '/root/myzap/.cache/puppeteer/chrome'
+                    executablePath: '/root/.cache/puppeteer/chrome/linux-1095492/chrome-linux/chrome'
                 },
                 catchQR: (base64Qrimg, asciiQR, attempts, urlCode) => {
                     session.state = "QRCODE";
