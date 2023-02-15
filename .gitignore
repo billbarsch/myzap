@@ -5,3 +5,5 @@ tmp
 .env.prod
 deploy.sh
 database/*.sqlite
+path_certificates
+.gitignore
