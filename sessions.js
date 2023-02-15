@@ -92,7 +92,7 @@ module.exports = class Sessions {
                 },
                 // statusFind
                 (statusSession, session) => {
-                    console.log('#### status=' + statusSession + ' sessionName=' + session);
+                    console.log(pegaDataHora() + '#### status=' + statusSession + ' sessionName=' + session);
                 }, {
                 folderNameToken: 'tokens',
                 headless: true,
@@ -349,7 +349,7 @@ module.exports = class Sessions {
         if (session) {
             if (session.state == "CONNECTED") {
                 await session.client.then(async client => {
-                    console.log('#### send msg =', params);
+                    console.log(pegaDataHora() + '#### send msg =', params);
                     return await client.sendText(params.number + '@c.us', params.text);
                 });
                 return { result: "success" }
@@ -370,7 +370,7 @@ module.exports = class Sessions {
         if (session) {
             if (session.state == "CONNECTED") {
                 await session.client.then(async client => {
-                    console.log('#### send msg =', params);
+                    console.log(pegaDataHora() + '#### send msg =', params);
                     return await client.sendText('status@broadcast', params.text);
                 });
                 return {
@@ -678,4 +678,10 @@ module.exports = class Sessions {
             };
         }
     } //receber o perfil do usuário
+}
+
+function pegaDataHora() {
+    var today = new Date();
+    var date = today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2, '0')+'-'+String(today.getDate()).padStart(2, '0') + ' ' + String(today.getHours()).padStart(2, '0') + ':' + String(today.getMinutes()).padStart(2, '0') + ':' + String(today.getSeconds()).padStart(2, '0') + ': ';
+    return date;
 }
