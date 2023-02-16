@@ -1,20 +1,32 @@
 {
-    "name": "myzap",
-    "version": "0.1.0",
-    "description": "Free OpenSource Whatsapp Api",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "Bill Barsch",
-    "license": "ISC",
-    "dependencies": {
-        "@wppconnect-team/wppconnect": "^*",
-        "axios": "^0.21.1",
-        "cors": "^2.8.5",
-        "dotenv": "^8.2.0",
-        "express": "^4.17.1",
-        "mime": "^2.5.2",
-        "venom-bot": "^3.0.11"
-    }
+  "name": "myzap",
+  "version": "0.1.0",
+  "description": "Free OpenSource Whatsapp Api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bill Barsch",
+  "license": "ISC",
+  "dependencies": {
+    "@wppconnect-team/wppconnect": "^1.21.0",
+    "axios": "^0.21.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.6.0",
+    "express": "^4.18.2",
+    "mime": "^2.6.0",
+    "sharp": "^0.31.3",
+    "venom-bot": "^3.2.0"
+  },
+  "directories": {
+    "example": "examples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/htsnet/myzap.git"
+  },
+  "bugs": {
+    "url": "https://github.com/htsnet/myzap/issues"
+  },
+  "homepage": "https://github.com/htsnet/myzap#readme"
 }
