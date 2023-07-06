@@ -26,7 +26,6 @@ MyZap®️ é uma API REST FULL 100% gratuita e Open Source
 
 Este projeto usa como base o [WPPCONNECT](https://github.com/wppconnect-team/wppconnect), e [Whatsapp-WEB.JS](https://github.com/pedroslopez/whatsapp-web.js/), e [Venom-bot](https://github.com/orkestral/venom) um navegador virtual sem interface gráfica que abre o whatsapp web e executa todos os comandos via código possibilitando assim a automação de todas as funções.
 
-
 ## Desenvolvedores e Suporte
 
 - +55 (63) 99215-8117 - [BillBarsch](https://github.com/billbarsch)
@@ -34,16 +33,6 @@ Este projeto usa como base o [WPPCONNECT](https://github.com/wppconnect-team/wpp
 - +55 (31) 99435-9434 - [Jonathan Henrique](https://github.com/jhowbhz) (Parceiro)
 #### Para suporte direto com o desenvolver da API chame no WhatsApp
 <a target="_blank" href="https://api.whatsapp.com/send?phone=554396611437&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP" target="_blank"><img title="WhatsApp do Suporte" height="50" width="190" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/WhatsApp_logo.svg/2000px-WhatsApp_logo.svg.png"></a>
-
-Temos alguns COLABORADORES que prestam suporte, caso precise entre em contato com [Everton Nogueira](https://api.whatsapp.com/send?phone=5511912891716&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP) ou [Jonathan Henrique](https://api.whatsapp.com/send?phone=5531994359434&text=Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20suporte%20da%20API%20MyZAP) 
-
-## #Instalação automatica com 1 clique; Copiou? Colou!😎
- 👉    curl -sSL https://sh.owenbrasil.com/myzap.sh | bash
-
-- Execute este comando em um novo servidor Ubuntu 20x com pelo menos 2 GB de RAM
-
-## Documentação Postman & Examples: 
-A documentação da API está disponível online [Aqui](https://documenter.getpostman.com/view/11074732/UVkqrZtZ) . Você também pode importar o arquivo de coleção Postman em seu aplicativo Postman alternativamente.
 
 ## Grupos de Apoio
 
