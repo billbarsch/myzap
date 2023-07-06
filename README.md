@@ -1,4 +1,4 @@
-﻿# MyZap Oficial®️
+# MyZap Oficial®️
 <p>
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/billbarsch/myzap">
 
