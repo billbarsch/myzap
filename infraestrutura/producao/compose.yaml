@@ -14,7 +14,7 @@ services:
     mem_limit: 384m
     cpus: '0.50'
     healthcheck:
-      test: ["CMD-SHELL", "mariadb-admin ping -uroot -p"$$MARIADB_ROOT_PASSWORD" --silent"]
+      test: ["CMD-SHELL", "mariadb-admin ping -uroot -p$MARIADB_ROOT_PASSWORD --silent"]
       interval: 10s
       timeout: 5s
       retries: 12
