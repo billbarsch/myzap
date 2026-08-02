@@ -1,12 +1,19 @@
-FROM ubuntu:18.04
+FROM node:20-bookworm-slim
 
 WORKDIR /usr/src/app
-COPY . .
-RUN apt update
-RUN apt install curl -y
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt install -y nodejs
-RUN apt install -y chromium-chromedriver
-RUN npm install
 
-CMD node index.js
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+
+COPY . .
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        chromium \
+        chromium-driver \
+        curl \
+        ffmpeg \
+    && npm install --no-audit --no-fund \
+    && rm -rf /var/lib/apt/lists/*
+
+CMD ["node", "index.js"]
