@@ -16,6 +16,7 @@ RUN apt-get update \
         g++ \
         make \
         python3 \
+    && rm -rf node_modules \
     && npm install --no-audit --no-fund \
     && npm rebuild sqlite3 --build-from-source \
     && rm -rf /var/lib/apt/lists/*
