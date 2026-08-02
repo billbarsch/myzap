@@ -3,7 +3,7 @@ name: Publicar MyZap na VPS 2
 on:
   push:
     branches:
-      - main
+      - myzap2.0
   workflow_dispatch:
 
 permissions:
@@ -28,4 +28,6 @@ jobs:
           ssh-keyscan -H 169.58.91.99 >> ~/.ssh/known_hosts
           ssh -i ~/.ssh/id_ed25519 implantador@169.58.91.99 \
             "sudo /usr/local/sbin/atualizar-myzap $COMMIT"
+
+
 
