@@ -1,0 +1,31 @@
+name: Publicar MyZap na VPS 2
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: myzap-producao
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publicar commit na VPS 2
+        env:
+          CHAVE_SSH: ${{ secrets.VPS_2_SSH_PRIVATE_KEY }}
+          COMMIT: ${{ github.sha }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$CHAVE_SSH" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H 169.58.91.99 >> ~/.ssh/known_hosts
+          ssh -i ~/.ssh/id_ed25519 implantador@169.58.91.99 \
+            "sudo /usr/local/sbin/atualizar-myzap $COMMIT"
+
