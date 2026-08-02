@@ -13,7 +13,11 @@ RUN apt-get update \
         chromium-driver \
         curl \
         ffmpeg \
+        g++ \
+        make \
+        python3 \
     && npm install --no-audit --no-fund \
+    && npm rebuild sqlite3 --build-from-source \
     && rm -rf /var/lib/apt/lists/*
 
 CMD ["node", "index.js"]
