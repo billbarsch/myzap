@@ -24,7 +24,6 @@ services:
     build:
       context: ../..
       dockerfile: Dockerfile
-    image: myzap-aplicacao
     container_name: myzap-aplicacao
     restart: unless-stopped
     env_file:
@@ -32,23 +31,20 @@ services:
     depends_on:
       banco:
         condition: service_healthy
-    volumes:
-      - /srv/myzap/storage:/var/www/html/storage
     networks:
       - myzap-interna
       - rede_publica
     mem_limit: 384m
     cpus: '0.50'
     healthcheck:
-      test: ["CMD-SHELL", "php -r '$$s=@fsockopen("127.0.0.1",80); exit($$s ? 0 : 1);'"]
-      interval: 15s
+      test: ["CMD-SHELL", "curl -fsS -o /dev/null http://127.0.0.1:80/api/saude"]
+      interval: 30s
       timeout: 5s
-      retries: 6
-      start_period: 30s
+      retries: 3
+      start_period: 45s
 
 networks:
   myzap-interna:
     name: myzap-interna
   rede_publica:
     external: true
-    name: rede_publica
