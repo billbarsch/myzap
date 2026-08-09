@@ -71,7 +71,7 @@
     "prettier": "1.19.1",
     "puppeteer": "2.0.0",
     "puppeteer-cluster": "0.18.0",
-    "rollup": "2.56.0",
+    "rollup": "2.80.0",
     "rollup-plugin-babel": "4.4.0",
     "rollup-plugin-copy-glob": "0.3.2",
     "rollup-plugin-postcss": "4.0.1",
