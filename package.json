@@ -57,7 +57,7 @@
     "express-pino-logger": "^*",
     "express-session": "^*",
     "ffmpeg": "^*",
-    "file-type": "16.5.4",
+    "file-type": "21.3.1",
     "fluent-ffmpeg": "^*",
     "form-data": "^*",
     "mime-types": "^*",
